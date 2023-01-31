@@ -1,5 +1,5 @@
 import React from 'react'
-import c from './HeaderTitle.module.css'
+import c from './HeaderTitle.module.scss'
 
 
 export const HeaderTitle = () => {

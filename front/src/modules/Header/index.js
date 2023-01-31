@@ -1,4 +1,4 @@
-export { Header } from "./components/Header";
+export { Header } from "./components/Header/Header";
 
 
 
