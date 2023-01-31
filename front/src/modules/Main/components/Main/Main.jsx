@@ -4,9 +4,9 @@ import { ClassNames } from '../../../../helpers/ClassNames/ClassNames'
 import c from './Main.module.css'
 
 
-export const Main = ({children, ...props}) => {
+export const Main = ({children, classes=[], ...props}) => {
   return (
-    <main className={ClassNames(c.main, {}, ['container', ...props.classes])}>
+    <main className={ClassNames(c.main, {}, ['container', ...classes])}>
         {children}
     </main>
   )
