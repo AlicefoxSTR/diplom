@@ -1,9 +1,9 @@
 import React from 'react'
-import c from './HeaderTitle.module.scss'
+import c from './HeaderTitle.module.css'
 
 
-export const HeaderTitle = () => {
+export const HeaderTitle = ({children}) => {
   return (
-    <div className={c.HeaderTitle}>HeaderTitle</div>
+    <h1 className={c.HeaderTitle}>{children}</h1>
   )
 }
