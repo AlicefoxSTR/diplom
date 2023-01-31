@@ -1,13 +1,18 @@
 import {Routes, Route} from 'react-router-dom'
-import { HomePage } from './pages/HomePage/components/HomePage/HomePage';
 import './assets/styles/index.css'
+import { Layout } from './components/Layout/Layout';
+import { HomePage } from './pages/HomePage';
+import { ParentPage } from './pages/ParentPage';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-          <Route path='/' element={<HomePage/>} />
-          <Route path='*' element={<HomePage/>} />
+          <Route path='/' element={<Layout />}>
+            <Route path='/' element={<HomePage/>} />
+            <Route path='/for-parents' element={<ParentPage />} />
+            <Route path='*' element={<HomePage/>} />
+          </Route>
       </Routes>
     </div>
   );

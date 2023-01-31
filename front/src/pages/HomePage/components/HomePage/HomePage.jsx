@@ -1,14 +1,15 @@
 import React from 'react'
-import { Footer } from '../../../../modules/Footer/components/Footer/Footer'
-import { Header } from '../../../../modules/Header/components/Header/Header'
-import { Main } from '../../../../modules/Main/Main'
+import { Main } from '../../../../modules/Main'
+import BorderButton from '../../../../UI/BorderButton/BorderButton'
+import CustomInput from '../../../../UI/CustomInput/CustomInput'
 
 export const HomePage = () => {
   return (
-    <div className='wrapper'>
-        <Header/>
-        <Main />
-        <Footer />
-    </div>
+    <Main>
+      <BorderButton>
+        Зарегистрироваться / Войти
+      </BorderButton>
+      <CustomInput type='text' placeholder='input' />
+    </Main>
   )
 }
