@@ -127,20 +127,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #CKEditor configs
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
