@@ -6,7 +6,7 @@ import { Header } from '../../modules/Header'
 export const Layout = () => {
   return (
     <div className='wrapper'>
-     <Header />   
+     <Header />  
      <Outlet />   
      <Footer />   
     </div>

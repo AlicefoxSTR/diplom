@@ -6,7 +6,7 @@ import c from './Main.module.css'
 
 export const Main = ({children}) => {
   return (
-    <main className={ClassNames(c.main, {}, [])}>
+    <main className={ClassNames(c.main, {}, ['container'])}>
         {children}
     </main>
   )
