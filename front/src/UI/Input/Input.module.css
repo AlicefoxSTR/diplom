@@ -1,4 +1,4 @@
-.input{
+.Input{
     padding: 21px 20px;
     width: 100%;
     border-radius: 20px;
@@ -7,10 +7,13 @@
     color: var(--main-color);
 }
 
+.border{
+    border: 2px solid var(--main-color);
+}
 
-.input::placeholder,
-.input::-moz-placeholder,
-.input::-webkit-input-placeholder{
+.Input::placeholder,
+.Input::-moz-placeholder,
+.Input::-webkit-input-placeholder{
     color: var(--pink-color);
 }
 
