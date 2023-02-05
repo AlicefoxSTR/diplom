@@ -1,17 +1,44 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { ClassNames } from '../../helpers/ClassNames/ClassNames'
-import cls from './CustomLink.module.css'
+import React from 'react';
+import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import cls from './CustomLink.module.css';
+import { Link, useLocation } from 'react-router-dom';
 
+export const CustomLink = (props) => {
 
-const CustomLink = ({children, to, active, classes, ...props}) => {
+  const LinkThemes  = {
+    SIMPLE: 'simple',
+    BUTTON: 'button',
+    HEADER: 'header',
+    FOOTER: 'footer',
+  }
 
+  const location = useLocation()
+
+  const { 
+    className,
+    to,
+    theme=LinkThemes.SIMPLE,
+    children,
+    ...otherProps
+  
+  } = props;
+
+  
 
   return (
-    <Link to={to} className={ClassNames(cls.link, {isActive: active}, [classes])} {...props}>
+    <Link 
+    to={to} 
+    className={
+      ClassNames(
+        cls.CustomLink, 
+        {[cls.active]: location.pathname===to}, 
+        [className, cls[theme]]
+      )
+    }
+    {...otherProps}
+    >
         {children}
     </Link>
   )
-}
 
-export default CustomLink
+}

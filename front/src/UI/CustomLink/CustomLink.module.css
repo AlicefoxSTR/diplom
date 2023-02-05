@@ -1,10 +1,50 @@
-.link {
-    font: var(--font-h3);
+.CustomLink {
+
+}
+
+
+.simple{
+    font: var(--font-h2);
     color: var(--main-color);
     text-decoration: none;
 }
 
+.header{
+    font: var(--font-h3);
+    text-decoration: none;
+    color: var(--main-color);
+}
 
-.link:hover, .link.active{
+
+.footer{
+    font: var(--font-h3);
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+.simple.active,
+.header.active,
+.footer.active,
+.footer:hover,
+.header:hover,
+.simple:hover{
     text-decoration: underline;
 }
+
+
+.button{
+    border: 3px solid var(--main-color);
+    text-decoration: none;
+    color: var(--main-color);
+    background: var(--secondary-color);
+    padding: 12px 40px;
+    border-radius: 12px;
+    font: var(--font-h2);
+}
+
+.button:hover,
+.button.active{
+    background: var(--main-color);
+    color: var(--secondary-color);
+}
+

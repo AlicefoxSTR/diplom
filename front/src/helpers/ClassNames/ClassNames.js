@@ -1,4 +1,4 @@
-export function ClassNames(cls, mods, anotherClasses){
+export function ClassNames(cls, mods={}, anotherClasses=[]){
 //Функция для удобного использования классов
     return [
         cls,

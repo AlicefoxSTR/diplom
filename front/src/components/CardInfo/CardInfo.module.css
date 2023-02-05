@@ -1,0 +1,23 @@
+.cardInfo {
+    background: var(--main-color);
+    border-radius: 24px;
+    padding: 40px 45px;
+    width: 47%;
+}
+
+.cardInfo:nth-child(2n+2){
+    margin-left: auto;
+}
+
+
+.title {
+    font: var(--font-h1);
+    color: var(--secondary-color);
+    margin-bottom: 25px;
+    display: flex;
+}
+
+.text {
+    font: var(--font-h2);
+    color: var(--secondary-color);
+}

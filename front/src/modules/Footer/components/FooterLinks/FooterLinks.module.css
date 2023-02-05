@@ -1,14 +1,6 @@
 .link{
-    color: var(--secondary-color);
     margin: 0 10px;
     opacity: 0.9;
-}
-
-.link:hover, 
-.link.active{
-    text-decoration: none;
-    /* font-weight: 800; */
-    opacity: 1;
 }
 
 .links{

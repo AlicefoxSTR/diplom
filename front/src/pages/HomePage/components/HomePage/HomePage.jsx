@@ -1,8 +1,8 @@
 import React from 'react'
-import { Main, MainNavigation } from '../../../../modules/Main'
-import BorderButton from '../../../../UI/BorderButton/BorderButton'
-import { HomeBorder } from '../../UI/HomeBorder/HomeBorder'
+import { Main, MainNavigation } from 'modules/Main'
+import { Button } from 'UI/Button/Button'
 import cls from './HomePage.module.css'
+import { HomeBorder } from '../../UI/HomeBorder/HomeBorder'
 
 
 export const HomePage = () => {
@@ -11,9 +11,9 @@ export const HomePage = () => {
       <MainNavigation /> 
       <div className={cls.block}>
         <HomeBorder />
-        <BorderButton classes={[cls.btn]}>
+        <Button className={cls.btn}>
           Зарегистрироваться / Войти
-        </BorderButton> 
+        </Button> 
       </div>
     </Main>
   )
