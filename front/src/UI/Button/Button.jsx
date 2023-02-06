@@ -4,7 +4,8 @@ import cls from './Button.module.css';
 
 export const ButtonTheme = {
   DARK: 'dark',
-  LIGHT: 'light'
+  LIGHT: 'light',
+  // LIGHT_THIN: 'light_thin'
 }
 
 export const Button = (props) => {

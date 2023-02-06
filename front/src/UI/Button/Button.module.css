@@ -5,24 +5,24 @@
     cursor: pointer;
 }
 
-.btn.dark{
+.dark{
     border: 6px solid var(--secondary-color);
     color: var(--secondary-color);
     background: var(--main-color);
 }
 
-.btn.light{
+.light{
     border: 6px solid var(--main-color);
     color: var(--main-color);
     background: var(--secondary-color);
 }
 
-.btn.dark:hover{
+.dark:hover{
     background: var(--secondary-color);
     color: var(--main-color);
 }
 
-.btn.light:hover{
+.light:hover{
     background: var(--main-color);
     color: var(--secondary-color) ;
 }
