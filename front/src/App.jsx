@@ -1,3 +1,6 @@
+import { ChosePopup } from 'modules/ChosePopup';
+import { SigninPopup } from 'modules/SigninPopup/UI/SigninPopup';
+import { SignupPopup } from 'modules/SignupPopup/UI/SignupPopup';
 import {Routes, Route} from 'react-router-dom'
 import './assets/styles/index.css'
 import { Layout } from './components/Layout/Layout';
@@ -23,6 +26,10 @@ function App() {
             <Route path='*' element={<NotFoundPage />} />
           </Route>
       </Routes>
+      <ChosePopup />
+      <SigninPopup  />
+      <SignupPopup />
+
     </div>
   );
 }

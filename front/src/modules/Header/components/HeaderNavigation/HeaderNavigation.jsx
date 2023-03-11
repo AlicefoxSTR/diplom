@@ -6,7 +6,7 @@ import cls from './HeaderNavigation.module.css'
 export const HeaderNavigation = () => {
   return (
     <nav className={cls.nav}>
-        <CustomLink theme="header" className={[cls.link]} active to='/'>Главная</CustomLink>
+        <CustomLink theme="header" className={[cls.link]} to='/'>Главная</CustomLink>
         <CustomLink theme="header" className={[cls.link]} to='/progress'>Достижения</CustomLink>
         <CustomLink theme="header" className={[cls.link]} to='/profile'>Профиль</CustomLink>
     </nav>

@@ -3,15 +3,17 @@ import { ClassNames } from 'helpers/ClassNames/ClassNames';
 import cls from './CustomLink.module.css';
 import { Link, useLocation } from 'react-router-dom';
 
+
+
+export const LinkThemes  = {
+  SIMPLE: 'simple',
+  BUTTON: 'button',
+  HEADER: 'header',
+  FOOTER: 'footer',
+}
+
+
 export const CustomLink = (props) => {
-
-  const LinkThemes  = {
-    SIMPLE: 'simple',
-    BUTTON: 'button',
-    HEADER: 'header',
-    FOOTER: 'footer',
-  }
-
   const location = useLocation()
 
   const { 
