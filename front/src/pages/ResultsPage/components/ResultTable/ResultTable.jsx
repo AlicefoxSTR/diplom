@@ -8,13 +8,12 @@ export const ResultTable = (props) => {
         result
     } = props;
 
-    console.log(result)
 
     return (
         <div className={ClassNames(cls.resultTable, {}, [className])}>
             {
                 result.map(item => (
-                    <div className={cls.row}>
+                    <div className={cls.row} key={`resultTableRow_${item.id}`}>
                         <span className={cls.fio}>{item.fio}</span>
                         <span className={cls.result}>Результат: {item.value}</span>
                         <span className={cls.date}>Дата: {item.date}</span>

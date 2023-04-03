@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initiatlState = {
-    tasks: []
-
+    tasks: [],
+    activeTestCategory: '',
 }
 
 
@@ -41,6 +41,14 @@ export const TestCreationSlice = createSlice({
                 if (index !== -1) {
                   state.tasks.splice(index, 1);
                 }
-              }
+            },
+            setActiveTestCategory(state, action){
+                state.activeTestCategory = action.payload
+            },
+            addQuestionToTasks(state, action){
+                if(!state.tasks.find(task => task.id === action.payload.id)){
+                    state.tasks.push(action.payload)
+                }
+            }
         }
 })

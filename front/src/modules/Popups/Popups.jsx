@@ -6,6 +6,7 @@ import { ChoseQuestionTypePopup } from 'modules/ChoseQuestionTypePopup/ChoseQues
 import { AddClassPopup } from 'modules/AddClassPopup/AddClassPopup';
 import { AddStudentPopup } from 'modules/AddStudentPopup/AddStudentPopup';
 import { ChoseTestCategoryPopup } from 'modules/ChoseTestCategoryPopup/ChoseTestCategoryPopup';
+import { ChoseQuestionPopup } from 'modules/ChoseQuestionPopup/ChoseQuestionPopup';
 
 export const Popups = (props) => {
 
@@ -18,6 +19,7 @@ export const Popups = (props) => {
             <AddClassPopup />
             <AddStudentPopup />
             <ChoseTestCategoryPopup />
+            <ChoseQuestionPopup />
         </>
  );
 }

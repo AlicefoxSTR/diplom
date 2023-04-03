@@ -3,20 +3,271 @@ import Image from 'assets/img/test-img.png'
 
 
 const initialState = {
-    cards: [
+    tests: [
         {
-            id: 1,
+            id: 123124,
             img: Image,
-            title: 'Персональные данные',
-            text: 'Знаете ли вы, что такое персональные данные и как их защитить?',
-            disabled: false
+            title: 'Антивирусы',
+            tasks: [
+                {
+                    id: 1,
+                    type: 'checkbox',
+                    question: 'Что НЕ относится к персональным данным ?',
+                    answers: [
+                        {
+                            text: 'Фамилия, имя, отчество',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Все наши документы',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Банковские данные',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Картинка природы из Интернета',
+                            isCorrect: true
+                        },
+                    ]
+                },
+                {
+                    id: 2,
+                    type: 'radio',
+                    question: 'Что НЕ относится к персональным данным ?',
+                    answers: [
+                        {
+                            text: 'Фамилия, имя, отчество',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Все наши документы',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Банковские данные',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Картинка природы из Интернета',
+                            isCorrect: true
+                        },
+                    ]
+                },
+            ]
         },
         {
-            id: 2,
+            id: 342153,
             img: Image,
-            title: 'Распространенные угрозы',
-            text: 'Знаете ли вы, что такое персональные данные и как их защитить?',
-            disabled: true
+            title: 'Второй тест',
+            tasks: [
+                {
+                    id: 1,
+                    type: 'checkbox',
+                    question: 'Что НЕ относится к персональным данным ?',
+                    answers: [
+                        {
+                            text: 'Фамилия, имя, отчество',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Все наши документы',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Банковские данные',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Картинка природы из Интернета',
+                            isCorrect: true
+                        },
+                    ]
+                },
+                {
+                    id: 2,
+                    type: 'radio',
+                    question: 'Что НЕ относится к персональным данным ?',
+                    answers: [
+                        {
+                            text: 'Фамилия, имя, отчество',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Все наши документы',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Банковские данные',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Картинка природы из Интернета',
+                            isCorrect: true
+                        },
+                    ]
+                },
+            ]
+        },
+        {
+            id: 3513512,
+            img: Image,
+            title: 'Третий тест',
+            tasks: [
+                {
+                    id: 1,
+                    type: 'checkbox',
+                    question: 'Что НЕ относится к персональным данным ?',
+                    answers: [
+                        {
+                            text: 'Фамилия, имя, отчество',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Все наши документы',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Банковские данные',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Картинка природы из Интернета',
+                            isCorrect: true
+                        },
+                    ]
+                },
+                {
+                    id: 2,
+                    type: 'radio',
+                    question: 'Что НЕ относится к персональным данным ?',
+                    answers: [
+                        {
+                            text: 'Фамилия, имя, отчество',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Все наши документы',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Банковские данные',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Картинка природы из Интернета',
+                            isCorrect: true
+                        },
+                    ]
+                },
+            ]
+        },
+        {
+            id: 3613513,
+            img: Image,
+            title: 'Четвертый тест',
+            tasks: [
+                {
+                    id: 1,
+                    type: 'checkbox',
+                    question: 'Что НЕ относится к персональным данным ?',
+                    answers: [
+                        {
+                            text: 'Фамилия, имя, отчество',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Все наши документы',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Банковские данные',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Картинка природы из Интернета',
+                            isCorrect: true
+                        },
+                    ]
+                },
+                {
+                    id: 2,
+                    type: 'radio',
+                    question: 'Что НЕ относится к персональным данным ?',
+                    answers: [
+                        {
+                            text: 'Фамилия, имя, отчество',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Все наши документы',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Банковские данные',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Картинка природы из Интернета',
+                            isCorrect: true
+                        },
+                    ]
+                },
+            ]
+        },
+        {
+            id: 21352135,
+            img: Image,
+            title: 'Пятый тест',
+            tasks: [
+                {
+                    id: 1,
+                    type: 'checkbox',
+                    question: 'Что НЕ относится к персональным данным ?',
+                    answers: [
+                        {
+                            text: 'Фамилия, имя, отчество',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Все наши документы',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Банковские данные',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Картинка природы из Интернета',
+                            isCorrect: true
+                        },
+                    ]
+                },
+                {
+                    id: 2,
+                    type: 'radio',
+                    question: 'Что НЕ относится к персональным данным ?',
+                    answers: [
+                        {
+                            text: 'Фамилия, имя, отчество',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Все наши документы',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Банковские данные',
+                            isCorrect: false
+                        },
+                        {
+                            text: 'Картинка природы из Интернета',
+                            isCorrect: true
+                        },
+                    ]
+                },
+            ]
         },
     ]
 }

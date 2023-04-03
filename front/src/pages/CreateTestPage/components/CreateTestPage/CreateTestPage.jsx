@@ -25,7 +25,7 @@ export const CreateTestPage = (props) => {
                         <>
                         {
                             tasks.map((task, index) => (
-                                <TaskRow task={task} key={`creationTestTaskItem_${task.id}`} className={cls.row} index={index} />
+                                <TaskRow task={task} key={`creationTestTaskItem_${task.id}_${index}`} className={cls.row} index={index} />
                             ))
                         }
                         <div className={cls.buttons}>
