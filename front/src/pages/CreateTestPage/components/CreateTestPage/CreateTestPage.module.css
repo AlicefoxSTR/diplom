@@ -1,0 +1,31 @@
+.createTestPage {
+    padding-bottom: 70px;
+}
+
+.row:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+.yellow {
+    display: block;
+    border: 3px solid #F3C301;
+    margin-left: auto;
+}
+
+.yellow:hover{
+    background: #F3C301;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.button:not(:last-child) {
+    margin-right: 30px;
+}
+
+.button {
+    border: 3px solid var(--main-color);
+}

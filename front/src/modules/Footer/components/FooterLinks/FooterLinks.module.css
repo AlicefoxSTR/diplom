@@ -1,0 +1,10 @@
+.link{
+    margin: 0 10px;
+    opacity: 0.9;
+}
+
+.links{
+    margin: 0 -10px;
+    display: flex;
+    align-items: center;
+}

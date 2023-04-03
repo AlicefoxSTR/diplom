@@ -1,0 +1,13 @@
+.testingTable {
+    margin: 50px 0 30px 0;
+}
+
+.link {
+    align-self: flex-end;
+    margin-bottom: 64px;
+}
+
+.testigPage {
+    display: flex;
+    flex-direction: column;
+}

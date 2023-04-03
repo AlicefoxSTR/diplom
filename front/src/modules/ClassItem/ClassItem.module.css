@@ -1,0 +1,43 @@
+.classItem {
+    padding: 30px;
+    background: var(--main-color);
+    width: 610px;
+    border-radius: 20px;
+    color: var(--secondary-color);
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font: var(--font-h2);
+    cursor: pointer;
+}
+
+.title.active {
+    padding-bottom: 30px;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.body {
+    display: none;
+}
+
+.body.active {
+    display: block;
+}
+
+.icon {
+    fill: var(--secondary-color);
+    transform: rotate(180deg);
+}
+
+.icon.active {
+    transform: rotate(0);
+}
+
+
+.button {
+    border: 3px solid var(--secondary-color);
+    margin-top: 30px;
+}

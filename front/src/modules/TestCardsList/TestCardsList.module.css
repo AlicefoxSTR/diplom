@@ -1,0 +1,13 @@
+.testCardsList {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -25px -10px;
+}
+
+.center {
+    justify-content: center;
+}
+
+.card {
+    margin: 25px 10px;
+}
