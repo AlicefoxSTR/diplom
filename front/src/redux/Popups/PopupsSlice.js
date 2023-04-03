@@ -10,6 +10,7 @@ export const PopupNames = {
     ADD_STUDENT: 'add_student',
     CHOSE_TEST_CATEGORY: 'chose_test_category',
     CHOSE_QUESTION: 'chose_question',
+    QUESTION_CONSTRUCTOR: 'question_constructor',
 }
 
 
@@ -45,6 +46,10 @@ const initialState = {
         },
         {
             name: PopupNames.CHOSE_TEST_CATEGORY,
+            hidden: true
+        },
+        {
+            name: PopupNames.QUESTION_CONSTRUCTOR,
             hidden: true
         },
     ],

@@ -1,0 +1,10 @@
+.label {
+    font: var(--font-h3);
+    margin-bottom: 8px;
+    color: var(--secondary-color);
+    padding-left: 20px;
+}
+
+.input {
+    margin-bottom: 30px;
+}

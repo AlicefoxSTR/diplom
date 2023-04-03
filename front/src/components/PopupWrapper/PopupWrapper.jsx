@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ClassNames } from 'helpers/ClassNames/ClassNames';
 import cls from './PopupWrapper.module.css';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const PopupWrapper = (props) => {
     const { className, children, hidden, ...otherProps } = props;
+
+
+    
 
     useEffect(() => { //Блокировка скролла на странице, пока открыто модальное окно
         if(!hidden){
@@ -15,7 +19,10 @@ export const PopupWrapper = (props) => {
 
 
     return (
-        <div className={ClassNames(cls.popupWrapper, {[cls.hidden]: hidden}, [className])} {...otherProps}>
+        <div 
+            className={ClassNames(cls.popupWrapper, {[cls.hidden]: hidden}, [className])} 
+            {...otherProps} 
+        >
             {children}
         </div>
  );
