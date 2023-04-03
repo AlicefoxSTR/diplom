@@ -8,7 +8,6 @@ export const SmallTestCard = (props) => {
         className,
         test
     } = props;
-    console.log(test)
 
     return (
         <div className={ClassNames(cls.smallTestCard, {}, [className])}>

@@ -7,6 +7,7 @@ import { Cross } from 'UI/Cross/Cross';
 import { Button, ButtonTheme } from 'UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'redux/Popups/PopupsSlice';
+import { PopupBoard } from 'components/PopupBoard/PopupBoard';
 
 export const SigninPopup = (props) => {
     const { className } = props;
@@ -18,7 +19,7 @@ export const SigninPopup = (props) => {
 
     return (
         <PopupWrapper hidden={popups.find(popup => popup.name === popupName ).hidden}>
-            <div className={ClassNames(cls.signinPopup, {}, [className]) }>
+            <PopupBoard className={ClassNames(cls.signinPopup, {}, [className]) }>
                 <Cross size={23} style={{top: '36.11px', right: '50.7px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup(popupName))} />
                 <h1 className={cls.title}>
                     Вход
@@ -32,7 +33,7 @@ export const SigninPopup = (props) => {
                         Регистрация
                     </span>
                 </p>
-            </div>
+            </PopupBoard>
         </PopupWrapper>
  );
 }

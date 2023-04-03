@@ -1,0 +1,23 @@
+
+
+.row {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 2px solid var(--main-color);
+    color: var(--main-color);
+    font: var(--font-h2);
+}
+
+.result {
+    text-align: center;
+}
+
+.date {
+    text-align: right;
+}
+
+.row > span {
+    flex: 0 0 33%;
+}
+

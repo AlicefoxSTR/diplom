@@ -15,6 +15,7 @@ import { AccountPage } from 'pages/AccountPage';
 import { AccountTestsPage } from 'pages/AccountTestsPage';
 import { AccountMyTestsPage } from 'pages/AccountMyTestsPage';
 import { CreateTestPage } from 'pages/CreateTestPage';
+import { ResultsPage } from 'pages/ResultsPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path='/progress' element={<ProgressPage />} />
             <Route path='/profile' element={<ProfilePage />} />
             <Route path='/account' element={<AccountPage />} />
+            <Route path='/account/results' element={<ResultsPage />} />
             <Route path='/account/tests' element={<AccountTestsPage />} />
             <Route path='/account/my-tests' element={<AccountMyTestsPage />} />
             <Route path='/account/create-test' element={<CreateTestPage />} />

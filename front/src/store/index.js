@@ -19,6 +19,7 @@ import { TestResultSlice } from "redux/TestResult/TestResultSlice";
 import { StudentTestsSlice } from "redux/StudentTests/StudentTestsSlice";
 import { TestCreationSlice } from "redux/TestCreation/TestCreationSlice";
 import { ClassesSlice } from "redux/Classes/ClassesSlice";
+import { ResultsSlice } from "redux/Results/ResultsSlice";
 
 
 
@@ -30,6 +31,7 @@ const TestResultReducer = TestResultSlice.reducer
 const StudentTestsReducer = StudentTestsSlice.reducer
 const TestCreationReducer = TestCreationSlice.reducer
 const ClassesReducer = ClassesSlice.reducer
+const ResultsReducer = ResultsSlice.reducer
  
 
 const rootReducer = combineReducers({
@@ -40,7 +42,8 @@ const rootReducer = combineReducers({
     testResult: TestResultReducer,
     studentTests: StudentTestsReducer,
     testCreation: TestCreationReducer,
-    classes: ClassesReducer
+    classes: ClassesReducer,
+    results: ResultsReducer
 })
 
 
