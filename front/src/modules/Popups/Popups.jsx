@@ -5,6 +5,7 @@ import { SignupPopup } from 'modules/SignupPopup/UI/SignupPopup';
 import { ChoseQuestionTypePopup } from 'modules/ChoseQuestionTypePopup/ChoseQuestionTypePopup';
 import { AddClassPopup } from 'modules/AddClassPopup/AddClassPopup';
 import { AddStudentPopup } from 'modules/AddStudentPopup/AddStudentPopup';
+import { ChoseTestCategoryPopup } from 'modules/ChoseTestCategoryPopup/ChoseTestCategoryPopup';
 
 export const Popups = (props) => {
 
@@ -16,6 +17,7 @@ export const Popups = (props) => {
             <ChoseQuestionTypePopup />
             <AddClassPopup />
             <AddStudentPopup />
+            <ChoseTestCategoryPopup />
         </>
  );
 }

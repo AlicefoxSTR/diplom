@@ -22,6 +22,29 @@
 }
 
 
+.popupTitle {
+    text-align: center;
+    margin: 0 auto;
+    text-transform: uppercase;
+    font: var(--font-h1);
+    font-style: 30px;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.popupButton {
+    display: block;
+    margin: 30px auto 15px auto;
+}
+
+.popupText {
+    font: var(--font-h2);
+    color: var(--secondary-color);
+    text-align: center;
+}
+
+
+
 :root{
 
     /* fonts params */

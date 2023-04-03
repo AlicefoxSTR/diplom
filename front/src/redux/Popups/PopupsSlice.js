@@ -8,6 +8,7 @@ export const PopupNames = {
     CHOSE_QUESTION_TYPE: 'chose_question_type',
     ADD_CLASS: 'add_class',
     ADD_STUDENT: 'add_student',
+    CHOSE_TEST_CATEGORY: 'chose_test_category',
 }
 
 
