@@ -1,41 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { ClassNames } from 'helpers/ClassNames/ClassNames';
-import cls from './InputWithCheckbox.module.css';
-import { Checkbox } from 'UI/Checkbox/Checkbox';
+import cls from './InputWithRadio.module.css';
+import { RadioButton } from 'UI/RadioButton/RadioButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { NewQuestionCreateSlice } from 'redux/NewQuestionCreate';
 
-export const InputWithCheckbox = (props) => {
-    const { className, placeholder, canDelete, value, id } = props;
-    const dispatch = useDispatch()
-    const { correctAnswers } = useSelector(state => state.newQuestionCreate)
+export const InputWithRadio = (props) => {
+    const { className, placeholder, canDelete, value, id, disabled} = props;
     const [input, setInput ] = useState(value ?? '')
+
+    const { correctAnswers } = useSelector(state => state.newQuestionCreate)
+
     const [checked, setChecked ] = useState(Boolean(correctAnswers.find((answer)=>answer.id === id)))
 
+
+    const dispatch = useDispatch()
+
+
     function BlurHandler(){
-        dispatch(NewQuestionCreateSlice.actions.checkboxAnswersHandler({
+        dispatch(NewQuestionCreateSlice.actions.radioAnswersHandler({
             id: id,
-            value: input,
-            checked: checked
+            value: input
         }))
         setInput('')
     }
-
 
     useEffect(()=>{
         setChecked(Boolean(correctAnswers.find((answer)=>answer.id === id)))
     }, [correctAnswers])
 
+
     return (
-        <div className={ClassNames(cls.inputWithCheckbox, {}, [className])}>
-            <Checkbox 
-                className={cls.checkbox} 
+        <div className={ClassNames(cls.inputWithRadio, {}, [className])}>
+            <RadioButton 
+                className={cls.radio} 
                 id={id} 
+                name={'answer'}
+                disabled={disabled}
                 checked={checked}
-                onChange = {()=> dispatch(NewQuestionCreateSlice.actions.toggleCheckboxAnswer({
-                    id: id,
-                    value: input
-                }))}
+                onChange = {
+                    e => dispatch(NewQuestionCreateSlice.actions.toggleRadioAnswer({id:id, value: input}))
+                }
             />
             <input 
                 type="text" 

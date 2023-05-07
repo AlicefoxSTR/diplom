@@ -67,15 +67,36 @@ export const NewQuestionCreateSlice = createSlice({
                     return
                 } 
                 state.answers = state.answers.filter( answer => answer.id !== action.payload.id )
+                state.correctAnswers = state.answers.filter( answer => answer.id !== action.payload.id )
             },
-            toggleCorrectAnswer(state, action){
+            radioAnswersHandler(state, action){
+                if(action.payload.value.length > 0){
+                    console.log(action.payload)
+                    const answer = state.answers.find(({id}) => id === action.payload.id)
+                    if(answer){
+                        answer.value = action.payload.value
+                        return
+                    }
+                    state.answers.push({
+                        id: action.payload.id,
+                        value: action.payload.value,
+                    })
+                    return
+                } 
+                state.answers = state.answers.filter( answer => answer.id !== action.payload.id )
+            },
+            toggleCheckboxAnswer(state, action){
                 if(state.correctAnswers.find(({id})=>id === action.payload.id)){
                     state.correctAnswers = state.correctAnswers.filter(({id})=>id !== action.payload.id)
                 }else{
                     state.correctAnswers.push(action.payload)
                 }
 
-            }
+            },
+            toggleRadioAnswer(state, action){
+                state.correctAnswers = [action.payload]
+
+            },
            
         
         }

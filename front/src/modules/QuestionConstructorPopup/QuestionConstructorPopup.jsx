@@ -8,18 +8,33 @@ import { Input } from 'UI/Input/Input';
 import { NewQuestionCreateSlice, questionTypes } from 'redux/NewQuestionCreate';
 import { Select } from 'UI/Select/Select';
 import { AddAnswers } from 'modules/AddAnswers';
+import { Button } from 'UI/Button/Button';
+import { TestCreationSlice } from 'redux/TestCreation/TestCreationSlice';
+import { AddStudentPopup } from 'modules/AddStudentPopup/AddStudentPopup';
+import { PopupsSlice } from 'redux/Popups/PopupsSlice';
 
 
 export const QuestionConstructorPopup = (props) => {
     const { className } = props;
 
 
-    const { question, questionType } = useSelector(state=>state.newQuestionCreate)
+    const { question, questionType, answers } = useSelector(state=>state.newQuestionCreate)
 
     const dispatch = useDispatch()
 
     function closeHandler(){
         dispatch(NewQuestionCreateSlice.actions.clearForm())
+    }
+
+    function SubmitHandler(){
+        dispatch(TestCreationSlice.actions.addCustomQuestion({
+            type: questionType,
+            question: question,
+            answers: answers,
+            isPersonal: true
+        }))
+        closeHandler()
+        dispatch(PopupsSlice.actions.closePopup())
     }
 
     return (
@@ -52,6 +67,12 @@ export const QuestionConstructorPopup = (props) => {
 
                 <AddAnswers questionType={questionType} />
 
+                <div className={cls.buttons}>
+                    <Button>Просмотреть</Button>
+                    <Button
+                        onClick={()=>SubmitHandler()}
+                        >Добавить вопрос в тест</Button>
+                </div>
                
             </PopupBoard>
         </PopupWrapper>

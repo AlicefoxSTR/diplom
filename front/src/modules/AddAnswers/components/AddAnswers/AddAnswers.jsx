@@ -4,6 +4,7 @@ import cls from './AddAnswers.module.css';
 import { questionTypes } from 'redux/NewQuestionCreate';
 import { AddTextAnswers } from '../AddTextAnswers/AddTextAnswers';
 import { AddCheckboxAnswers } from '../AddCheckboxAnswers/AddCheckboxAnswers';
+import { AddRadioAnswers } from '../AddRadioAnswers/AddRadioAnswers';
 
 export const AddAnswers = (props) => {
     const { className, questionType } = props;
@@ -19,7 +20,7 @@ export const AddAnswers = (props) => {
                 ?
                 <AddCheckboxAnswers />
                 :
-                <div>qwe</div>
+                <AddRadioAnswers />
             }
         </div>
  );

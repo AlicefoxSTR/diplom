@@ -9,11 +9,7 @@ export const AddCheckboxAnswers = (props) => {
     const { className } = props;
 
     const { answers } = useSelector(state => state.newQuestionCreate)
-
-    function deleteAnswer(){
-
-    }
-
+    
     return (
         <div className={ClassNames(cls.addCheckboxAnswers, {}, [className])}>
             {
@@ -25,7 +21,7 @@ export const AddCheckboxAnswers = (props) => {
                         id={answer.id} 
                         key={`checkboxAnswer_${answer.id}`} 
                         placeholder={'Добавить ответ'} 
-                        deleteHandler={deleteAnswer} 
+                        canDelete
                     />
                 ))
             }

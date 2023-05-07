@@ -1,0 +1,47 @@
+.input {
+    display: none;   
+}
+
+.radioButton {
+    display: flex;
+}
+
+
+.label {
+    display: flex;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+
+}
+
+.label::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+}
+.label::after {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.input:checked + .label::after {
+    background: var(--main-color);
+}
