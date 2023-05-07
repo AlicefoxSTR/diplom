@@ -23,7 +23,7 @@ export const ChoseQuestionPopup = (props) => {
         const test = tests.find(item => item.id === activeTestCategory)
         const task = test.tasks.find(task => task.id === id)
         dispatch(TestCreationSlice.actions.addQuestionToTasks(task))
-        dispatch(PopupsSlice.actions.closePopup(popupName))
+        dispatch(PopupsSlice.actions.closePopup())
     }
 
 

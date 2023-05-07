@@ -20,13 +20,13 @@ export const AddClassPopup = (props) => {
 
     function saveHandler() {
         dispatch((ClassesSlice.actions.saveClass(input)))
-        dispatch(PopupsSlice.actions.closePopup(popupName))
+        dispatch(PopupsSlice.actions.closePopup())
     }
 
     return (
-        <PopupWrapper hidden={popups.find(popup => popup.name === popupName ).hidden}>
+        <PopupWrapper>
             <div className={ClassNames(cls.addClassPopup, {}, [className])}>
-                <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup(popupName))} />
+                <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
                 <h2 className={cls.title}>Введите название класса:</h2>
                 <Input 
                     theme={InputTheme.CLEAR} 

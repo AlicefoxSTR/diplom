@@ -1,26 +1,45 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { ClassNames } from 'helpers/ClassNames/ClassNames';
 import cls from './PopupWrapper.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { PopupsSlice } from 'redux/Popups/PopupsSlice';
 
 export const PopupWrapper = (props) => {
-    const { className, children, hidden, ...otherProps } = props;
+    const { className, children, closeHandler, ...otherProps } = props;
+    const { activePopup} = useSelector(state => state.popups)
 
 
-    
+    const dispatch = useDispatch()
 
-    useEffect(() => { //Блокировка скролла на странице, пока открыто модальное окно
-        if(!hidden){
-            document.body.style.overflow = 'hidden'
-        }else {
-            document.body.style.overflow = 'auto'
+    function handleKeyDown(e){
+        if (e.key === 'Escape'){
+            dispatch(PopupsSlice.actions.closePopup())
         }
-    }, [hidden])
+    }
+
+    useEffect(()=>{
+        if (activePopup){
+            document.addEventListener('keydown', handleKeyDown )
+            document.body.style.overflow = 'hidden'
+        }else{
+            document.removeEventListener('keydown', handleKeyDown)
+            document.body.style.overflow = 'auto'
+
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = 'auto'
+
+          };
+        
+
+    }, [activePopup])
 
 
     return (
         <div 
-            className={ClassNames(cls.popupWrapper, {[cls.hidden]: hidden}, [className])} 
+            className={ClassNames(cls.popupWrapper, {}, [className])} 
             {...otherProps} 
         >
             {children}

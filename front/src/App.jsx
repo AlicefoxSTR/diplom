@@ -10,12 +10,12 @@ import { ProgressPage } from './pages/ProgressPage';
 import { TeacherPage } from './pages/TeacherPage';
 import { TestsPage } from './pages/TestsPage';
 import { TestingPage } from 'pages/TestingPage';
-import { Popups } from 'modules/Popups/Popups';
 import { AccountPage } from 'pages/AccountPage';
 import { AccountTestsPage } from 'pages/AccountTestsPage';
 import { AccountMyTestsPage } from 'pages/AccountMyTestsPage';
 import { CreateTestPage } from 'pages/CreateTestPage';
 import { ResultsPage } from 'pages/ResultsPage';
+import { Popups } from 'modules/Popups/Popups';
 
 function App() {
   return (

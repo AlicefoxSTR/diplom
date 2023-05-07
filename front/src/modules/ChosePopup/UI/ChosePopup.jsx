@@ -20,9 +20,9 @@ export const ChosePopup = (props) => {
     const popupName = PopupNames.CHOSE
 
     return (
-        <PopupWrapper hidden={popups.find(popup => popup.name === popupName ).hidden} >
+        <PopupWrapper >
             <div className={ClassNames(cls.chosePopup, {}, [className])}>
-                <Cross style={{top: '25px', right: '25px'}} size={25} onClick={()=>dispatch(PopupsSlice.actions.closePopup(popupName))} />
+                <Cross style={{top: '25px', right: '25px'}} size={25} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
                 <div className={ClassNames(cls.block, {}, [className, cls.firstBlock])}>
                     <p className={cls.role}>
                         Я - ученик

@@ -16,7 +16,6 @@ export const QuestionConstructorPopup = (props) => {
     const dispatch = useDispatch()
 
     const popupName = PopupNames.QUESTION_CONSTRUCTOR
-    console.log(popups.find(popup=> popup.name === popupName ).hidden)
     return (
         <PopupWrapper hidden={popups.find(popup=> popup.name === popupName ).hidden}>
             <PopupBoard className={ClassNames(cls.choseTestCategoryPopup, {}, [className])}>

@@ -18,9 +18,9 @@ export const SignupPopup = (props) => {
     const popupName = PopupNames.SIGNUP
 
     return (
-        <PopupWrapper hidden={popups.find(popup => popup.name === popupName ).hidden}>
+        <PopupWrapper>
             <PopupBoard className={ClassNames(cls.signinPopup, {}, [className])}>
-                <Cross size={23} style={{top: '36.11px', right: '50.7px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup(popupName))} />
+                <Cross size={23} style={{top: '36.11px', right: '50.7px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
                 <h1 className={cls.title}>
                     Регистрация
                 </h1>
@@ -30,7 +30,7 @@ export const SignupPopup = (props) => {
                 <PopupFormRow  label={'Подтвердите пароль'} placeholder={'ivanov11'} className={cls.row} />
                 <Button className={cls.button} theme={ButtonTheme.DARK} >Зарегистрироваться</Button>
                 <p className={cls.text}>
-                        Уже есть аккаунт? <span className={cls.link} onClick={()=>dispatch(PopupsSlice.actions.switchAuthentication())}>
+                        Уже есть аккаунт? <span className={cls.link} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))}>
                         Войти
                     </span>
                 </p>

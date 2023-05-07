@@ -30,7 +30,3 @@
 .input {
     margin-bottom: 50px;
 }
-
-.button:not(:last-child) {
-    margin-bottom: 30px;
-}

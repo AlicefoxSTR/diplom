@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StudentContent } from '../StudentContent/StudentContent';
 import { TeacherContent } from '../TeacherContent/TeacherContent';
 import { UserContent } from '../UserContent/UserContent';
-import { PopupsSlice } from 'redux/Popups/PopupsSlice';
+import { PopupNames, PopupsSlice } from 'redux/Popups/PopupsSlice';
+import { useNavigate } from 'react-router';
 
 export const ProfilePage = (props) => {
     const { className } = props;
@@ -14,14 +15,17 @@ export const ProfilePage = (props) => {
 
     const {isAuthenticate, role} = useSelector(state=>state.user)
     const { activePopup } = useSelector(state=>state.popups)
+    const navigate = useNavigate()
   
     const dispatch = useDispatch()
   
     //Проверяем при первом посещении страницы профиля и при попытке закрыть модалку авторизации авторизацию пользователя
     useEffect(()=>{
       if(!isAuthenticate){
+        console.log('not auth')
         if(Boolean(!activePopup)){
-          dispatch(PopupsSlice.actions.switchAuthentication())
+          dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))
+          navigate('/')
         }
       }
     }, [activePopup, isAuthenticate, dispatch])

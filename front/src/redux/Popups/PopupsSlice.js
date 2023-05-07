@@ -1,4 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { ChosePopup } from 'modules/ChosePopup';
+import { SigninPopup } from 'modules/SigninPopup/UI/SigninPopup';
+import { SignupPopup } from 'modules/SignupPopup/UI/SignupPopup';
+import { ChoseQuestionTypePopup } from 'modules/ChoseQuestionTypePopup/ChoseQuestionTypePopup';
+import { AddClassPopup } from 'modules/AddClassPopup/AddClassPopup';
+import { AddStudentPopup } from 'modules/AddStudentPopup/AddStudentPopup';
+import { ChoseTestCategoryPopup } from 'modules/ChoseTestCategoryPopup/ChoseTestCategoryPopup';
+import { ChoseQuestionPopup } from 'modules/ChoseQuestionPopup/ChoseQuestionPopup';
+import { QuestionConstructorPopup } from 'modules/QuestionConstructorPopup/QuestionConstructorPopup';
 
 
 export const PopupNames = {
@@ -14,46 +23,23 @@ export const PopupNames = {
 }
 
 
+export const PopupBodies = {
+    [PopupNames.CHOSE]: ChosePopup,
+    [PopupNames.SIGNIN]: SigninPopup,
+    [PopupNames.SIGNUP]: SignupPopup,
+    [PopupNames.CHOSE_QUESTION_TYPE]: ChoseQuestionTypePopup,
+    [PopupNames.ADD_CLASS]: AddClassPopup,
+    [PopupNames.ADD_STUDENT]: AddStudentPopup,
+    [PopupNames.CHOSE_TEST_CATEGORY]: ChoseTestCategoryPopup,
+    [PopupNames.CHOSE_QUESTION]: ChoseQuestionPopup,
+    [PopupNames.QUESTION_CONSTRUCTOR]: QuestionConstructorPopup,
+
+}
+
+
 const initialState = {
-    popups: [
-        {
-            name: PopupNames.CHOSE,
-            hidden: true
-        },
-        {
-            name: PopupNames.SIGNIN,
-            hidden: true
-        },
-        {
-            name: PopupNames.SIGNUP,
-            hidden: true
-        },
-        {
-            name: PopupNames.CHOSE_QUESTION_TYPE,
-            hidden: true
-        },
-        {
-            name: PopupNames.ADD_CLASS,
-            hidden: true
-        },
-        {
-            name: PopupNames.ADD_STUDENT,
-            hidden: true
-        },
-        {
-            name: PopupNames.CHOSE_QUESTION,
-            hidden: true
-        },
-        {
-            name: PopupNames.CHOSE_TEST_CATEGORY,
-            hidden: true
-        },
-        {
-            name: PopupNames.QUESTION_CONSTRUCTOR,
-            hidden: true
-        },
-    ],
-    activePopup: ''
+            
+    activePopup: null
 }
 
 
@@ -62,39 +48,11 @@ export const PopupsSlice = createSlice({
     name: 'popups',
     reducers: {
         showPopup(state, action){
-            state.popups.forEach(popup =>  popup.hidden = true )
-            state.popups.find(popup =>  popup.name === action.payload ).hidden = false 
             state.activePopup = action.payload
         },
-        closePopup(state, action){
-            state.popups.find(popup =>  popup.name === action.payload ).hidden = true
-            state.activePopup = ''
-        },
-        closeAllPopups(state){
-            state.popups.forEach(popup =>  popup.hidden = true )
-            state.activePopup = ''
-        },
-
-        switchAuthentication(state){
-            switch (state.activePopup) {
-                case PopupNames.SIGNIN:
-                    state.popups.forEach(popup =>  popup.hidden = true )
-                    state.popups.find(popup =>  popup.name === PopupNames.SIGNUP ).hidden = false
-                    state.activePopup = PopupNames.SIGNUP
-                    break;
-                case PopupNames.SIGNUP:
-                    state.popups.forEach(popup =>  popup.hidden = true )
-                    state.popups.find(popup =>  popup.name === PopupNames.SIGNIN ).hidden = false
-                    state.activePopup = PopupNames.SIGNIN
-                    break;
-                default:
-                    state.popups.forEach(popup =>  popup.hidden = true )
-                    state.popups.find(popup =>  popup.name === PopupNames.SIGNIN ).hidden = false
-                    state.activePopup = PopupNames.SIGNIN
-                    break;
-            }
-        }
-        
+        closePopup(state){
+            state.activePopup = null
+        }        
     }
 })
 

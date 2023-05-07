@@ -21,7 +21,7 @@ export const ChoseTestCategoryPopup = (props) => {
     function openChoseQuestionPopupHandler(test_id){
         dispatch(TestCreationSlice.actions.setActiveTestCategory(test_id))
         dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_QUESTION))
-        dispatch(PopupsSlice.actions.closePopup(popupName))
+        dispatch(PopupsSlice.actions.closePopup())
     }
 
     return (
