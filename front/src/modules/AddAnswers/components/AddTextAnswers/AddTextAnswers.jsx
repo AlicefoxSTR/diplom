@@ -3,7 +3,7 @@ import { ClassNames } from 'helpers/ClassNames/ClassNames';
 import cls from './AddTextAnswers.module.css';
 import { Input } from 'UI/Input/Input';
 import { NewQuestionCreateSlice } from 'redux/NewQuestionCreate';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const AddTextAnswers = (props) => {
     const { className } = props;
@@ -11,17 +11,21 @@ export const AddTextAnswers = (props) => {
     const [input, setInput] = useState('')
 
     const { answers } = useSelector(state => state.newQuestionCreate)
+    const dispatch = useDispatch()
 
-    function BlurHandler(e){
-
+    function BlurHandler(answer){
+        console.log(answer)
+        dispatch(NewQuestionCreateSlice.actions.answersHandle(answer))
+        setInput('')
     }
 
-    function FocusHandler(e){
 
-    }
 
-    function ChangeHandler(e){
-
+    function ChangeHandler(answer){
+        if(answer.length===0){
+            dispatch(NewQuestionCreateSlice.actions.deleteAnswer(answer.id))
+        }
+        dispatch(NewQuestionCreateSlice.actions.answersHandle(answer))
     }
 
     return (
@@ -30,15 +34,39 @@ export const AddTextAnswers = (props) => {
                 {
                     answers.length > 0 
                     ?
-                        answers.map((value, index)=>(
-                            <Input className={cls.input} value={value} key={index} onChange={e=>console.log(e.target)} />
+                        answers.map(({id, value})=>(
+                            <Input 
+                                className={cls.input} 
+                                value={value} 
+                                key={id} 
+                                onChange={e=>ChangeHandler({
+                                    id: id,
+                                    value: e.target.value
+                                })} 
+                            />
                         ))
                     :
-                <Input className={cls.input} placeholder="Введите возможный вариант ответа" onChange={e=>console.log(e.target.value)} />
+                        <Input 
+                            className={cls.input} 
+                            placeholder="Введите возможный вариант ответа" 
+                            onBlur={e=>dispatch(NewQuestionCreateSlice.actions.answersHandle({
+                                id: answers.length + 1,
+                                value: e.target.value
+                            }))}
+                        />
 
                     
                 }
-                <Input className={cls.input} placeholder="Дополнительный вариант*" onChange={e=>console.log(e.target)} />
+                <Input 
+                    className={cls.input} 
+                    placeholder="Дополнительный вариант*" 
+                    onChange={e => setInput(e.target.value)}
+                    value={input}
+                    onBlur={e=>BlurHandler({
+                        id: answers.length + 1,
+                        value: e.target.value
+                    })}
+                />
 
                 <span className={cls.help}>*  - Необязательно для заполнения</span>
 

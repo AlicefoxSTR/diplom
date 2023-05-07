@@ -14,7 +14,6 @@ export const Select = (props) => {
 
 
     function toggleHandler(e){
-        e.preventDefault()
         setActive(!active)
     }
 
@@ -28,9 +27,11 @@ export const Select = (props) => {
           }
     }
 
-    function choseOptionHandler(value){
-        dispatch(NewQuestionCreateSlice.actions.setQuestionType(value))
-        setActive(!active)
+    function choseOptionHandler(e, value, index){
+        if(active && index !== 0){
+            dispatch(NewQuestionCreateSlice.actions.setQuestionType(value))
+            setActive(!active)
+        }
     }
 
         
@@ -39,8 +40,8 @@ export const Select = (props) => {
         <div className={ClassNames(cls.select, {[cls.active]: active}, [className])} onClick={e=>toggleHandler(e)}>
             <div className={cls.options}>
                 {
-                    options.sort((a,b) => sortOptions(a, b)).map(({label, value})=>(
-                        <div key={value} className={ClassNames(cls.option, {}, [])} onClick={()=>choseOptionHandler(value)}>
+                    options.sort((a,b) => sortOptions(a, b)).map(({label, value}, index)=>(
+                        <div key={value} className={ClassNames(cls.option, {}, [])} onClick={e=>choseOptionHandler(e, value, index)}>
                             {label}
                             <Arrow className={cls.icon }/>
                         </div>

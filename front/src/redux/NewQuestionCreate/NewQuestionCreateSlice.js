@@ -32,7 +32,22 @@ export const NewQuestionCreateSlice = createSlice({
             },
             setQuestionType(state, action){
                 state.questionType = action.payload
-            }
+                state.answers = []
+            },
+            answersHandle(state, action){
+                if(action.payload.value.length > 0){
+                    const answer = state.answers.find(({id}) => id === action.payload.id)
+                    if(answer){
+                        answer.value = action.payload.value
+                        return
+                    }
+                    state.answers.push(action.payload)
+                    return
+                } 
+                state.answers = state.answers.filter( answer => answer.id !== action.payload.id )
+            },
+           
+        
         }
 })
 
