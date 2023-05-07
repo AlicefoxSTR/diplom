@@ -1,0 +1,1 @@
+export { AddAnswers } from './components/AddAnswers/AddAnswers'

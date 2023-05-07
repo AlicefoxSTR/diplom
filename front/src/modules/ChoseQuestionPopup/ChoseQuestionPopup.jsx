@@ -28,7 +28,7 @@ export const ChoseQuestionPopup = (props) => {
 
 
     return (
-        <PopupWrapper hidden={popups.find(popup=> popup.name === popupName ).hidden} >
+        <PopupWrapper >
             <PopupBoard className={ClassNames(cls.choseQuestionPopup, {}, [className])}>
                 <h2 className={'popupTitle'}>Выберите вопрос</h2>
                 <div className={cls.cards}>

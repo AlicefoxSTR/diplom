@@ -25,7 +25,7 @@ export const ChoseTestCategoryPopup = (props) => {
     }
 
     return (
-        <PopupWrapper hidden={popups.find(popup=> popup.name === popupName ).hidden}>
+        <PopupWrapper>
             <PopupBoard className={ClassNames(cls.choseTestCategoryPopup, {}, [className])}>
                 <h2 className="popupTitle">
                     Выберите категорию

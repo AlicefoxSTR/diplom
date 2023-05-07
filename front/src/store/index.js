@@ -20,6 +20,7 @@ import { StudentTestsSlice } from "redux/StudentTests/StudentTestsSlice";
 import { TestCreationSlice } from "redux/TestCreation/TestCreationSlice";
 import { ClassesSlice } from "redux/Classes/ClassesSlice";
 import { ResultsSlice } from "redux/Results/ResultsSlice";
+import { NewQuestionCreateReducer } from "redux/NewQuestionCreate";
 
 
 
@@ -43,7 +44,8 @@ const rootReducer = combineReducers({
     studentTests: StudentTestsReducer,
     testCreation: TestCreationReducer,
     classes: ClassesReducer,
-    results: ResultsReducer
+    results: ResultsReducer,
+    newQuestionCreate: NewQuestionCreateReducer
 })
 
 

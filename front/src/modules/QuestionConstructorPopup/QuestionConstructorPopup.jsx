@@ -2,22 +2,28 @@ import React, { useState } from 'react';
 import { ClassNames } from 'helpers/ClassNames/ClassNames';
 import cls from './QuestionConstructorPopup.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { PopupNames } from 'redux/Popups/PopupsSlice';
 import { PopupWrapper } from 'components/PopupWrapper/PopupWrapper';
 import { PopupBoard } from 'components/PopupBoard/PopupBoard';
 import { Input } from 'UI/Input/Input';
+import { NewQuestionCreateSlice, questionTypes } from 'redux/NewQuestionCreate';
+import { Select } from 'UI/Select/Select';
+import { AddAnswers } from 'modules/AddAnswers';
+
 
 export const QuestionConstructorPopup = (props) => {
     const { className } = props;
 
 
-    const [input, setInput] = useState()
-    const { popups } = useSelector(state=>state.popups)
+    const { question, questionType } = useSelector(state=>state.newQuestionCreate)
+
     const dispatch = useDispatch()
 
-    const popupName = PopupNames.QUESTION_CONSTRUCTOR
+    function closeHandler(){
+        dispatch(NewQuestionCreateSlice.actions.clearForm())
+    }
+
     return (
-        <PopupWrapper hidden={popups.find(popup=> popup.name === popupName ).hidden}>
+        <PopupWrapper closeHandler={closeHandler} >
             <PopupBoard className={ClassNames(cls.choseTestCategoryPopup, {}, [className])}>
                 <h2 className="popupTitle">
                     Новый вопрос
@@ -29,10 +35,22 @@ export const QuestionConstructorPopup = (props) => {
                     name={'question'} 
                     id={'question'}
                     placeholder={"Вопрос без заголовка"} 
-                    value={input} 
-                    onChange={e => setInput(e.target.value)}
+                    value={question} 
+                    onChange={e => dispatch(NewQuestionCreateSlice.actions.setQuestion(e.target.value))}
                     className={cls.input}
                 />
+
+                <Select 
+                    options={[
+                        { label: "Текст", value: questionTypes.TEXT },
+                        { label: "Несколько из списка", value: questionTypes.CHECKBOX },
+                        { label: "Один на выбор", value: questionTypes.RADIO },
+                    ]} 
+                    activeOption={questionType}
+                    className={cls.select}
+                />
+
+                <AddAnswers questionType={questionType} />
 
                
             </PopupBoard>

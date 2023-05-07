@@ -24,12 +24,15 @@ export const PopupWrapper = (props) => {
         }else{
             document.removeEventListener('keydown', handleKeyDown)
             document.body.style.overflow = 'auto'
+            closeHandler && closeHandler()
+
 
         }
 
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
             document.body.style.overflow = 'auto'
+            closeHandler && closeHandler()
 
           };
         
