@@ -1,14 +1,35 @@
 import React from 'react';
 import { ClassNames } from 'helpers/ClassNames/ClassNames';
 import cls from './AddCheckboxAnswers.module.css';
-import { Checkbox } from 'UI/Checkbox/Checkbox';
+import { InputWithCheckbox } from '../../UI/InputWithCheckbox/InputWithCheckbox/InputWithCheckbox';
+import { useSelector } from 'react-redux';
+
 
 export const AddCheckboxAnswers = (props) => {
     const { className } = props;
 
+    const { answers } = useSelector(state => state.newQuestionCreate)
+
+    function deleteAnswer(){
+
+    }
+
     return (
         <div className={ClassNames(cls.addCheckboxAnswers, {}, [className])}>
-            <Checkbox  text={'qwe'} name="answer" id={'qwe'} />
+            {
+                answers.map(answer => (
+                    <InputWithCheckbox 
+                        className={cls.input} 
+                        value={answer.value} 
+                        name="answer" 
+                        id={answer.id} 
+                        key={`checkboxAnswer_${answer.id}`} 
+                        placeholder={'Добавить ответ'} 
+                        deleteHandler={deleteAnswer} 
+                    />
+                ))
+            }
+            <InputWithCheckbox className={cls.input} name="answer" id={answers.length+1} placeholder={'Добавить ответ'} />
         </div>
  );
 }

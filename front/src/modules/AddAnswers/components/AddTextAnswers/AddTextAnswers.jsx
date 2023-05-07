@@ -10,31 +10,28 @@ export const AddTextAnswers = (props) => {
 
     const [input, setInput] = useState('')
 
-    const { answers } = useSelector(state => state.newQuestionCreate)
+    const { correctAnswers } = useSelector(state => state.newQuestionCreate)
     const dispatch = useDispatch()
 
     function BlurHandler(answer){
         console.log(answer)
-        dispatch(NewQuestionCreateSlice.actions.answersHandle(answer))
+        dispatch(NewQuestionCreateSlice.actions.textAnswersHandler(answer))
         setInput('')
     }
 
 
 
     function ChangeHandler(answer){
-        if(answer.length===0){
-            dispatch(NewQuestionCreateSlice.actions.deleteAnswer(answer.id))
-        }
-        dispatch(NewQuestionCreateSlice.actions.answersHandle(answer))
+        dispatch(NewQuestionCreateSlice.actions.textAnswersHandler(answer))
     }
 
     return (
         <div className={ClassNames(cls.addTextAnswers, {}, [className])}>
 
                 {
-                    answers.length > 0 
+                    correctAnswers.length > 0 
                     ?
-                        answers.map(({id, value})=>(
+                    correctAnswers.map(({id, value})=>(
                             <Input 
                                 className={cls.input} 
                                 value={value} 
@@ -49,8 +46,8 @@ export const AddTextAnswers = (props) => {
                         <Input 
                             className={cls.input} 
                             placeholder="Введите возможный вариант ответа" 
-                            onBlur={e=>dispatch(NewQuestionCreateSlice.actions.answersHandle({
-                                id: answers.length + 1,
+                            onBlur={e=>dispatch(NewQuestionCreateSlice.actions.textAnswersHandler({
+                                id: correctAnswers.length + 1,
                                 value: e.target.value
                             }))}
                         />
@@ -63,7 +60,7 @@ export const AddTextAnswers = (props) => {
                     onChange={e => setInput(e.target.value)}
                     value={input}
                     onBlur={e=>BlurHandler({
-                        id: answers.length + 1,
+                        id: correctAnswers.length + 1,
                         value: e.target.value
                     })}
                 />

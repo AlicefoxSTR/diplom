@@ -8,3 +8,8 @@
     margin-top: 15px;
 }
 
+.addTextAnswers {
+    display: flex;
+    flex-direction: column;
+}
+

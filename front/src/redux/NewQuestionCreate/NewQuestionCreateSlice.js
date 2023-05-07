@@ -11,9 +11,9 @@ export const questionTypes = {
 
 const initiatlState = {
     question: '',
-    questionType: '',
+    questionType: questionTypes.CHECKBOX,
     answers: [],
-    correctAnswers: questionTypes.CHECKBOX
+    correctAnswers: []
 }
 
 
@@ -32,20 +32,50 @@ export const NewQuestionCreateSlice = createSlice({
             },
             setQuestionType(state, action){
                 state.questionType = action.payload
+                state.correctAnswers = []
                 state.answers = []
             },
-            answersHandle(state, action){
+            textAnswersHandler(state, action){
+                if(action.payload.value.length > 0){
+                    const correctAnswer = state.correctAnswers.find(({id}) => id === action.payload.id)
+                    if(correctAnswer){
+                        correctAnswer.value = action.payload.value
+                        state.answers = state.correctAnswers
+                        return
+                    }
+                    state.correctAnswers.push(action.payload)
+                    state.answers = state.correctAnswers
+                    return
+                } 
+                state.correctAnswers = state.correctAnswers.filter( answer => answer.id !== action.payload.id )
+                state.answers = state.correctAnswers
+            },
+            checkboxAnswersHandler(state, action){
                 if(action.payload.value.length > 0){
                     const answer = state.answers.find(({id}) => id === action.payload.id)
                     if(answer){
                         answer.value = action.payload.value
                         return
                     }
-                    state.answers.push(action.payload)
+                    state.answers.push({
+                        id: action.payload.id,
+                        value: action.payload.value,
+                    })
+                    if(action.payload.checked){
+                        state.correctAnswers.find(({id})=>action.payload.id === id).value = action.payload.value
+                    }
                     return
                 } 
                 state.answers = state.answers.filter( answer => answer.id !== action.payload.id )
             },
+            toggleCorrectAnswer(state, action){
+                if(state.correctAnswers.find(({id})=>id === action.payload.id)){
+                    state.correctAnswers = state.correctAnswers.filter(({id})=>id !== action.payload.id)
+                }else{
+                    state.correctAnswers.push(action.payload)
+                }
+
+            }
            
         
         }

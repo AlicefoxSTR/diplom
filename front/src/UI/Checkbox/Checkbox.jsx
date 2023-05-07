@@ -7,12 +7,13 @@ export const Checkbox = (props) => {
         className,
         text,
         id,
-        name
+        name,
+        ...otherProps
     } = props;
 
     return (
         <div className={ClassNames(cls.checkbox, {}, [className])}>
-            <input type='checkbox' id={id} name={name} className={ClassNames(cls.input, {}, [])}/>
+            <input type='checkbox' id={id} name={name} className={ClassNames(cls.input, {}, [])} {...otherProps}/>
             <label htmlFor={id}  className={ClassNames(cls.label, {}, [])} >
                 {text}
             </label>
