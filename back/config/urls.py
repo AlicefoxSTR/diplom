@@ -5,11 +5,9 @@ from django.conf.urls.static import static
 from .yasg import urlpatterns as doc_urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.authtoken')),
-    path('auth/', include('djoser.urls.jwt')),
+    path('api/admin/', admin.site.urls),
+    path('api/ckeditor/', include('ckeditor_uploader.urls')),
+    path('api/auth/', include('djoser.urls.jwt')),
     path('api/v1/', include('api.urls')),
 ]
 

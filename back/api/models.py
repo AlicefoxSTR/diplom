@@ -1,24 +1,20 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 
-
-class User(models.Model):
+class User(AbstractUser):
     USER_ROLES = (
         ('teacher', 'Учитель'),
         ('student', 'Ученик'),
         ('user', 'Пользователь'),
     )
 
-    first_name = models.CharField(max_length=100, verbose_name='Имя')
-    last_name = models.CharField(max_length=100, verbose_name='Фамилия')
-    username = models.CharField(max_length=100, verbose_name='Логин')
-    password = models.CharField(max_length=255, verbose_name='Пароль')
-    email = models.EmailField(verbose_name='Почта')
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, verbose_name='Аватар')
-    role = models.CharField(choices=USER_ROLES, max_length=100, verbose_name='Роль пользователя')
-    teacher = models.OneToOneField('Teacher', null=True, blank=True, on_delete=models.CASCADE)
-    student = models.OneToOneField('Student', null=True, blank=True, on_delete=models.CASCADE)
-    user = models.OneToOneField('User', null=True, blank=True, on_delete=models.CASCADE)
+    role = models.CharField(choices=USER_ROLES, default='user', max_length=100, verbose_name='Роль пользователя')
+    teacher = models.OneToOneField('Teacher', null=True, blank=True, on_delete=models.CASCADE, related_name='teacher_profile')
+    student = models.OneToOneField('Student', null=True, blank=True, on_delete=models.CASCADE, related_name='student_profile')
+    user = models.OneToOneField('UserStage', null=True, blank=True, on_delete=models.CASCADE, related_name='user_profile')
+    email_confirmed = models.BooleanField(("Почта подтверждена"), default=False)
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
@@ -28,7 +24,8 @@ class User(models.Model):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.username}'
+
 
 
 class UserStage(models.Model):
@@ -48,7 +45,7 @@ class UserStage(models.Model):
 
 
 class Teacher(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', related_name='teacher_profile')
     classes = models.ManyToManyField('Class', related_name='teachers', blank=True, verbose_name='Классы')
     custom_tests = models.ManyToManyField('Test', related_name='created_by', blank=True, verbose_name='Кастомные тесты, созданные учителем')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
@@ -63,7 +60,7 @@ class Teacher(models.Model):
 
 
 class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь', related_name='student_profile')
     username = models.CharField(max_length=100, verbose_name='Логин')
     password = models.CharField(max_length=255, verbose_name='Пароль')
     classroom = models.ForeignKey('Class', on_delete=models.CASCADE, related_name='students', verbose_name='Класс')
@@ -120,8 +117,8 @@ class Task(models.Model):
 
     question_type = models.CharField(choices=QUESTION_TYPES, max_length=100, verbose_name='Тип вопроса')
     question_text = models.TextField(verbose_name='Текст вопроса')
-    correct_answers = models.ManyToManyField('Правильные ответы', related_name='tasks_correct', verbose_name='Правильные ответы')
-    possible_answers = models.ManyToManyField('Возможные ответы', related_name='tasks_possible', verbose_name='Возможные ответы')
+    correct_answers = models.ManyToManyField('Answer', related_name='tasks_correct', verbose_name='Правильные ответы')
+    possible_answers = models.ManyToManyField('Answer', related_name='tasks_possible', verbose_name='Возможные ответы')
     creator = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Создатель', blank=True, null=True)
     is_custom = models.BooleanField(("Кастомный"), default=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
