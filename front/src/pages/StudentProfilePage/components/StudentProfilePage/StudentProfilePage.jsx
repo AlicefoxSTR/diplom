@@ -1,7 +1,7 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './StudentProfilePage.module.css';
-import { Main } from 'modules/Main';
+import { Main } from 'widgets/Main';
 
 export const StudentProfilePage = (props) => {
     const { className } = props;

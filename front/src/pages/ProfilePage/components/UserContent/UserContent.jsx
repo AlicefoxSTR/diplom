@@ -1,10 +1,10 @@
 import React from 'react'
-import { Main } from 'modules/Main'
+import { Main } from 'widgets/Main'
 import { ProfileForm } from '../ProfileForm/ProfileForm'
 import cls from './UserContent.module.css'
-import { Button } from 'UI/Button/Button'
-import { AddImageIcon } from 'UI/AddImageIcon/AddImageIcon'
-import { CustomLink } from 'UI/CustomLink/CustomLink'
+import { Button } from 'shared/UI/Button/Button'
+import { AddImageIcon } from 'shared/UI/AddImageIcon/AddImageIcon'
+import { CustomLink } from 'shared/UI/CustomLink/CustomLink'
 
 export const UserContent = () => {
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './StudentForm.module.css';
-import { FormInputRow } from 'components/FormInputRow/FormInputRow';
+import { FormInputRow } from 'widgets/FormInputRow/FormInputRow';
 
 export const StudentForm = (props) => {
     const { className } = props;

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './ProfilePage.module.css';
-import { Main, MainNavigation } from 'modules/Main';
+import { Main, MainNavigation } from 'widgets/Main';
 import { useDispatch, useSelector } from 'react-redux';
 import { StudentContent } from '../StudentContent/StudentContent';
 import { TeacherContent } from '../TeacherContent/TeacherContent';
 import { UserContent } from '../UserContent/UserContent';
-import { PopupNames, PopupsSlice } from 'redux/Popups/PopupsSlice';
+import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
 import { useNavigate } from 'react-router';
 
 export const ProfilePage = (props) => {

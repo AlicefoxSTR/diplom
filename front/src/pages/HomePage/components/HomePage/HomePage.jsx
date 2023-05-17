@@ -1,10 +1,10 @@
 import React from 'react'
-import { Main, MainNavigation } from 'modules/Main'
-import { Button } from 'UI/Button/Button'
+import { Main, MainNavigation } from 'widgets/Main'
+import { Button } from 'shared/UI/Button/Button'
 import cls from './HomePage.module.css'
 import { HomeBorder } from '../../UI/HomeBorder/HomeBorder'
 import { useDispatch } from 'react-redux'
-import { PopupNames, PopupsSlice } from 'redux/Popups/PopupsSlice'
+import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice'
 
 
 export const HomePage = () => {

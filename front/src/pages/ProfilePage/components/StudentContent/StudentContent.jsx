@@ -1,8 +1,8 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './StudentContent.module.css';
-import { Button } from 'UI/Button/Button';
-import { AddImageIcon } from 'UI/AddImageIcon/AddImageIcon'
+import { Button } from 'shared/UI/Button/Button';
+import { AddImageIcon } from 'shared/UI/AddImageIcon/AddImageIcon'
 import { StudentForm } from '../StudentForm/StudentForm';
 
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TestingPage.module.css';
 import { useSelector } from 'react-redux';
-import { ProgressBar } from 'modules/ProgressBar/ProgressBar';
-import { Main } from 'modules/Main';
-import { TestingTable } from 'modules/TestingTable/TestingTable';
-import { CustomLink, LinkThemes } from 'UI/CustomLink/CustomLink';
+import { ProgressBar } from 'widgets/ProgressBar/ProgressBar';
+import { Main } from 'widgets/Main';
+import { TestingTable } from 'widgets/TestingTable/TestingTable';
+import { CustomLink, LinkThemes } from 'shared/UI/CustomLink/CustomLink';
 
 export const TestingPage = (props) => {
     const { 

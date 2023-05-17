@@ -1,8 +1,8 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './ProfileForm.module.css';
-import { FormInputRow } from 'components/FormInputRow/FormInputRow';
-import { Button } from 'UI/Button/Button';
+import { FormInputRow } from 'widgets/FormInputRow/FormInputRow';
+import { Button } from 'shared/UI/Button/Button';
 
 export const ProfileForm = (props) => {
     const { className } = props;

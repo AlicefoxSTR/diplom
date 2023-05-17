@@ -1,9 +1,9 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './StudentContent.module.css';
 import { NotFoundResults } from '../NotFoundResults/NotFoundResults';
 import { useSelector } from 'react-redux';
-import { ResultsTable } from 'modules/ResultsTable/ResultsTable';
+import { ResultsTable } from 'widgets/ResultsTable/ResultsTable';
 
 export const StudentContent = (props) => {
     const { className } = props;

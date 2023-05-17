@@ -1,8 +1,8 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './ResultClassesFilter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { ResultsSlice } from 'redux/Results/ResultsSlice';
+import { ResultsSlice } from 'entities/Results/ResultsSlice';
 
 export const ResultClassesFilter = (props) => {
     const { 

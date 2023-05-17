@@ -1,11 +1,11 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TeacherContent.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotFoundResults } from '../NotFoundResults/NotFoundResults';
-import { Button } from 'UI/Button/Button';
-import { PopupNames, PopupsSlice } from 'redux/Popups/PopupsSlice';
-import { ClassList } from 'modules/ClassList/ClassList';
+import { Button } from 'shared/UI/Button/Button';
+import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
+import { ClassList } from 'widgets/ClassList/ClassList';
 
 export const TeacherContent = (props) => {
     const { className } = props;

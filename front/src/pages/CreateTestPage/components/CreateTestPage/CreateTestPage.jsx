@@ -1,12 +1,12 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './CreateTestPage.module.css';
 import { NotFoundResults } from 'pages/AccountPage/components/NotFoundResults/NotFoundResults';
-import { Main, MainNavigation } from 'modules/Main';
-import { Button, ButtonTheme } from 'UI/Button/Button';
+import { Main, MainNavigation } from 'widgets/Main';
+import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { PopupNames, PopupsSlice } from 'redux/Popups/PopupsSlice';
-import { TaskRow } from 'modules/TaskRow/TaskRow';
+import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
+import { TaskRow } from 'widgets/TaskRow/TaskRow';
 
 export const CreateTestPage = (props) => {
     const { className } = props;

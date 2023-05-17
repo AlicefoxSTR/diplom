@@ -1,7 +1,7 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './AccountTestsPage.module.css';
-import { Main, MainNavigation } from 'modules/Main';
+import { Main, MainNavigation } from 'widgets/Main';
 import { StudentContent } from '../StudentContent/StudentContent';
 import { useSelector } from 'react-redux';
 import { TeacherContent } from '../TeacherContent/TeacherContent';

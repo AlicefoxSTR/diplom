@@ -1,11 +1,11 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TeacherContent.module.css';
 import { useSelector } from 'react-redux';
-import { TestCardsList } from 'modules/TestCardsList/TestCardsList';
+import { TestCardsList } from 'widgets/TestCardsList/TestCardsList';
 import { NotFoundResults } from 'pages/AccountPage/components/NotFoundResults/NotFoundResults';
-import { Button, ButtonTheme } from 'UI/Button/Button';
-import { CustomLink, LinkThemes } from 'UI/CustomLink/CustomLink';
+import { Button, ButtonTheme } from 'shared/UI/Button/Button';
+import { CustomLink, LinkThemes } from 'shared/UI/CustomLink/CustomLink';
 
 export const TeacherContent = (props) => {
     const { className } = props;

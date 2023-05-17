@@ -1,5 +1,5 @@
 import React from 'react'
-import { Main } from 'modules/Main'
+import { Main } from 'widgets/Main'
 
 export const NotFoundPage = () => {
   return (

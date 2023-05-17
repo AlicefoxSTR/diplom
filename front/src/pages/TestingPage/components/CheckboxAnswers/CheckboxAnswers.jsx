@@ -1,7 +1,7 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './CheckboxAnswers.module.css';
-import { Checkbox } from 'UI/Checkbox/Checkbox';
+import { Checkbox } from 'shared/UI/Checkbox/Checkbox';
 
 export const CheckboxAnswers = (props) => {
     const { 

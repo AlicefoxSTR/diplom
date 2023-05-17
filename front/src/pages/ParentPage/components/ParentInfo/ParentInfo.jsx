@@ -1,9 +1,9 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './ParentInfo.module.css';
-import { CardInfo } from 'components/CardInfo/CardInfo';
-import IconVKSmall from 'UI/IconVKSmall/IconVKSmall';
-import IconJoystick from 'UI/IconJoystick/IconJoystick';
+import { CardInfo } from 'widgets/CardInfo/CardInfo';
+import IconVKSmall from 'shared/UI/IconVKSmall/IconVKSmall';
+import IconJoystick from 'shared/UI/IconJoystick/IconJoystick';
 
 export const ParentInfo = (props) => {
     const { className } = props;

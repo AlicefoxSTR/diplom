@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClassNames } from 'helpers/ClassNames/ClassNames';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './NotFoundResults.module.css';
 import Image from 'assets/img/astronaut.png'
 

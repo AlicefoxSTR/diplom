@@ -1,6 +1,6 @@
 import React from 'react'
-import { Main, MainNavigation } from '../../../../modules/Main'
-import { TestCard } from 'components/TestCard/TestCard'
+import { Main, MainNavigation } from '../../../../widgets/Main'
+import { TestCard } from 'widgets/TestCard/TestCard'
 import cls from './TestsPage.module.css'
 import { useSelector } from 'react-redux'
 
