@@ -4,13 +4,22 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
-from .permissions import IsAuthenticatedAndVerfiendEmail
+from rest_framework.views import APIView
+from .permissions import IsAuthenticatedAndVerfyEmail
+from .utils import generate_random_password, generate_random_username
 
 from .models import (
-    User
+    User,
+    Teacher,
+    UserStage,
+    Student,
+    Stage,
+    Class
 )
 from .serializers import (
-    UserSerializer
+    UserSerializer,
+    StudentSerializer,
+    ClassSerializer
 )
 
 
@@ -25,10 +34,22 @@ class UserRegistrationView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
+        if request.data['role'] == 'teacher':
+            teacher_profile = Teacher.objects.create(user=user)
+            teacher_profile.save()
+        if request.data['role'] == 'user' or 'role' not in request.data:
+            user_stage = UserStage.objects.create(user=user)
+            if 'stage' in request.data:
+                stages_passed = Stage.objects.filter(id__in = request.data['stage'])
+                stages_not_passed = Stage.objects.exclude(id__in = request.data['stage'])
+                user_stage.stages_passed.set(stages_passed)
+                user_stage.stages_not_passed.set(stages_not_passed)
+            user_stage.save()
+
         if user:
             return Response(
                 {
-                    "message": "Пользователь успешно зарегистрирован. Проверьте свою электронную почту для активации учетной записи."
+                    "message": "Пользователь успешно зарегистрирован. Проверьте свою электронную почту для активации учетной записи.",
                 },
                 status=status.HTTP_201_CREATED,
             )
@@ -36,9 +57,88 @@ class UserRegistrationView(generics.CreateAPIView):
             return Response(
                 {"message": "Ошибка регистрации пользователя."}, status=status.HTTP_400_BAD_REQUEST
             )
+        
+
+class ClassView(generics.ListCreateAPIView):
+
+    serializer_class = ClassSerializer
+    permission_classes = (IsAuthenticatedAndVerfyEmail,)
+    queryset = Class.objects.all()
+
+    def post(self, request): #Создание класса учеников
+        
+        teacher = Teacher.objects.get(user=request.user.id)
+        classes_serializer = self.get_serializer(data=request.data)
+        classes_serializer.is_valid(raise_exception=True)
+        classes = classes_serializer.save()
+        teacher.classes.add(classes)
+        teacher.save()
+
+        if classes:
+            return Response(
+                {
+                    'message': 'Класс успешно создан!',
+                    "data": classes_serializer.data
+                }, status=status.HTTP_201_CREATED
+            )        
+        else:
+            return Response(
+                {
+                    'message': 'Ошибка при создании класса',
+                }, status=status.HTTP_400_BAD_REQUEST
+            )    
+
+class StudentCreationView(APIView):
+
+    permission_classes = (IsAuthenticatedAndVerfyEmail,)
+
+    def post(self, request): #Создание профиля ученика
 
 
-class UserActivationView(generics.GenericAPIView):
+        #Генерация данных ученика
+        splited_fio = self.split_fio(request.data['fio'])
+        username = generate_random_username()
+        password = generate_random_password()
+
+        #Создание User
+        student_user = User.objects.create_user(username=username, password=password)
+        student_user.first_name = splited_fio['first_name']
+        student_user.last_name = splited_fio['last_name']
+        student_user.role = 'student'
+        student_user.email_confirmed = True 
+        student_user.save()
+
+        #Создание Student
+        student = Student.objects.create(
+            user=student_user, 
+            username=username, 
+            password=password, 
+            classroom=Class.objects.get(id=request.data['classroom']['id'])
+        )
+        student.save()
+
+        if student_user and student:
+            return Response({'message': 'Ученик успешно создан!' }, status=status.HTTP_201_CREATED)
+        else:
+            return Response(
+                {
+                    'message': 'Ошибка при создании ученика',
+                }, status=status.HTTP_400_BAD_REQUEST
+            )    
+
+
+    def split_fio(self, fio):
+
+        first_name = fio.split(' ', 1)[1]
+        last_name = fio.split(' ', 1)[0]
+        return {
+            'first_name': first_name,
+            'last_name': last_name
+        }
+
+
+
+class UserActivationView(APIView):
 
     queryset = User.objects.none()
     permission_classes = [permissions.AllowAny]

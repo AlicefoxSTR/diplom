@@ -64,7 +64,7 @@ class Student(models.Model):
     username = models.CharField(max_length=100, verbose_name='Логин')
     password = models.CharField(max_length=255, verbose_name='Пароль')
     classroom = models.ForeignKey('Class', on_delete=models.CASCADE, related_name='students', verbose_name='Класс')
-    stages = models.ManyToManyField('Stage', related_name='students', blank=True, verbose_name='Этапы')
+    # stages = models.ManyToManyField('Stage', related_name='students', blank=True, verbose_name='Этапы')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
 
@@ -143,11 +143,11 @@ class Test(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
 
     class Meta:
-        verbose_name = 'ПОльзовательский тест'
-        verbose_name_plural = 'Пользовательские тесты'
+        verbose_name = 'Тест'
+        verbose_name_plural = 'Тесты'
 
     def __str__(self):
-        return f'Тест {self.id}'
+        return f'Тест {self.name}'
 
 
 class Answer(models.Model):
@@ -161,6 +161,8 @@ class Answer(models.Model):
         verbose_name = 'Ответ'
         verbose_name_plural = 'Ответы'
         
+    def __str__(self):
+        return f'Ответ: {self.text}'
 
 
 class TestResult(models.Model):

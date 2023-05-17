@@ -5,20 +5,44 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from rest_framework import serializers
-from .models import User
+from .models import User, Teacher, Student, UserStage, Stage, Class
+
+
+class ClassSerializer(serializers.ModelSerializer):
+
+    class Meta: 
+        model = Class
+        fields = ['id']
+
+    
+class TeacherSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Teacher
+        fields = '__all__'
+
+   
+class UserStageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Stage
+        fields = ('id', 'title')
 
 
 class UserSerializer(serializers.ModelSerializer):
+
+    # stage = UserStageSerializer(many=True, required=False)
+
     class Meta:
         model = User
-        fields = ('id', 'email', 'username', 'password')
+        fields = ('email', 'username', 'password', 'role')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
-        user.email_confirmed = False  # Устанавливаем флаг is_active в False для активации почты
+        if validated_data['role'] == 'teacher' or validated_data['role'] == 'user':
+            user.email_confirmed = False  # Устанавливаем флаг is_active в False для активации почты
+            self.send_activation_email(user)  # Отправляем письмо для активации почты
         user.save()
-        self.send_activation_email(user)  # Отправляем письмо для активации почты
         return user
 
     def send_activation_email(self, user):
@@ -33,3 +57,14 @@ class UserSerializer(serializers.ModelSerializer):
         to_email = user.email
         email = EmailMessage(mail_subject, message, to=[to_email])
         email.send()
+
+
+
+class StudentSerializer(serializers.ModelSerializer):
+
+
+    user = UserSerializer(read_only=True)
+
+    class Meta: 
+        model = Student
+        fields = '__all__'
