@@ -77,6 +77,7 @@ class Student(models.Model):
 
 class Class(models.Model):
     class_name = models.CharField(max_length=100, verbose_name='Название класса')
+    tests = models.ManyToManyField("Test", verbose_name="Доступные тесты", blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
 

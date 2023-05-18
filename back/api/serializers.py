@@ -27,6 +27,12 @@ class UserStageSerializer(serializers.ModelSerializer):
         model = Stage
         fields = ('id', 'title')
 
+class UserDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'role')
+
 
 class UserSerializer(serializers.ModelSerializer):
 

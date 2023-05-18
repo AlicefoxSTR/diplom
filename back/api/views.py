@@ -6,7 +6,7 @@ from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .permissions import IsAuthenticatedAndVerfyEmail
-from .utils import generate_random_password, generate_random_username
+from .utils import generate_random_password, generate_random_username, split_fio
 
 from .models import (
     User,
@@ -19,7 +19,8 @@ from .models import (
 from .serializers import (
     UserSerializer,
     StudentSerializer,
-    ClassSerializer
+    ClassSerializer,
+    UserDetailSerializer
 )
 
 
@@ -34,9 +35,16 @@ class UserRegistrationView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
+        splited_fio = split_fio(request.data['fio'])
+        user.first_name = splited_fio['first_name']
+        user.last_name = splited_fio['last_name']
+        user.save()
+
         if request.data['role'] == 'teacher':
             teacher_profile = Teacher.objects.create(user=user)
             teacher_profile.save()
+            user.teacher = teacher_profile
+            user.save()
         if request.data['role'] == 'user' or 'role' not in request.data:
             user_stage = UserStage.objects.create(user=user)
             if 'stage' in request.data:
@@ -45,6 +53,8 @@ class UserRegistrationView(generics.CreateAPIView):
                 user_stage.stages_passed.set(stages_passed)
                 user_stage.stages_not_passed.set(stages_not_passed)
             user_stage.save()
+            user.user = user_stage
+            user.save()
 
         if user:
             return Response(
@@ -57,6 +67,19 @@ class UserRegistrationView(generics.CreateAPIView):
             return Response(
                 {"message": "Ошибка регистрации пользователя."}, status=status.HTTP_400_BAD_REQUEST
             )
+
+class UserView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    
+    def get(self, request):
+        
+        user_serializer = UserDetailSerializer(self.request.user)
+        if(user_serializer):
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "Ошибка"})
+
         
 
 class ClassView(generics.ListCreateAPIView):
@@ -96,7 +119,7 @@ class StudentCreationView(APIView):
 
 
         #Генерация данных ученика
-        splited_fio = self.split_fio(request.data['fio'])
+        splited_fio = split_fio(request.data['fio'])
         username = generate_random_username()
         password = generate_random_password()
 
@@ -127,14 +150,7 @@ class StudentCreationView(APIView):
             )    
 
 
-    def split_fio(self, fio):
-
-        first_name = fio.split(' ', 1)[1]
-        last_name = fio.split(' ', 1)[0]
-        return {
-            'first_name': first_name,
-            'last_name': last_name
-        }
+    
 
 
 

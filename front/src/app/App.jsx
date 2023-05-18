@@ -1,5 +1,5 @@
 
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, useLocation} from 'react-router-dom'
 import './assets/styles/index.css'
 import { Layout } from '../widgets/Layout/Layout';
 import { HomePage } from '../pages/HomePage';
@@ -16,8 +16,33 @@ import { AccountMyTestsPage } from 'pages/AccountMyTestsPage';
 import { CreateTestPage } from 'pages/CreateTestPage';
 import { ResultsPage } from 'pages/ResultsPage';
 import { Popups } from 'widgets/Popups/Popups';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { UserSlice } from 'entities/User';
+import { userApi } from 'entities/User/api/UserApi';
 
 function App() {
+
+  const location = useLocation()
+
+  const { refresh_token, access_token } = useSelector(state => state.user)
+  const dispatch = useDispatch()
+
+  const [ fetchUserDetail ] = userApi.useFetchUserDetailMutation()
+  const [ refreshToken ] = userApi.useRefreshTokenMutation()
+
+  useEffect(()=>{
+    fetchUserDetail(access_token).then(
+      res => {
+        if(res.error && res.error.status===401){
+          refreshToken({"refresh": refresh_token})
+        }else{
+          dispatch(UserSlice.actions.setUser(res.data))
+        }
+      }
+    )
+  },[location.pathname])
+
   return (
     <div className="App">
       <Routes>

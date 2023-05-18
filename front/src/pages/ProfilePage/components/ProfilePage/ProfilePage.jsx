@@ -22,7 +22,6 @@ export const ProfilePage = (props) => {
     //Проверяем при первом посещении страницы профиля и при попытке закрыть модалку авторизации авторизацию пользователя
     useEffect(()=>{
       if(!isAuthenticate){
-        console.log('not auth')
         if(Boolean(!activePopup)){
           dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))
           navigate('/')

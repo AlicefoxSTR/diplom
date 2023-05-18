@@ -1,7 +1,7 @@
 import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './NotFoundResults.module.css';
-import Image from 'assets/img/astronaut.png'
+import Image from 'app/assets/img/astronaut.png'
 
 export const NotFoundResults = (props) => {
     const { 

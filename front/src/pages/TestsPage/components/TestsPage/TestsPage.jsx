@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 
 export const TestsPage = () => {
 
-  const { cards } = useSelector(state => state.tests)
+  const { tests } = useSelector(state => state.tests)
 
 
   return (
@@ -15,7 +15,7 @@ export const TestsPage = () => {
       <MainNavigation />
       <div className={cls.content}>
         {
-          cards.map(card => (
+          tests.map(card => (
             <TestCard  className={cls.card} card={card} key={`TestCard_${card.id}`}/>
           ) )
         }

@@ -6,7 +6,7 @@ import App from './app/App';
 import {store, persistor} from './app/store'
 import { PersistGate } from 'redux-persist/integration/react';
 
-import './assets/styles/normalize.css'
+import './app/assets/styles/normalize.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

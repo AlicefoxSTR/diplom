@@ -71,7 +71,6 @@ export const NewQuestionCreateSlice = createSlice({
             },
             radioAnswersHandler(state, action){
                 if(action.payload.value.length > 0){
-                    console.log(action.payload)
                     const answer = state.answers.find(({id}) => id === action.payload.id)
                     if(answer){
                         answer.value = action.payload.value

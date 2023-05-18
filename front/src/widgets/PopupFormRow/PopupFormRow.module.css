@@ -11,3 +11,16 @@
     margin-bottom: 8px;
     color: var(--secondary-color);
 }
+
+.isError {
+    border: 5px solid var(--error-color);
+    color: var(--error-color);
+}
+
+.error {
+    text-align: right;
+    font: var(--font-h3);
+    color: var(--secondary-color);
+    font-weight: 500;
+    margin-top: 5px;
+}

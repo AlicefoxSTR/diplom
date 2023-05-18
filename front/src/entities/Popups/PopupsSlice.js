@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { ChosePopup } from 'widgets/ChosePopup';
+import { ChoseRolePopup } from 'widgets/ChoseRolePopup';
 import { SigninPopup } from 'widgets/SigninPopup/UI/SigninPopup';
 import { SignupPopup } from 'widgets/SignupPopup/UI/SignupPopup';
 import { ChoseQuestionTypePopup } from 'widgets/ChoseQuestionTypePopup/ChoseQuestionTypePopup';
@@ -11,7 +11,7 @@ import { QuestionConstructorPopup } from 'widgets/QuestionConstructorPopup/Quest
 
 
 export const PopupNames = {
-    CHOSE: 'chose',
+    CHOSE_ROLE: 'chose_role',
     SIGNIN: 'signin',
     SIGNUP: 'signup',
     CHOSE_QUESTION_TYPE: 'chose_question_type',
@@ -24,7 +24,7 @@ export const PopupNames = {
 
 
 export const PopupBodies = {
-    [PopupNames.CHOSE]: ChosePopup,
+    [PopupNames.CHOSE_ROLE]: ChoseRolePopup,
     [PopupNames.SIGNIN]: SigninPopup,
     [PopupNames.SIGNUP]: SignupPopup,
     [PopupNames.CHOSE_QUESTION_TYPE]: ChoseQuestionTypePopup,

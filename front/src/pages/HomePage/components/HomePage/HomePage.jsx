@@ -19,7 +19,7 @@ export const HomePage = () => {
       <MainNavigation /> 
       <div className={cls.block}>
         <HomeBorder />
-        <Button className={cls.btn} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE))}>
+        <Button className={cls.btn} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ROLE))}>
           Зарегистрироваться / Войти
         </Button> 
       </div>

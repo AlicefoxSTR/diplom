@@ -21,6 +21,7 @@ import { TestCreationSlice } from "entities/TestCreation/TestCreationSlice";
 import { ClassesSlice } from "entities/Classes/ClassesSlice";
 import { ResultsSlice } from "entities/Results/ResultsSlice";
 import { NewQuestionCreateReducer } from "entities/NewQuestionCreate";
+import { userApi } from "entities/User/api/UserApi";
 
 
 
@@ -45,13 +46,17 @@ const rootReducer = combineReducers({
     testCreation: TestCreationReducer,
     classes: ClassesReducer,
     results: ResultsReducer,
-    newQuestionCreate: NewQuestionCreateReducer
+    newQuestionCreate: NewQuestionCreateReducer,
+    [userApi.reducerPath]: userApi.reducer
 })
 
 
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: [
+      [userApi.reducerPath]
+    ]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -63,7 +68,9 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    })
+    .concat(userApi.middleware)
+    ,
   })
 
 export const persistor = persistStore(store)

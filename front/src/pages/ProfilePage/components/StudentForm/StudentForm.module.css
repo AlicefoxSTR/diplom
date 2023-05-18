@@ -11,7 +11,7 @@
     right: 0;
     width: 147px;
     height: 190px;
-    background: url('../../../../assets/img/rabbit.png');
+    background: url('../../../../app/assets/img/rabbit.png');
     transform: translateY(-11%);
 }
 

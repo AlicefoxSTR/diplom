@@ -1,23 +1,27 @@
 import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
-import cls from './ChosePopup.module.css';
+import cls from './ChoseRolePopup.module.css';
 import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { Cross } from 'shared/UI/Cross/Cross';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
+import { UserSlice } from 'entities/User';
 
-export const ChosePopup = (props) => {
+export const ChoseRolePopup = (props) => {
 
 
     const { 
         className,
      } = props;
 
-    const { popups } = useSelector(state=>state.popups)
     const dispatch = useDispatch()
 
-    const popupName = PopupNames.CHOSE
+
+    function ClickHandler(popup, role){
+        dispatch(PopupsSlice.actions.showPopup(popup))
+        dispatch(UserSlice.actions.setRole(role))
+    }
 
     return (
         <PopupWrapper >
@@ -38,7 +42,7 @@ export const ChosePopup = (props) => {
                             Получай именную грамоту
                         </li>
                     </ul>
-                    <Button theme={ButtonTheme.DARK} className={cls.button} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))} >Войти как ученик</Button>
+                    <Button theme={ButtonTheme.DARK} className={cls.button} onClick={()=>ClickHandler(PopupNames.SIGNIN, 'user')} >Войти как ученик</Button>
                 </div>
                 <div className={ClassNames(cls.block, {}, [className])}>
                     <p className={cls.role}>
@@ -55,7 +59,7 @@ export const ChosePopup = (props) => {
                             Отслеживай успеваемость
                         </li>
                     </ul>
-                    <Button theme={ButtonTheme.DARK} className={cls.button}  onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))} >Войти как учитель</Button>
+                    <Button theme={ButtonTheme.DARK} className={cls.button}  onClick={()=>ClickHandler(PopupNames.SIGNIN, 'teacher')}  >Войти как учитель</Button>
                 </div>
             </div>
         </PopupWrapper>    

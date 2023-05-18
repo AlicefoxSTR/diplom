@@ -14,7 +14,6 @@ export const AddTextAnswers = (props) => {
     const dispatch = useDispatch()
 
     function BlurHandler(answer){
-        console.log(answer)
         dispatch(NewQuestionCreateSlice.actions.textAnswersHandler(answer))
         setInput('')
     }
