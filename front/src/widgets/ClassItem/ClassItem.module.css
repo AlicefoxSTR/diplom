@@ -1,7 +1,7 @@
 .classItem {
     padding: 30px;
     background: var(--main-color);
-    width: 50%;
+    width: 65%;
     border-radius: 20px;
     color: var(--secondary-color);
 }
@@ -50,7 +50,7 @@
 
 .button {
     border: 3px solid var(--secondary-color);
-    margin-top: 30px;
+    margin: 30px 5px 0 5px
 }
 
 .row {

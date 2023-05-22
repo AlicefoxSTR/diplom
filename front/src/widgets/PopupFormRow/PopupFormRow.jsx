@@ -3,7 +3,7 @@ import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './PopupFormRow.module.css';
 import { Input, InputTheme } from 'shared/UI/Input/Input';
 
-export const PopupFormRow = (props) => {
+export const PopupFormRow = React.forwardRef((props, ref) => {
     const { 
         className, 
         theme, 
@@ -19,4 +19,4 @@ export const PopupFormRow = (props) => {
             {error && <span className={cls.error} >{error}</span>}
         </div>
  );
-}
+})

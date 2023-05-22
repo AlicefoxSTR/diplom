@@ -3,7 +3,11 @@
     position: relative;
 }
 
-.ProfileForm::before {
+.rabbitView{
+    display: block;
+    position: relative;
+}
+.rabbitView::before {
     content: "";
     display: block;
     position: absolute;

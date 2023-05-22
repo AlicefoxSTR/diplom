@@ -14,12 +14,14 @@ export const Input = (props) => {
   const {
     className,
     theme=InputTheme.CLEAR,
+    disabled=false,
     ...otherProps
   } = props
 
   return (
     <input
-      className={ClassNames(cls.Input, {}, [className, cls[theme]])} 
+      className={ClassNames(cls.Input, {[cls.disabled]: disabled}, [className, cls[theme]])} 
+      disabled={disabled}
       {...otherProps}
     />
   )

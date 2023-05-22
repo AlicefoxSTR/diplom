@@ -1,6 +1,7 @@
 .FormInputRow {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 
@@ -23,4 +24,6 @@
     color: var(--secondary-color);
     font-weight: 500;
     margin-top: 5px;
+    max-width: 95%;
+    align-self: flex-end;
 }

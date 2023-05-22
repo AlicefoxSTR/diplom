@@ -8,6 +8,7 @@ import { TeacherContent } from '../TeacherContent/TeacherContent';
 import { UserContent } from '../UserContent/UserContent';
 import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
 import { useNavigate } from 'react-router';
+import { userApi } from 'entities/User/api/UserApi';
 
 export const ProfilePage = (props) => {
     const { className } = props;
@@ -23,7 +24,7 @@ export const ProfilePage = (props) => {
     useEffect(()=>{
       if(!isAuthenticate){
         if(Boolean(!activePopup)){
-          dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))
+          dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ROLE))
           navigate('/')
         }
       }

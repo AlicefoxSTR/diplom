@@ -12,13 +12,13 @@ import {
     REGISTER,
   } from 'redux-persist';
 import { TestingSlice } from "entities/Testing/TestingSlice";
-import { TestsSlice  } from "entities/Tests/TestsSlice";     
+import { TestsSlice, testsApi  } from "entities/Tests";     
 import { UserSlice } from "entities/User";
 import { PopupsSlice } from "entities/Popups/PopupsSlice";
 import { TestResultSlice } from "entities/TestResult/TestResultSlice";
-import { StudentTestsSlice } from "entities/StudentTests/StudentTestsSlice";
+import { TeacherTestsSlice } from "entities/TeacherTests";
 import { TestCreationSlice } from "entities/TestCreation/TestCreationSlice";
-import { ClassesSlice } from "entities/Classes/ClassesSlice";
+import { ClassesSlice, classesApi } from "entities/Classes";
 import { ResultsSlice } from "entities/Results/ResultsSlice";
 import { NewQuestionCreateReducer } from "entities/NewQuestionCreate";
 import { userApi } from "entities/User/api/UserApi";
@@ -30,7 +30,7 @@ const TestingReducer = TestingSlice.reducer
 const UserReducer = UserSlice.reducer
 const PopupsReducer = PopupsSlice.reducer
 const TestResultReducer = TestResultSlice.reducer
-const StudentTestsReducer = StudentTestsSlice.reducer
+const TeacherTestsReducer = TeacherTestsSlice.reducer
 const TestCreationReducer = TestCreationSlice.reducer
 const ClassesReducer = ClassesSlice.reducer
 const ResultsReducer = ResultsSlice.reducer
@@ -42,12 +42,14 @@ const rootReducer = combineReducers({
     user: UserReducer,
     popups: PopupsReducer,
     testResult: TestResultReducer,
-    studentTests: StudentTestsReducer,
+    TeacherTests: TeacherTestsReducer,
     testCreation: TestCreationReducer,
     classes: ClassesReducer,
     results: ResultsReducer,
     newQuestionCreate: NewQuestionCreateReducer,
-    [userApi.reducerPath]: userApi.reducer
+    [userApi.reducerPath]: userApi.reducer,
+    [classesApi.reducerPath]: classesApi.reducer,
+    [testsApi.reducerPath]: testsApi.reducer
 })
 
 
@@ -55,7 +57,9 @@ const persistConfig = {
     key: 'root',
     storage,
     blacklist: [
-      [userApi.reducerPath]
+      [userApi.reducerPath],
+      [classesApi.reducerPath],
+      [testsApi.reducerPath]
     ]
 }
 
@@ -70,6 +74,8 @@ export const store = configureStore({
       },
     })
     .concat(userApi.middleware)
+    .concat(classesApi.middleware)
+    .concat(testsApi.middleware)
     ,
   })
 

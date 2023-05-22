@@ -29,7 +29,7 @@ export const ChoseRolePopup = (props) => {
                 <Cross style={{top: '25px', right: '25px'}} size={25} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
                 <div className={ClassNames(cls.block, {}, [className, cls.firstBlock])}>
                     <p className={cls.role}>
-                        Я - ученик
+                        Я - пользователь
                     </p>
                     <ul className={cls.list}>
                         <li className={cls.item}>
@@ -42,7 +42,7 @@ export const ChoseRolePopup = (props) => {
                             Получай именную грамоту
                         </li>
                     </ul>
-                    <Button theme={ButtonTheme.DARK} className={cls.button} onClick={()=>ClickHandler(PopupNames.SIGNIN, 'user')} >Войти как ученик</Button>
+                    <Button theme={ButtonTheme.DARK} className={cls.button} onClick={()=>ClickHandler(PopupNames.SIGNIN, 'user')} >Войти как пользователь</Button>
                 </div>
                 <div className={ClassNames(cls.block, {}, [className])}>
                     <p className={cls.role}>

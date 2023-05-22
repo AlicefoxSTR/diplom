@@ -14,18 +14,24 @@ from .models import (
     UserStage,
     Student,
     Stage,
-    Class
+    Class,
+    Test
 )
 from .serializers import (
     UserSerializer,
     StudentSerializer,
     ClassSerializer,
-    UserDetailSerializer
+    UserDetailSerializer,
+    ClassCreateSerializer,
+    TeacherClassesSerializer,
+    TestsSerializer,
+    ClassDeleteSerializer
 )
 
 
 
 class UserRegistrationView(generics.CreateAPIView):
+    #Регистрация нового пользователя
     queryset = User.objects.none()
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny]
@@ -33,19 +39,19 @@ class UserRegistrationView(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-
+        user = serializer.save() #Создаем экземляр класса User
         splited_fio = split_fio(request.data['fio'])
         user.first_name = splited_fio['first_name']
         user.last_name = splited_fio['last_name']
-        user.save()
+        user.save() #Добавляем ему имя и фамилию и сохраняем
 
+        #Проверка роли создаваемого пользователя и создания профиля под соответствующую роль
         if request.data['role'] == 'teacher':
             teacher_profile = Teacher.objects.create(user=user)
             teacher_profile.save()
             user.teacher = teacher_profile
             user.save()
-        if request.data['role'] == 'user' or 'role' not in request.data:
+        elif request.data['role'] == 'user' or 'role' not in request.data:
             user_stage = UserStage.objects.create(user=user)
             if 'stage' in request.data:
                 stages_passed = Stage.objects.filter(id__in = request.data['stage'])
@@ -80,13 +86,21 @@ class UserView(APIView):
         else:
             return Response({"message": "Ошибка"})
 
-        
+class ClassListView(generics.ListAPIView):
 
-class ClassView(generics.ListCreateAPIView):
+    serializer_class = TeacherClassesSerializer
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+           
+    def get_queryset(self):
+        teacher = Teacher.objects.filter(user=self.request.user)
+        return teacher
 
-    serializer_class = ClassSerializer
-    permission_classes = (IsAuthenticatedAndVerfyEmail,)
-    queryset = Class.objects.all()
+class ClassCreateView(generics.CreateAPIView):
+
+    serializer_class = ClassCreateSerializer
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+    queryset = Class.objects.none()
+    
 
     def post(self, request): #Создание класса учеников
         
@@ -111,12 +125,30 @@ class ClassView(generics.ListCreateAPIView):
                 }, status=status.HTTP_400_BAD_REQUEST
             )    
 
-class StudentCreationView(APIView):
+
+class ClassDeleteView(APIView):
+    #Удаление класса с учениками
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+
+    def delete(self, request):
+        try:
+            class_room = Class.objects.get(id=request.data)  #Получение класса из бд
+            students = Student.objects.filter(classroom=class_room.id) #Получения списка учеников из класса
+            if students:
+                for student in students:
+                    student.delete()
+            class_room.delete()
+            return Response({"message": "Удаление прошло успешно."}, status=status.HTTP_200_OK)
+        except:
+            return Response({"message": "Ошибка удаленния класса."}, status=status.HTTP_400_BAD_REQUEST)
+            
+
+
+class StudentView(APIView):
 
     permission_classes = (IsAuthenticatedAndVerfyEmail,)
 
     def post(self, request): #Создание профиля ученика
-
 
         #Генерация данных ученика
         splited_fio = split_fio(request.data['fio'])
@@ -139,6 +171,9 @@ class StudentCreationView(APIView):
             classroom=Class.objects.get(id=request.data['classroom']['id'])
         )
         student.save()
+        student_user.student = student
+        student_user.save()
+        
 
         if student_user and student:
             return Response({'message': 'Ученик успешно создан!' }, status=status.HTTP_201_CREATED)
@@ -148,11 +183,30 @@ class StudentCreationView(APIView):
                     'message': 'Ошибка при создании ученика',
                 }, status=status.HTTP_400_BAD_REQUEST
             )    
+        
+    def patch(self, request):
+        try:
+            student = Student.objects.get(id=request.data['student'])
+            splited_fio = split_fio(request.data['fio'])
+            student.user.first_name = splited_fio['first_name']
+            student.user.last_name = splited_fio['last_name']
+            student.save()
+            student.user.save()
+            return Response({"message": "Ученик успешно изменен!"}, status=status.HTTP_200_OK)
+        except:
+            return Response({"message": "Ошибка сохранения изменений!"}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+
+        try:
+            student = Student.objects.get(id=request.data['student'])
+            student.user.delete()
+            return Response({"message": "Ученик успешно удален!"}, status=status.HTTP_200_OK)
+        except:
+            return Response({"message": "Ошибка удаления ученика!"}, status=status.HTTP_400_BAD_REQUEST)
 
 
     
-
-
 
 class UserActivationView(APIView):
 
@@ -174,3 +228,16 @@ class UserActivationView(APIView):
         else:
             return Response({"message": "Недействительная ссылка активации."}, status=status.HTTP_400_BAD_REQUEST)
         
+
+
+class TestsView(APIView):
+
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+
+    def get(self, request):
+        
+        print(request.GET)
+        tests = Test.objects.filter(is_custom=False).prefetch_related('tasks', 'tasks__possible_answers')
+        tests_serializer = TestsSerializer(tests, many=True)
+
+        return Response(tests_serializer.data, status=status.HTTP_200_OK)

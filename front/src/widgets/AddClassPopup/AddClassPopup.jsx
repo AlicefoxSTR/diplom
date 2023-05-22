@@ -5,36 +5,60 @@ import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
 import { Cross } from 'shared/UI/Cross/Cross';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
+import { PopupsSlice } from 'entities/Popups/PopupsSlice';
 import { Input, InputTheme } from 'shared/UI/Input/Input';
-import { ClassesSlice } from 'entities/Classes/ClassesSlice';
+import { ClassesSlice, classesApi } from 'entities/Classes';
+import { Controller, useForm } from 'react-hook-form';
+import { FormInputRow } from 'widgets/FormInputRow/FormInputRow';
+import { PopupFormRow } from 'widgets/PopupFormRow/PopupFormRow';
 
 export const AddClassPopup = (props) => {
     const { className } = props;
-    const [ input, setInput ] = useState('')
 
-    const { popups } = useSelector(state=>state.popups)
     const dispatch = useDispatch()
+    const [ saveClassRoom ] = classesApi.useSaveClassRoomMutation()
 
-    const popupName = PopupNames.ADD_CLASS
+    const {
+        control, 
+        handleSubmit, 
+        formState: {errors}, 
+        reset
+    } = useForm({mode: 'onBlur'})
 
-    function saveHandler() {
-        dispatch((ClassesSlice.actions.saveClass(input)))
+
+
+    function saveHandler(data) {
+        saveClassRoom(data)
         dispatch(PopupsSlice.actions.closePopup())
+        reset()
     }
+
+
 
     return (
         <PopupWrapper>
             <div className={ClassNames(cls.addClassPopup, {}, [className])}>
                 <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
                 <h2 className={cls.title}>Введите название класса:</h2>
-                <Input 
-                    theme={InputTheme.CLEAR} 
-                    placeholder={'5a'} 
-                    value={input} 
-                    onChange={e => setInput(e.target.value)}
-                    className={cls.input} />
-                <Button className={cls.button} theme={ButtonTheme.DARK} onClick={()=>saveHandler()} >Сохранить</Button>
+                <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
+                    <Controller 
+                        name='class_name'
+                        control={control}
+                        rules={{
+                            required: 'Пожулайста введите название класса'
+                        }}
+                        render={
+                            ({field})=> <PopupFormRow 
+                                { ...field }
+                                theme={InputTheme.CLEAR} 
+                                error={errors.class_name?.message}
+                                placeholder={'5 А'} 
+                                className={cls.input} 
+                                />
+                            }
+                    />
+                    <Button className={cls.button} theme={ButtonTheme.DARK} >Сохранить</Button>
+                </form>
             </div>
         </PopupWrapper>
  );

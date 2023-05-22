@@ -5,6 +5,11 @@
     font: var(--font-h3);
     font-weight: 500;
     color: var(--main-color);
+    background: var(--secondary-color);
+}
+
+.disabled {
+    color: var(--disabled-light-color);
 }
 
 .border{

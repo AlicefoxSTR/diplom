@@ -9,6 +9,7 @@ import { StudentForm } from '../StudentForm/StudentForm';
 export const StudentContent = (props) => {
     const { className } = props;
 
+
     return (
         <div className={ClassNames(cls.studentContent, {}, [className])}>
             <div className={cls.ProfilePage}>

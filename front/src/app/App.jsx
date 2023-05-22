@@ -20,46 +20,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { UserSlice } from 'entities/User';
 import { userApi } from 'entities/User/api/UserApi';
+import { classesApi } from 'entities/Classes';
 
 function App() {
-
-  const location = useLocation()
-
-  const { refresh_token, access_token } = useSelector(state => state.user)
-  const dispatch = useDispatch()
-
-  const [ fetchUserDetail ] = userApi.useFetchUserDetailMutation()
-  const [ refreshToken ] = userApi.useRefreshTokenMutation()
-
-  useEffect(()=>{
-    fetchUserDetail(access_token).then(
-      res => {
-        if(res.error && res.error.status===401){
-          refreshToken({"refresh": refresh_token})
-        }else{
-          dispatch(UserSlice.actions.setUser(res.data))
-        }
-      }
-    )
-  },[location.pathname])
 
   return (
     <div className="App">
       <Routes>
           <Route path='/' element={<Layout />}>
-            <Route path='/' element={<HomePage/>} />
-            <Route path='/progress' element={<ProgressPage />} />
-            <Route path='/profile' element={<ProfilePage />} />
-            <Route path='/account' element={<AccountPage />} />
-            <Route path='/account/results' element={<ResultsPage />} />
-            <Route path='/account/tests' element={<AccountTestsPage />} />
-            <Route path='/account/my-tests' element={<AccountMyTestsPage />} />
-            <Route path='/account/create-test' element={<CreateTestPage />} />
-            <Route path='/tests' element={<TestsPage />} />
-            <Route path='/for-parents' element={<ParentPage />} />
-            <Route path='/for-teachers' element={<TeacherPage />} />
-            <Route path='/test/:testId' element={<TestingPage />} />
-            <Route path='*' element={<NotFoundPage />} />
+              <Route path='/' element={<HomePage/>} />
+              <Route path='/progress' element={<ProgressPage />} />
+              <Route path='/profile' element={<ProfilePage />} />
+              <Route path='/account' element={<AccountPage />} />
+              <Route path='/account/results' element={<ResultsPage />} />
+              <Route path='/account/tests' element={<AccountTestsPage />} />
+              <Route path='/account/my-tests' element={<AccountMyTestsPage />} />
+              <Route path='/account/create-test' element={<CreateTestPage />} />
+              <Route path='/tests' element={<TestsPage />} />
+              <Route path='/for-parents' element={<ParentPage />} />
+              <Route path='/for-teachers' element={<TeacherPage />} />
+              <Route path='/test/:testId' element={<TestingPage />} />
+              <Route path='*' element={<NotFoundPage />} />
           </Route>
       </Routes>
       

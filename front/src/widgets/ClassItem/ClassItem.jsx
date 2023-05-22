@@ -5,9 +5,10 @@ import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { ReactComponent as Arrow} from 'app/assets/icons/arrow-top.svg'
 import { useDispatch } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
-import { ClassesSlice } from 'entities/Classes/ClassesSlice';
 import {ReactComponent as Edit} from 'app/assets/icons/edit-icon.svg'
 import {ReactComponent as Cross} from 'app/assets/icons/cross-icon.svg'
+import { ClassesSlice } from 'entities/Classes/redux/ClassesSlice';
+import { classesApi } from 'entities/Classes';
 
 export const ClassItem = (props) => {
     const { 
@@ -17,8 +18,11 @@ export const ClassItem = (props) => {
 
 
     const [active, setActive ] = useState()
+    const [ deleteClassRoom ] = classesApi.useDeleteClassRoomMutation()
+
 
     const dispatch = useDispatch()
+    const [ deleteStudent ] = classesApi.useDeleteStudentMutation()
 
 
     function toggleActive(){
@@ -30,14 +34,21 @@ export const ClassItem = (props) => {
         dispatch(PopupsSlice.actions.showPopup(PopupNames.ADD_STUDENT))
     }
 
-    function deleteHandler(item){
-        dispatch(ClassesSlice.actions.removeStudent(item))
+    function deleteStudentHandler(data){
+        deleteStudent(data)
     }
+    
+    
+
 
     function editHandler(item){
         dispatch(ClassesSlice.actions.setEditionalClass(item.class))
         dispatch(ClassesSlice.actions.setEditionalStudent(item.student))
         dispatch(PopupsSlice.actions.showPopup(PopupNames.ADD_STUDENT))
+    }
+
+    function deleteClassHandler(class_id){
+        deleteClassRoom(class_id)
     }
 
     return (
@@ -58,8 +69,7 @@ export const ClassItem = (props) => {
                                     class: item.id, 
                                     student: student.id
                                 })} />
-                                <Cross className={cls.icon} onClick={()=>deleteHandler({
-                                    class: item.id, 
+                                <Cross className={cls.icon} onClick={()=>deleteStudentHandler({
                                     student: student.id
                                 })} />
                             </div>
@@ -71,6 +81,11 @@ export const ClassItem = (props) => {
                     theme={ButtonTheme.DARK}
                     onClick={()=>openPopuptHandler(item.id)} 
                 >Добавить ученика</Button>
+                <Button
+                    className={ClassNames(cls.button, {}, [])} 
+                    theme={ButtonTheme.DARK}
+                    onClick={()=>deleteClassHandler(item.id)} 
+                >Удалить класс</Button>
             </div>
         </div>
  );

@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-import Image from 'app/assets/img/small-test-img.png'
+import Image from 'app/assets/img/test-img.png'
 
-const initiatlState = {
+
+const initialState = {
     tests: [
         {
-            id: 1,
+            id: 123124,
             img: Image,
-            name: 'Антивирусы',
+            title: 'Антивирусы',
             tasks: [
                 {
                     id: 1,
@@ -57,9 +58,9 @@ const initiatlState = {
             ]
         },
         {
-            id: 2,
+            id: 342153,
             img: Image,
-            name: 'Антивирусы',
+            title: 'Второй тест',
             tasks: [
                 {
                     id: 1,
@@ -110,9 +111,9 @@ const initiatlState = {
             ]
         },
         {
-            id: 3,
+            id: 3513512,
             img: Image,
-            name: 'Антивирусы',
+            title: 'Третий тест',
             tasks: [
                 {
                     id: 1,
@@ -163,9 +164,9 @@ const initiatlState = {
             ]
         },
         {
-            id: 4,
+            id: 3613513,
             img: Image,
-            name: 'Антивирусы',
+            title: 'Четвертый тест',
             tasks: [
                 {
                     id: 1,
@@ -216,9 +217,9 @@ const initiatlState = {
             ]
         },
         {
-            id: 5,
+            id: 21352135,
             img: Image,
-            name: 'Антивирусы',
+            title: 'Пятый тест',
             tasks: [
                 {
                     id: 1,
@@ -272,10 +273,12 @@ const initiatlState = {
 }
 
 
-export const StudentTestsSlice = createSlice({
-    initialState: initiatlState,
-        name: 'studentTests',
-        reducers: {
-        
+export const TestsSlice = createSlice({
+    name: 'tests',
+    initialState: initialState,
+    reducers: {
+        TestsSlice(state, action){
+            state.tests = action.payload
         }
+    }
 })

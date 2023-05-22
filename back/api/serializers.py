@@ -5,20 +5,15 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from rest_framework import serializers
-from .models import User, Teacher, Student, UserStage, Stage, Class
+from .models import User, Teacher, Student, UserStage, Stage, Class, Test, Task, Answer
 
 
-class ClassSerializer(serializers.ModelSerializer):
 
-    class Meta: 
-        model = Class
-        fields = ['id']
+
+
+
 
     
-class TeacherSerializer(serializers.ModelSerializer):
-    class Meta: 
-        model = Teacher
-        fields = '__all__'
 
    
 class UserStageSerializer(serializers.ModelSerializer):
@@ -36,11 +31,9 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
 
-    # stage = UserStageSerializer(many=True, required=False)
-
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'role')
+        fields = ('email', 'username', 'password', 'role', 'first_name', 'last_name')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -66,11 +59,97 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 
+
+
 class StudentSerializer(serializers.ModelSerializer):
+    fio = serializers.SerializerMethodField()
+    login = serializers.CharField(source='username')
 
-
-    user = UserSerializer(read_only=True)
+    def get_fio(self, student):
+        return student.user.first_name + ' ' + student.user.last_name
 
     class Meta: 
         model = Student
+        fields = ('id', 'fio', 'login', 'password')
+
+
+class ClassSerializer(serializers.ModelSerializer):
+    students = StudentSerializer(many=True, read_only=True)
+    name = serializers.CharField(source='class_name')
+
+    class Meta:
+        model = Class
+        fields = ('id', 'name', 'students')
+
+
+class TeacherClassesSerializer(serializers.ModelSerializer):
+
+    classes = ClassSerializer(many=True, read_only=True, required=False)
+
+    class Meta: 
+        model = Teacher
+        fields = ('id', 'classes')
+
+
+class ClassCreateSerializer(serializers.ModelSerializer):
+
+    class Meta: 
+        model = Class
+        fields = ['class_name']
+
+class ClassDeleteSerializer(serializers.ModelSerializer):
+
+    class Meta: 
+        model = Class
+        fields = ['id']
+
+
+class TeacherSerializer(serializers.ModelSerializer):
+
+    class Meta: 
+        model = Teacher
         fields = '__all__'
+
+
+
+
+class AnswerSerializer(serializers.ModelSerializer):
+
+    class Meta: 
+        model = Answer
+        fields = ('id', 'text', 'is_custom', 'creator')
+
+
+class TaskSerializer(serializers.ModelSerializer):
+
+    type = serializers.CharField(source='question_type')
+    question = serializers.CharField(source='question_text')
+    answers = serializers.SerializerMethodField()
+
+    def get_answers(self, task):
+
+        answers = []
+        for answer in task.possible_answers.all():
+            answers.append({
+                "id": answer.id,
+                "text": answer.text,
+                "isCorrect": bool(task.correct_answers.filter(id=answer.id))
+            })
+    
+        return answers
+
+    
+
+    class Meta: 
+        model = Task
+        fields = ('id', 'answers', 'type', 'question', 'is_custom', 'creator' )
+
+
+class TestsSerializer(serializers.ModelSerializer):
+
+    tasks = TaskSerializer(read_only=True, many=True)
+    title = serializers.CharField(source='name')
+
+    class Meta: 
+        model = Test
+        fields = ('id', 'tasks', 'title', 'description', 'creator' )

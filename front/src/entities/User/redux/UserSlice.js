@@ -4,6 +4,7 @@ const initialState = {
     firstName: '',
     secondName: '',
     role: '',
+    email: '',
     access_token: '',
     refresh_token: '',
     isAuthenticate: false,
@@ -34,12 +35,17 @@ export const UserSlice = createSlice({
             state.access_token=''
             state.refresh_token=''
             state.isAuthenticate=false
+            state.email = ''
             state.completedStages=[]
         },
         setUser(state, action){
             state.firstName = action.payload.first_name
             state.secondName = action.payload.last_name
             state.role = action.payload.role
+            state.email = action.payload.email
+        },
+        getAccessToken(state){
+            return state.access_token
         }
     }
 })

@@ -28,6 +28,7 @@ export const SignupPopup = (props) => {
 
     const dispatch = useDispatch()
 
+    // обработка отправки формы
     function SubmitHandler(data){
         const formData = data
         formData.role = role
@@ -102,7 +103,7 @@ export const SignupPopup = (props) => {
                             required: 'Пожалуйста введите пароль',
                             pattern: {
                                 value: passwordRegEx,
-                                message: 'Проверьте правильность введенного пароля'
+                                message: "Пароль должен состоять как минимум из 8 латинских символов и включать как минимум одну заглавную букву, одну цифру и спец. символ. Пожалуйста, проверьте правильность введенного пароля."
                             }
                         }}
                         control={control}

@@ -1,13 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-import Image from 'app/assets/img/test-img.png'
+import Image from 'app/assets/img/small-test-img.png'
 
-
-const initialState = {
+const initiatlState = {
     tests: [
         {
-            id: 123124,
+            id: 1,
             img: Image,
-            title: 'Антивирусы',
+            name: 'Антивирусы',
             tasks: [
                 {
                     id: 1,
@@ -58,9 +57,9 @@ const initialState = {
             ]
         },
         {
-            id: 342153,
+            id: 2,
             img: Image,
-            title: 'Второй тест',
+            name: 'Антивирусы',
             tasks: [
                 {
                     id: 1,
@@ -111,9 +110,9 @@ const initialState = {
             ]
         },
         {
-            id: 3513512,
+            id: 3,
             img: Image,
-            title: 'Третий тест',
+            name: 'Антивирусы',
             tasks: [
                 {
                     id: 1,
@@ -164,9 +163,9 @@ const initialState = {
             ]
         },
         {
-            id: 3613513,
+            id: 4,
             img: Image,
-            title: 'Четвертый тест',
+            name: 'Антивирусы',
             tasks: [
                 {
                     id: 1,
@@ -217,9 +216,9 @@ const initialState = {
             ]
         },
         {
-            id: 21352135,
+            id: 5,
             img: Image,
-            title: 'Пятый тест',
+            name: 'Антивирусы',
             tasks: [
                 {
                     id: 1,
@@ -273,10 +272,10 @@ const initialState = {
 }
 
 
-export const TestsSlice = createSlice({
-    name: 'tests',
-    initialState: initialState,
-    reducers: {
-
-    }
+export const TeacherTestsSlice = createSlice({
+    initialState: initiatlState,
+        name: 'teacherTests',
+        reducers: {
+        
+        }
 })
