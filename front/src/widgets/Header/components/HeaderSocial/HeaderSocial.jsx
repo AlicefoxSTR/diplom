@@ -8,7 +8,7 @@ import cls from './HeaderSocial.module.css'
 export const HeaderSocial = () => {
   return (
     <div className={cls.social}>
-        <CustomLink to='https://vk.com/go0d_m0od'  className={cls.link}>
+        <CustomLink to='https://vk.com/lisooooooo'  className={cls.link}>
           <IconVK className={cls.icon} size={'28px'} />
         </CustomLink>
         <CustomLink to='https://t.me/sheverdin_mikhail'  className={cls.link}>

@@ -1,2 +1,2 @@
-export { AccountPage } from "./components/AccountPage/AccountPage";
+export { AccountPage } from "./Ui/AccountPage/AccountPage";
 

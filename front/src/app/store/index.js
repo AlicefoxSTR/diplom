@@ -17,11 +17,12 @@ import { UserSlice } from "entities/User";
 import { PopupsSlice } from "entities/Popups/PopupsSlice";
 import { TestResultSlice } from "entities/TestResult/TestResultSlice";
 import { TeacherTestsSlice } from "entities/TeacherTests";
-import { TestCreationSlice } from "entities/TestCreation/TestCreationSlice";
+import { TestCreationSlice } from "entities/TestCreation";
 import { ClassesSlice, classesApi } from "entities/Classes";
 import { ResultsSlice } from "entities/Results/ResultsSlice";
 import { NewQuestionCreateReducer } from "entities/NewQuestionCreate";
 import { userApi } from "entities/User/api/UserApi";
+import { testCreationApi } from "entities/TestCreation";
 
 
 
@@ -49,7 +50,8 @@ const rootReducer = combineReducers({
     newQuestionCreate: NewQuestionCreateReducer,
     [userApi.reducerPath]: userApi.reducer,
     [classesApi.reducerPath]: classesApi.reducer,
-    [testsApi.reducerPath]: testsApi.reducer
+    [testsApi.reducerPath]: testsApi.reducer,
+    [testCreationApi.reducerPath]: testCreationApi.reducer,
 })
 
 
@@ -59,11 +61,15 @@ const persistConfig = {
     blacklist: [
       [userApi.reducerPath],
       [classesApi.reducerPath],
-      [testsApi.reducerPath]
+      [testsApi.reducerPath],
+      [testCreationApi.reducerPath],
     ]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+
+
 
 export const store = configureStore({
     reducer: persistedReducer,
@@ -76,7 +82,7 @@ export const store = configureStore({
     .concat(userApi.middleware)
     .concat(classesApi.middleware)
     .concat(testsApi.middleware)
-    ,
+    .concat(testCreationApi.middleware)
   })
 
 export const persistor = persistStore(store)

@@ -3,9 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 export const questionTypes = {
-    TEXT: 'text',
-    CHECKBOX: 'checkbox',
-    RADIO: 'radio'
+    TEXT: 'free_text',
+    CHECKBOX: 'multiple_choice',
+    RADIO: 'single_choice'
 }
 
 
@@ -13,7 +13,9 @@ const initiatlState = {
     question: '',
     questionType: questionTypes.CHECKBOX,
     answers: [],
-    correctAnswers: []
+    correctAnswers: [],
+    isEdit: false,
+    fromApi: false
 }
 
 
@@ -25,6 +27,9 @@ export const NewQuestionCreateSlice = createSlice({
                 state.question = action.payload
             },
             clearForm(state){
+                state.id = null
+                state.isEdit = false
+                state.fromApi = false
                 state.question = ''
                 state.answers = []
                 state.correctAnswers = []
@@ -51,6 +56,7 @@ export const NewQuestionCreateSlice = createSlice({
                 state.answers = state.correctAnswers
             },
             checkboxAnswersHandler(state, action){
+                console.log(action)
                 if(action.payload.value.length > 0){
                     const answer = state.answers.find(({id}) => id === action.payload.id)
                     if(answer){
@@ -58,16 +64,16 @@ export const NewQuestionCreateSlice = createSlice({
                         return
                     }
                     state.answers.push({
-                        id: action.payload.id,
+                        id: Math.random().toString(36).substr(2, 9),
                         value: action.payload.value,
                     })
                     if(action.payload.checked){
                         state.correctAnswers.find(({id})=>action.payload.id === id).value = action.payload.value
                     }
                     return
-                } 
+                }
                 state.answers = state.answers.filter( answer => answer.id !== action.payload.id )
-                state.correctAnswers = state.answers.filter( answer => answer.id !== action.payload.id )
+                state.correctAnswers = state.correctAnswers.filter( answer => answer.id !== action.payload.id )
             },
             radioAnswersHandler(state, action){
                 if(action.payload.value.length > 0){
@@ -96,6 +102,20 @@ export const NewQuestionCreateSlice = createSlice({
                 state.correctAnswers = [action.payload]
 
             },
+            setEditionalQuestion(state, action){
+                state.id = action.payload.id
+                state.question = action.payload.question
+                state.isEdit = true
+                state.questionType = action.payload.type
+                state.answers = action.payload.answers.map(answer => ({
+                    id: answer.id,
+                    value: answer.text
+                }))
+                state.correctAnswers = action.payload.answers.filter(answer => answer.isCorrect).map(answer => ({
+                    id: answer.id,
+                    value: answer.text
+                }))
+            }
            
         
         }

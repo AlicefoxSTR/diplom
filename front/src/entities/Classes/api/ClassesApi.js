@@ -1,6 +1,8 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react'
 import { baseApiUrl } from 'shared/lib/ClassNames/ApiConfig/ApiConfig'
 import { ClassesSlice } from '../redux/ClassesSlice'
+import { UserSlice } from 'entities/User'
+import { userApi } from 'entities/User/api/UserApi'
 
 
 export const classesApi =  createApi({
@@ -22,11 +24,18 @@ export const classesApi =  createApi({
             query: () => ({
                 url: 'classes/',
             }),
-            async onQueryStarted(args, {dispatch, queryFulfilled}){
+            async onQueryStarted(args, {dispatch, queryFulfilled, getState}){
                 try {
                     const { data } = await queryFulfilled
-                    dispatch(ClassesSlice.actions.setClasses(data[0].classes))
-                }catch(error){}
+                    if(data){
+                        dispatch(ClassesSlice.actions.setClasses(data[0].classes))
+                        return
+                    }
+                }catch(error){
+                    const refreshToken = getState().user.refresh_token
+                    const token = await dispatch(userApi.endpoints.refreshToken.initiate({'refresh': refreshToken}))
+                    dispatch(UserSlice.actions.refreshToken(token.data.access))
+                }
             },
             providesTags: result => ['Class'],
         }),  
@@ -76,5 +85,5 @@ export const classesApi =  createApi({
 
         }),
         
-    })
+    }),
 })

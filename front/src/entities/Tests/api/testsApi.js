@@ -33,6 +33,21 @@ export const testsApi =  createApi({
                 }catch(error){}
             }
         }),
+        fetchCustomTests: build.query({
+            query: (role) => ({
+                url: `tests?role=${role}`,
+            }),
+            async onQueryStarted(args, {dispatch, queryFulfilled}){
+                try {
+                    const { data } = await queryFulfilled
+                    if (data){
+                        dispatch(TestsSlice.actions.setTests(data))
+                    }
+                    
+                }catch(error){}
+            }
+        }),
+        
         
       
     })

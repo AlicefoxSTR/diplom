@@ -9,8 +9,7 @@ import { NewQuestionCreateSlice, questionTypes } from 'entities/NewQuestionCreat
 import { Select } from 'shared/UI/Select/Select';
 import { AddAnswers } from 'widgets/AddAnswers';
 import { Button } from 'shared/UI/Button/Button';
-import { TestCreationSlice } from 'entities/TestCreation/TestCreationSlice';
-import { AddStudentPopup } from 'widgets/AddStudentPopup/AddStudentPopup';
+import { TestCreationSlice } from 'entities/TestCreation';
 import { PopupsSlice } from 'entities/Popups/PopupsSlice';
 
 
@@ -18,7 +17,7 @@ export const QuestionConstructorPopup = (props) => {
     const { className } = props;
 
 
-    const { question, questionType, answers } = useSelector(state=>state.newQuestionCreate)
+    const { id, question, questionType, answers, correctAnswers, isEdit } = useSelector(state=>state.newQuestionCreate)
 
     const dispatch = useDispatch()
 
@@ -26,16 +25,36 @@ export const QuestionConstructorPopup = (props) => {
         dispatch(NewQuestionCreateSlice.actions.clearForm())
     }
 
-    function SubmitHandler(){
+    function SubmitSaveHandler(){
         dispatch(TestCreationSlice.actions.addCustomQuestion({
             type: questionType,
             question: question,
-            answers: answers,
+            answers: answers.map(answer => ({
+                id: answer.id,
+                text: answer.value,
+                isCorrect: Boolean(correctAnswers.find(({id}) => id === answer.id))
+            })),
             isPersonal: true
         }))
         closeHandler()
         dispatch(PopupsSlice.actions.closePopup())
     }
+
+    function SubmitEditHandler(){
+        dispatch(TestCreationSlice.actions.saveEditionQuestion({
+            id: id,
+            type: questionType,
+            question: question,
+            answers: answers.map(answer => ({
+                id: answer.id,
+                text: answer.value,
+                isCorrect: Boolean(correctAnswers.find(({id}) => id === answer.id))
+            })),
+        }))
+        closeHandler()
+        dispatch(PopupsSlice.actions.closePopup())
+    }
+
 
     return (
         <PopupWrapper closeHandler={closeHandler} >
@@ -69,9 +88,17 @@ export const QuestionConstructorPopup = (props) => {
 
                 <div className={cls.buttons}>
                     <Button>Просмотреть</Button>
-                    <Button
-                        onClick={()=>SubmitHandler()}
-                        >Добавить вопрос в тест</Button>
+                    {
+                        isEdit
+                        ?
+                        <Button
+                            onClick={()=>SubmitEditHandler()}
+                            >Сохранить изменения</Button>
+                        :
+                            <Button
+                            onClick={()=>SubmitSaveHandler()}
+                            >Добавить вопрос в тест</Button>
+                    }
                 </div>
                
             </PopupBoard>

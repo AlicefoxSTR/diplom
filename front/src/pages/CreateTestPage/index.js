@@ -1,1 +1,1 @@
-export { CreateTestPage } from "./components/CreateTestPage/CreateTestPage";
+export { CreateTestPage } from "./UI/CreateTestPage/CreateTestPage";

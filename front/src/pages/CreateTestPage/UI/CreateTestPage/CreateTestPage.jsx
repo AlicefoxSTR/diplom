@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './CreateTestPage.module.css';
-import { NotFoundResults } from 'pages/AccountPage/components/NotFoundResults/NotFoundResults';
+import { NotFoundResults } from 'pages/AccountPage/Ui/NotFoundResults/NotFoundResults';
 import { Main, MainNavigation } from 'widgets/Main';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +14,11 @@ export const CreateTestPage = (props) => {
     const dispatch = useDispatch()
     const { tasks } = useSelector(state => state.testCreation)
 
+
+    function testSaveHandler(tasks){
+        console.log(tasks)
+    }
+
     return (
         <Main className={ClassNames(cls.createTestPage, {}, [className])}>
             <MainNavigation />
@@ -21,17 +26,16 @@ export const CreateTestPage = (props) => {
                 {
                     tasks.length > 0
                     ?
-                        
                         <>
                         {
                             tasks.map((task, index) => (
-                                <TaskRow task={task} key={`creationTestTaskItem_${task.id}_${index}`} className={cls.row} index={index} />
+                                task && <TaskRow task={task} key={`creationTestTaskItem_${index}`} className={cls.row} index={index} />
                             ))
                         }
                         <div className={cls.buttons}>
                             <Button className={cls.button} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_QUESTION_TYPE))}>Добавить вопрос</Button>
                             <Button className={cls.button}>Просмотреть тест</Button>
-                            <Button className={cls.yellow}>Сохранить тест</Button>
+                            <Button className={cls.yellow} onClick={()=>testSaveHandler(tasks)} >Сохранить тест</Button>
                         </div>
                         </>
                         

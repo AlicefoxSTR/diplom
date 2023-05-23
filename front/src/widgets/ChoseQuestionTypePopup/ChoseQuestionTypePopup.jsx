@@ -6,20 +6,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
 import { Button } from 'shared/UI/Button/Button';
 import { Cross } from 'shared/UI/Cross/Cross';
-import { TestCreationSlice } from 'entities/TestCreation/TestCreationSlice';
+import { TestCreationSlice, testCreationApi } from 'entities/TestCreation';
 import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
 
 export const ChoseQuestionTypePopup = (props) => {
     const { className } = props;
 
-    const { popups } = useSelector(state=>state.popups)
     const dispatch = useDispatch()
 
-    const popupName = PopupNames.CHOSE_QUESTION_TYPE
+        
+    const [ getQuestion ] = testCreationApi.useGetQuestionMutation()
+    const { tasks } = useSelector(state => state.testCreation)
+ 
 
     function addRandomQuestionHandler() {
-        dispatch(PopupsSlice.actions.closePopup())
-        dispatch(TestCreationSlice.actions.addRandomQuestion())
+        // dispatch(TestCreationSlice.actions.addRandomQuestion())
+        getQuestion({random: true, tasks_id: [tasks.map(task => (task.id))]}).then(res => {
+            if (res.data){
+                dispatch(TestCreationSlice.actions.addQuestionToTasks(res.data))
+            }
+            if(res.error){
+            }
+            dispatch(PopupsSlice.actions.closePopup())
+        })
+
     }
 
     function openChoseTestCategoryPopup(){

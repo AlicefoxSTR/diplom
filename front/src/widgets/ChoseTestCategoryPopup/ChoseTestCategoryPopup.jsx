@@ -6,23 +6,24 @@ import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
-import { TestCreationSlice } from 'entities/TestCreation/TestCreationSlice';
+import { TestCreationSlice, testCreationApi } from 'entities/TestCreation';
+import { Loader } from 'shared/UI/Loader/Loader';
 
 export const ChoseTestCategoryPopup = (props) => {
 
     const { className } = props;
 
-    const { popups } = useSelector(state=>state.popups)
-    const { tests } = useSelector(state=>state.tests)
+    // const { tests } = useSelector(state=>state.tests)
     const dispatch = useDispatch()
+    const { data: tests, isLoading } = testCreationApi.useGetAllStagesQuery()
 
-    const popupName = PopupNames.CHOSE_TEST_CATEGORY
+
 
     function openChoseQuestionPopupHandler(test_id){
         dispatch(TestCreationSlice.actions.setActiveTestCategory(test_id))
         dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_QUESTION))
-        dispatch(PopupsSlice.actions.closePopup())
     }
+
 
     return (
         <PopupWrapper>
@@ -32,6 +33,10 @@ export const ChoseTestCategoryPopup = (props) => {
                 </h2>
                 <div className={cls.cards}>
                     {
+                        isLoading
+                        ?
+                        <Loader />
+                        :
                         tests.map(test => (
                             <div className={cls.card} key={`choseTestCategoryPopupCard_${test.id}`}>
                                 <span className={cls.cardText}>{ test.title }</span>

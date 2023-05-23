@@ -7,6 +7,7 @@ import { Button } from 'shared/UI/Button/Button';
 import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
 import { ClassList } from 'widgets/ClassList/ClassList';
 import { classesApi } from 'entities/Classes';
+import { Loader } from 'shared/UI/Loader/Loader';
 
 export const TeacherContent = (props) => {
     const { className } = props;
@@ -23,7 +24,7 @@ export const TeacherContent = (props) => {
             {
                 isLoading
                 ?
-                <span>Загрузка...</span>
+                    <Loader />
                 :
                     data && data[0].classes.length > 0
                     ?

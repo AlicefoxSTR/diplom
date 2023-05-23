@@ -22,13 +22,10 @@ export const ProfileForm = (props) => {
         defaultValues: {
             first_name: firstName,
             last_name: secondName,
-
         }
     })
 
     function SubmitHandler(data){
-        console.log(data)
-        console.log(dirtyFields)
     }
 
 
