@@ -1,5 +1,6 @@
 .popupWrapper {
     position: fixed;
+    overflow-y: auto;
     bottom: 0;
     top: 0;
     left: 0;
@@ -12,4 +13,21 @@
     opacity: 1;
     z-index: 100;
     transition: opacity 0.3s;
+}
+
+.popupWrapper::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.popupWrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.popupWrapper::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+    border-radius: 4px;
+}
+
+.popupWrapper::-webkit-scrollbar-thumb:hover {
+    background: var(--main-color);
 }

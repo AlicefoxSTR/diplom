@@ -8,7 +8,7 @@ import cls from './Header.module.css'
 export const Header = () => {
   return (
     <header className={ClassNames(cls.header, {}, ['container'])}>
-        <HeaderTitle>
+        <HeaderTitle to='/'>
           Интернет-грамота
         </HeaderTitle>
         <HeaderNavigation />

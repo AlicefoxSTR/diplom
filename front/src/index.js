@@ -7,8 +7,13 @@ import {store, persistor} from './app/store'
 import { PersistGate } from 'redux-persist/integration/react';
 
 import './app/assets/styles/normalize.css'
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+setupListeners(store.dispatch)
 root.render(
     
     <Provider store={store}>

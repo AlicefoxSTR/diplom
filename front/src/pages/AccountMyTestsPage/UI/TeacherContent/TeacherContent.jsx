@@ -6,12 +6,18 @@ import { NotFoundResults } from 'pages/AccountPage/Ui/NotFoundResults/NotFoundRe
 import { CustomLink, LinkThemes } from 'shared/UI/CustomLink/CustomLink';
 import { testsApi } from 'entities/Tests';
 import { Loader } from 'shared/UI/Loader/Loader';
+import { useSelector } from 'react-redux';
 
 export const TeacherContent = (props) => {
     const { className } = props;
 
+    const { role } = useSelector(state=>state.user)
 
-    const { data, isLoading } = testsApi.useFetchTestsQuery({'custom': true})
+
+    const { data, isLoading } = testsApi.useFetchCustomTestsQuery({
+        "custom": true,
+        "role": role
+    })
 
 
 
@@ -23,7 +29,7 @@ export const TeacherContent = (props) => {
                     ?
                     data && data.length > 0
                         ?
-                        <TestCardsList tests={data} />
+                        <TestCardsList tests={data}  />
                         :
                         <NotFoundResults title={"Мои тесты:"} description={"Тесты не были найдены"} />
                     :

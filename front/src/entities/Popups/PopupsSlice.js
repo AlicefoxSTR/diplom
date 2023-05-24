@@ -8,6 +8,7 @@ import { AddStudentPopup } from 'widgets/AddStudentPopup/AddStudentPopup';
 import { ChoseTestCategoryPopup } from 'widgets/ChoseTestCategoryPopup/ChoseTestCategoryPopup';
 import { ChoseQuestionPopup } from 'widgets/ChoseQuestionPopup/ChoseQuestionPopup';
 import { QuestionConstructorPopup } from 'widgets/QuestionConstructorPopup/QuestionConstructorPopup';
+import { NameCreationTestPopup } from "widgets/NameCreationTestPopup/NameCreationTestPopup";
 
 
 export const PopupNames = {
@@ -20,6 +21,7 @@ export const PopupNames = {
     CHOSE_TEST_CATEGORY: 'chose_test_category',
     CHOSE_QUESTION: 'chose_question',
     QUESTION_CONSTRUCTOR: 'question_constructor',
+    NAME_CREATION_TEST: 'name_creation_test',
 }
 
 
@@ -33,6 +35,7 @@ export const PopupBodies = {
     [PopupNames.CHOSE_TEST_CATEGORY]: ChoseTestCategoryPopup,
     [PopupNames.CHOSE_QUESTION]: ChoseQuestionPopup,
     [PopupNames.QUESTION_CONSTRUCTOR]: QuestionConstructorPopup,
+    [PopupNames.NAME_CREATION_TEST]: NameCreationTestPopup,
 
 }
 

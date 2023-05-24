@@ -17,7 +17,7 @@ export const QuestionConstructorPopup = (props) => {
     const { className } = props;
 
 
-    const { id, question, questionType, answers, correctAnswers, isEdit } = useSelector(state=>state.newQuestionCreate)
+    const { id, question, questionType, answers, correctAnswers, isEdit, fromApi } = useSelector(state=>state.newQuestionCreate)
 
     const dispatch = useDispatch()
 
@@ -36,6 +36,7 @@ export const QuestionConstructorPopup = (props) => {
             })),
             isPersonal: true
         }))
+       
         closeHandler()
         dispatch(PopupsSlice.actions.closePopup())
     }

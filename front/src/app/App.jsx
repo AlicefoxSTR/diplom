@@ -16,11 +16,6 @@ import { AccountMyTestsPage } from 'pages/AccountMyTestsPage';
 import { CreateTestPage } from 'pages/CreateTestPage';
 import { ResultsPage } from 'pages/ResultsPage';
 import { Popups } from 'widgets/Popups/Popups';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { UserSlice } from 'entities/User';
-import { userApi } from 'entities/User/api/UserApi';
-import { classesApi } from 'entities/Classes';
 
 function App() {
 
@@ -28,7 +23,7 @@ function App() {
     <div className="App">
       <Routes>
           <Route path='/' element={<Layout />}>
-              <Route path='/' element={<HomePage/>} />
+              <Route path='/' element={<HomePage qwe='qwe'/>} />
               <Route path='/progress' element={<ProgressPage />} />
               <Route path='/profile' element={<ProfilePage />} />
               <Route path='/account' element={<AccountPage />} />

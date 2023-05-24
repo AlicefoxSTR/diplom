@@ -125,6 +125,7 @@ class TaskSerializer(serializers.ModelSerializer):
     type = serializers.CharField(source='question_type')
     question = serializers.CharField(source='question_text')
     answers = serializers.SerializerMethodField()
+    isPersonal = serializers.BooleanField(source='is_custom')
 
     def get_answers(self, task):
 
@@ -142,7 +143,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = Task
-        fields = ('id', 'answers', 'type', 'question', 'is_custom', 'creator' )
+        fields = ('id', 'answers', 'type', 'question', 'isPersonal', 'creator' )
 
 
 class TestsSerializer(serializers.ModelSerializer):

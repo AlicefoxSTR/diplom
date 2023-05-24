@@ -13,7 +13,7 @@ export const AccountPage = (props) => {
     const {role} = useSelector(state=>state.user)
 
     return (
-        <Main>
+        <Main isPrivate={true}>
             <MainNavigation />
             <div className={ClassNames(cls.accountPage, {}, [className])}>
                 {

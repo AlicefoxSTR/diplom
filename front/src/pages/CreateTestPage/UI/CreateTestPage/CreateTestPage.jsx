@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './CreateTestPage.module.css';
 import { NotFoundResults } from 'pages/AccountPage/Ui/NotFoundResults/NotFoundResults';
@@ -15,12 +15,8 @@ export const CreateTestPage = (props) => {
     const { tasks } = useSelector(state => state.testCreation)
 
 
-    function testSaveHandler(tasks){
-        console.log(tasks)
-    }
-
     return (
-        <Main className={ClassNames(cls.createTestPage, {}, [className])}>
+        <Main className={ClassNames(cls.createTestPage, {}, [className])} isPrivate={true}>
             <MainNavigation />
             <div >
                 {
@@ -35,7 +31,7 @@ export const CreateTestPage = (props) => {
                         <div className={cls.buttons}>
                             <Button className={cls.button} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_QUESTION_TYPE))}>Добавить вопрос</Button>
                             <Button className={cls.button}>Просмотреть тест</Button>
-                            <Button className={cls.yellow} onClick={()=>testSaveHandler(tasks)} >Сохранить тест</Button>
+                            <Button className={cls.yellow} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.NAME_CREATION_TEST))} >Сохранить тест</Button>
                         </div>
                         </>
                         

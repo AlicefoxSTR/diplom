@@ -10,7 +10,7 @@ export const AccountMyTestsPage = (props) => {
 
 
     return (
-        <Main>
+        <Main isPrivate={true}>
             <MainNavigation />
             <div className={ClassNames(cls.accountTestsPage, {}, [className])}>
                 {

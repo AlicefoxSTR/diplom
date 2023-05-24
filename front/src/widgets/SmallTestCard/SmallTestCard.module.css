@@ -31,3 +31,6 @@
 .button {
     padding: 8px 46px;
 }
+.buttons {
+    display: flex;
+}

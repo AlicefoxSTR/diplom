@@ -7,7 +7,7 @@ import cls from './FooterNavigation.module.css'
 const FooterNavigation = () => {
   return (
     <nav className={cls.nav}>
-        <FooterTitle>Интернет-Грамота</FooterTitle>
+        <FooterTitle to={'/'}>Интернет-Грамота</FooterTitle>
         <FooterLinks />
         <FooterSocial />
     </nav>

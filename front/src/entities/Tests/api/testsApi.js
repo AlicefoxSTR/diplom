@@ -5,6 +5,7 @@ import { TestsSlice } from '../redux/TestsSlice'
 
 export const testsApi =  createApi({
     reducerPath: 'testsApi',
+    tagTypes: ['Tests', 'CustomTests'],
     baseQuery: fetchBaseQuery({
         baseUrl: `${baseApiUrl}/v1/`,
         headers: {
@@ -16,7 +17,6 @@ export const testsApi =  createApi({
             return headers
         }
     }),
-    
     endpoints: (build) => ({
         fetchTests: build.query({
             query: (params) => ({
@@ -31,11 +31,13 @@ export const testsApi =  createApi({
                     }
                     
                 }catch(error){}
-            }
+            },
+            providesTags: ['CustomTests'],
         }),
         fetchCustomTests: build.query({
-            query: (role) => ({
-                url: `tests?role=${role}`,
+            query: (params) => ({
+                url: `tests/`,
+                params: params
             }),
             async onQueryStarted(args, {dispatch, queryFulfilled}){
                 try {
@@ -45,7 +47,8 @@ export const testsApi =  createApi({
                     }
                     
                 }catch(error){}
-            }
+            },
+            providesTags: ['CustomTests'],
         }),
         
         

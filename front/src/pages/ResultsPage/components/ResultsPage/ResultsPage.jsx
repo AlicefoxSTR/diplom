@@ -15,7 +15,7 @@ export const ResultsPage = (props) => {
     const { results } = useSelector(state => state.results)
 
     return (
-        <Main>
+        <Main isPrivate={true}>
             <MainNavigation />
             <div className={ClassNames(cls.resultsPage, {}, [className])}>
                 <ResultTestsFilter items={tests} placeholder={"Выберите тест"} />

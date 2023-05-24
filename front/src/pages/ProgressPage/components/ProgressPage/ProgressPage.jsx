@@ -3,7 +3,7 @@ import { Main, MainNavigation } from '../../../../widgets/Main'
 
 export const ProgressPage = () => {
   return (
-    <Main>
+    <Main isPrivate={true}>
       <MainNavigation />
     </Main>
   )

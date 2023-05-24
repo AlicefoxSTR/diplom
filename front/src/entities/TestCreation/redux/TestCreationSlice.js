@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initiatlState = {
+    name: '',
     tasks: [],
     activeTestCategory: '',
 }
@@ -39,6 +40,14 @@ export const TestCreationSlice = createSlice({
                 if(!state.tasks.find(task => task.id === action.payload.id)){
                     state.tasks.push({ fromApi: true, ...action.payload})
                 }
+            },
+            setTestName(state,action){
+                state.name = action.payload
+            },
+            clearTestCreation(state){
+                state.name = ''
+                state.tasks = []
+                state.activeTestCategory = ''
             }
         }
 })

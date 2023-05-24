@@ -4,6 +4,7 @@ import { baseApiUrl } from 'shared/lib/ClassNames/ApiConfig/ApiConfig'
 
 export const testCreationApi =  createApi({
     reducerPath: 'testCreationApi',
+    tagTypes: ['CustomTests'],
     baseQuery: fetchBaseQuery({
         baseUrl: `${baseApiUrl}/v1/`,
         headers: {
@@ -31,11 +32,28 @@ export const testCreationApi =  createApi({
                 params: data
             }),
         }),  
+        saveCustomTasksFromApi: build.mutation({
+            query: (data) => ({
+                url: 'tasks/',
+                method: 'PATCH',
+                body: data
+             }),
+        }),  
         getAllStages: build.query({
             query: () => ({
                 url: 'stages/',
                 method: 'GET',
              }),
         }),  
+        saveTest: build.mutation({
+            query: (data) => ({
+                url: 'tests/',
+                method: 'POST',
+                body: data
+             }),
+            invalidatesTags: ['CustomTests'],
+        }),  
+        
+        
     }),
 })

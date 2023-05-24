@@ -20,6 +20,7 @@ export const SigninPopup = (props) => {
    
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    
               
     const [ createToken] = userApi.useCreateTokenMutation()
 
@@ -53,7 +54,7 @@ export const SigninPopup = (props) => {
                         'refresh_token': res.data.refresh
                     }))   
                     reset()                 
-                    navigate('/profile')
+                    navigate(-1)
                     dispatch(PopupsSlice.actions.closePopup())
                 }
             }

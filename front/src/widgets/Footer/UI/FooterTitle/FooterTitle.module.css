@@ -3,4 +3,9 @@
     font-weight: 700;
     color: var(--secondary-color);
     text-transform: uppercase;
+    text-decoration: none;
+}
+
+.title:hover {
+    text-decoration: underline;
 }

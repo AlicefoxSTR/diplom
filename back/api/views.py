@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .permissions import IsAuthenticatedAndVerfyEmail
 from .utils import generate_random_password, generate_random_username, split_fio
+from django.db.models import Q
 
 from .models import (
     User,
@@ -15,7 +16,9 @@ from .models import (
     Student,
     Stage,
     Class,
-    Test
+    Test,
+    Task,
+    Answer
 )
 from .serializers import (
     UserSerializer,
@@ -25,7 +28,9 @@ from .serializers import (
     ClassCreateSerializer,
     TeacherClassesSerializer,
     TestsSerializer,
-    ClassDeleteSerializer
+    ClassDeleteSerializer,
+    TaskSerializer, 
+    UserStageSerializer
 )
 
 
@@ -37,6 +42,7 @@ class UserRegistrationView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request, *args, **kwargs):
+        #Создание User
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save() #Создаем экземляр класса User
@@ -235,9 +241,149 @@ class TestsView(APIView):
     permission_classes = [IsAuthenticatedAndVerfyEmail]
 
     def get(self, request):
-        
         print(request.GET)
-        tests = Test.objects.filter(is_custom=False).prefetch_related('tasks', 'tasks__possible_answers')
+        
+        if(request.GET.get('custom')):
+            tests = Test.objects.filter(is_custom=True, creator=self.request.user.teacher).prefetch_related('tasks', 'tasks__possible_answers')
+        else:
+            tests = Test.objects.filter(is_custom=False).prefetch_related('tasks', 'tasks__possible_answers')
         tests_serializer = TestsSerializer(tests, many=True)
 
-        return Response(tests_serializer.data, status=status.HTTP_200_OK)
+        if tests:
+            return Response(tests_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "Ошибка получения списка тестов."}, status=status.HTTP_400_BAD_REQUEST)
+
+    
+    def post(self, request):
+
+        test_data = request.data
+        teacher = Teacher.objects.get(user=self.request.user)
+        tasks_data = test_data['tasks']
+        task_list =[]
+        for task in tasks_data:
+            if 'fromApi' not in task or task['fromApi']==False:
+                possible_answers = []
+                correct_answers = []
+                for answer in task['answers']:
+                    new_answer = Answer.objects.create(text=answer['text'], creator=teacher, is_custom=True)
+                    possible_answers.append(new_answer)
+                    if answer['isCorrect']:
+                        correct_answers.append(new_answer)
+                    
+
+                new_task = Task.objects.create(
+                    question_type = task['type'],
+                    question_text = task['question'],
+                    is_custom = task['isPersonal'],
+                    creator = teacher,
+                )
+                new_task.possible_answers.set(possible_answers)
+                new_task.correct_answers.set(correct_answers)
+                new_task.save()
+                task_list.append(new_task)
+        new_test = Test.objects.create(
+            name=test_data['name'],
+            creator = teacher,
+            is_custom = True
+        )
+        new_test.tasks.set(task_list)
+        new_test.save()
+
+        teacher.custom_tests.add(new_test)
+        teacher.save()
+
+        if new_test:
+            return Response({"message": "Тест успешно создан!."}, status=status.HTTP_200_OK)
+        else: 
+            return Response({"message": "Ошибка получения списка тестов."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+class TaskView(APIView):
+
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+
+    def get(self, request):
+        ready_tasks = []
+        if request.GET.get('tasks_id'):
+            ready_tasks = request.GET.get('tasks_id').split(',')
+        if(request.GET.get('random')):
+            tasks = Task.objects.filter(
+                    Q(is_custom=False) | Q(creator=self.request.user.teacher)
+                ).prefetch_related('possible_answers')
+            if ready_tasks:
+                tasks = tasks.exclude(id__in=ready_tasks)
+            task = tasks.order_by('?').first()
+        
+        tasks_serializer = TaskSerializer(task, many=False)
+        if task:
+            return Response(tasks_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response({'meesage': 'Доступных вопросов не найдено'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TasksView(APIView):
+
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+
+    def get(self, request):
+
+        stage = None
+        if request.GET.get('stage'):
+            stage = Stage.objects.filter(id=request.GET.get('stage')).prefetch_related('test', 'test__tasks').first()
+            if stage:
+                tasks = stage.test.tasks.all()
+        else:
+            tasks = Task.objects.filter(
+                Q(is_custom=False)
+            ).prefetch_related('possible_answers')
+        
+        tasks_serializer = TaskSerializer(tasks, many=True)
+
+        if tasks:
+            return Response(tasks_serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response({'meesage': 'Доступных вопросов не найдено'}, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request):
+
+        tasks_data = request.data
+        new_task=None
+        for task in tasks_data:
+            new_task = Task.objects.get(id=task['id'])
+            possible_answers = []
+            correct_answers = []
+            for answer in task['answers']:
+                try:
+                    new_answer = Answer.objects.get(id=answer['id'])
+                    possible_answers.append(new_answer)
+                    if answer['isCorrect']:
+                        correct_answers.append(new_answer)
+                except:
+                    new_answer = Answer.objects.create(text=answer['text'], creator=self.request.user.teacher, is_custom=True)
+                    possible_answers.append(new_answer)
+                    if answer['isCorrect']:
+                        correct_answers.append(new_answer)
+
+                
+            new_task.question_text = task['question']
+            new_task.question_type = task['type']
+            new_task.possible_answers.set(possible_answers)
+            new_task.correct_answers.set(correct_answers)
+            new_task.save()
+
+        if new_task:
+            return Response({"message": "Сохранение прошло успешно."}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "Ошибка сохранения заданий."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class StagesView(generics.ListAPIView):
+
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+    serializer_class = UserStageSerializer
+    queryset = Stage.objects.all()
+
+   

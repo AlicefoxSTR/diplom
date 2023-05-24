@@ -1,9 +1,10 @@
 import React from 'react'
 import c from './HeaderTitle.module.css'
+import { Link } from 'react-router-dom'
 
 
-export const HeaderTitle = ({children}) => {
+export const HeaderTitle = ({children, to}) => {
   return (
-    <h1 className={c.HeaderTitle}>{children}</h1>
+    <Link to={to} className={c.HeaderTitle}>{children}</Link>
   )
 }

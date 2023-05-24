@@ -1,10 +1,11 @@
 import React from 'react'
 import cls from './FooterTitle.module.css'
+import { Link } from 'react-router-dom'
 
 
-const FooterTitle = ({children}) => {
+const FooterTitle = ({children, to}) => {
   return (
-    <h2 className={cls.title}>{children}</h2>
+    <Link to={to} className={cls.title}>{children}</Link>
   )
 }
 

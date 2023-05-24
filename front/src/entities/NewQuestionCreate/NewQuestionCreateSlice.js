@@ -106,6 +106,7 @@ export const NewQuestionCreateSlice = createSlice({
                 state.id = action.payload.id
                 state.question = action.payload.question
                 state.isEdit = true
+                state.fromApi = action.payload.fromApi
                 state.questionType = action.payload.type
                 state.answers = action.payload.answers.map(answer => ({
                     id: answer.id,

@@ -136,7 +136,7 @@ class Task(models.Model):
 
 class Test(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название')
-    description = models.TextField(verbose_name='Описание')
+    description = models.TextField(verbose_name='Описание', blank=True, null=True)
     tasks = models.ManyToManyField(Task, related_name='custom_tests', blank=True, verbose_name='Задачи')
     creator = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Создатель', blank=True, null=True)
     is_custom = models.BooleanField(("Кастомный"), default=True)
