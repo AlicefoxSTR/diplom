@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router'
 
 export const HeaderNavigation = () => {
 
-  const { isAuthenticate } = useSelector(state=>state.user)
+  const { isAuthenticate, role } = useSelector(state=>state.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -20,7 +20,10 @@ export const HeaderNavigation = () => {
   return (
     <nav className={cls.nav}>
         <CustomLink theme="header" className={[cls.link]} to='/'>Главная</CustomLink>
-        <CustomLink theme="header" className={[cls.link]} to='/progress'>Достижения</CustomLink>
+        {
+          role==='user' && <CustomLink theme="header" className={[cls.link]} to='/progress'>Достижения</CustomLink>
+        }
+        
         <CustomLink theme="header" className={[cls.link]} to='/profile'>Профиль</CustomLink>
         {
           isAuthenticate && <SmallButton 

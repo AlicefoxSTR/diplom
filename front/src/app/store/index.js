@@ -14,7 +14,7 @@ import {
 import { TestingSlice } from "entities/Testing/TestingSlice";
 import { TestsSlice, testsApi  } from "entities/Tests";     
 import { UserSlice } from "entities/User";
-import { PopupsSlice } from "entities/Popups/PopupsSlice";
+import { PopupsSlice } from "entities/Popups/redux/PopupsSlice";
 import { TestResultSlice } from "entities/TestResult/TestResultSlice";
 import { TeacherTestsSlice } from "entities/TeacherTests";
 import { TestCreationSlice } from "entities/TestCreation";

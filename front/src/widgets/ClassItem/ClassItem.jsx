@@ -4,7 +4,7 @@ import cls from './ClassItem.module.css';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { ReactComponent as Arrow} from 'app/assets/icons/arrow-top.svg'
 import { useDispatch } from 'react-redux';
-import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
+import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import {ReactComponent as Edit} from 'app/assets/icons/edit-icon.svg'
 import {ReactComponent as Cross} from 'app/assets/icons/cross-icon.svg'
 import { ClassesSlice } from 'entities/Classes/redux/ClassesSlice';

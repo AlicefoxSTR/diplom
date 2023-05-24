@@ -15,7 +15,7 @@ import { AccountTestsPage } from 'pages/AccountTestsPage';
 import { AccountMyTestsPage } from 'pages/AccountMyTestsPage';
 import { CreateTestPage } from 'pages/CreateTestPage';
 import { ResultsPage } from 'pages/ResultsPage';
-import { Popups } from 'widgets/Popups/Popups';
+import { Popups } from 'entities/Popups';
 
 function App() {
 

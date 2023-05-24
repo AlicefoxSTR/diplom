@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './PopupWrapper.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { PopupsSlice } from 'entities/Popups/PopupsSlice';
+import { PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 
 export const PopupWrapper = (props) => {
     const { className, children, closeHandler, ...otherProps } = props;

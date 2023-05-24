@@ -5,7 +5,7 @@ import { NotFoundResults } from 'pages/AccountPage/Ui/NotFoundResults/NotFoundRe
 import { Main, MainNavigation } from 'widgets/Main';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
+import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { TaskRow } from 'widgets/TaskRow/TaskRow';
 
 export const CreateTestPage = (props) => {
@@ -13,7 +13,6 @@ export const CreateTestPage = (props) => {
 
     const dispatch = useDispatch()
     const { tasks } = useSelector(state => state.testCreation)
-
 
     return (
         <Main className={ClassNames(cls.createTestPage, {}, [className])} isPrivate={true}>

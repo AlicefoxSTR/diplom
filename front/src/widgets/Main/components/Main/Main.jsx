@@ -2,36 +2,48 @@ import React, { useEffect } from 'react'
 import { ClassNames } from '../../../../shared/lib/ClassNames/ClassNames'
 
 import c from './Main.module.css'
-import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice'
+import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
+import { userApi } from 'entities/User/api/UserApi'
+import { UserSlice } from 'entities/User'
 
 
 export const Main = (props) => {
 
   const {children, className, isPrivate=false, ...otherProps} = props
 
-  const {isAuthenticate } = useSelector(state=>state.user)
+  const { isAuthenticate, access_token, refresh_token } = useSelector(state=>state.user)
     const { activePopup } = useSelector(state=>state.popups)
     const navigate = useNavigate()
   
     const dispatch = useDispatch()
+    const [fetchUserDetail]  = userApi.useFetchUserDetailMutation()
+    const [ refreshToken ]  = userApi.useRefreshTokenMutation()
   
-    //Проверяем при первом посещении страницы профиля и при попытке закрыть модалку авторизации авторизацию пользователя
+    //Проверяем при посещении приватных страниц авторизован ли пользователь и действителен ли его access token
     useEffect(()=>{
       if(isPrivate){
-        if(!isAuthenticate){
-          if(Boolean(!activePopup)){
-            dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ROLE))
-            navigate('/')
-          }
-        }
-      }
-    }, [activePopup, isAuthenticate, dispatch])
+        fetchUserDetail(access_token)
+          .then(
+            res => {
+              if(res.error){
+                refreshToken({'refresh': refresh_token}).then(res => {
+                  if(res.data){
+                    dispatch(UserSlice.actions.refreshToken(res.data.access))
+                  }else if(res.error){
+                    dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ROLE))
+                    navigate('/')
+                  }
+                })
+              }
+            }
+          )
+       }
 
-  // useEffect(()=>{
-  //   console.log(isPrivate)
-  // }, [])
+      
+       
+    }, [activePopup, isAuthenticate, dispatch])
 
   return (
     <main className={ClassNames(c.main, {}, ['container', className])} {...otherProps}>

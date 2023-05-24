@@ -5,7 +5,7 @@ import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { TestCreationSlice } from 'entities/TestCreation';
 import { useDispatch, useSelector } from 'react-redux';
 import { NewQuestionCreateSlice } from 'entities/NewQuestionCreate';
-import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
+import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 
 export const TaskRow = (props) => {
     const { 

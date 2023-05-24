@@ -56,7 +56,6 @@ export const NewQuestionCreateSlice = createSlice({
                 state.answers = state.correctAnswers
             },
             checkboxAnswersHandler(state, action){
-                console.log(action)
                 if(action.payload.value.length > 0){
                     const answer = state.answers.find(({id}) => id === action.payload.id)
                     if(answer){

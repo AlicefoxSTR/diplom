@@ -2,9 +2,10 @@
 .teacherContent {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .button {
+    align-self: center;
     margin-top: 60px;
 }

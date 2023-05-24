@@ -4,7 +4,7 @@ import cls from './TeacherContent.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotFoundResults } from '../NotFoundResults/NotFoundResults';
 import { Button } from 'shared/UI/Button/Button';
-import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice';
+import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { ClassList } from 'widgets/ClassList/ClassList';
 import { classesApi } from 'entities/Classes';
 import { Loader } from 'shared/UI/Loader/Loader';

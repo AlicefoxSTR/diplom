@@ -53,6 +53,14 @@ export const testCreationApi =  createApi({
              }),
             invalidatesTags: ['CustomTests'],
         }),  
+        saveEditTest: build.mutation({
+            query: (data) => ({
+                url: 'tests/',
+                method: 'PATCH',
+                body: data
+             }),
+            invalidatesTags: ['CustomTests'],
+        })
         
         
     }),

@@ -8,7 +8,8 @@ const initialState = {
     access_token: '',
     refresh_token: '',
     isAuthenticate: false,
-    completedStages: []
+    completedStages: [],
+    chosedTest: null
 }
 
 
@@ -46,6 +47,9 @@ export const UserSlice = createSlice({
         },
         getAccessToken(state){
             return state.access_token
+        },
+        setChosedTest(state, action){
+            state.chosedTest = action.payload
         }
     }
 })

@@ -4,6 +4,7 @@ const initiatlState = {
     name: '',
     tasks: [],
     activeTestCategory: '',
+    isEdit: false
 }
 
 
@@ -48,6 +49,14 @@ export const TestCreationSlice = createSlice({
                 state.name = ''
                 state.tasks = []
                 state.activeTestCategory = ''
+                state.isEdit= false
+
+            },
+            setTest(state, action){
+                state.name = action.payload.title
+                state.tasks = action.payload.tasks
+                state.id = action.payload.id
+                state.isEdit = true
             }
         }
 })

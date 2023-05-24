@@ -3,14 +3,16 @@ import { Main, MainNavigation } from 'widgets/Main'
 import { Button } from 'shared/UI/Button/Button'
 import cls from './HomePage.module.css'
 import { HomeBorder } from '../../UI/HomeBorder/HomeBorder'
-import { useDispatch } from 'react-redux'
-import { PopupNames, PopupsSlice } from 'entities/Popups/PopupsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice'
 
 
 export const HomePage = () => {
 
 
   const dispatch = useDispatch()
+  const { isAuthenticate } = useSelector(state=>state.user)
+
 
 
 
@@ -19,9 +21,12 @@ export const HomePage = () => {
       <MainNavigation /> 
       <div className={cls.block}>
         <HomeBorder />
-        <Button className={cls.btn} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ROLE))}>
-          Зарегистрироваться / Войти
-        </Button> 
+        {
+          !isAuthenticate &&  <Button className={cls.btn} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ROLE))}>
+            Зарегистрироваться / Войти
+          </Button> 
+        }
+       
       </div>
     </Main>
   )

@@ -3,10 +3,12 @@ import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TeacherContent.module.css';
 import { TestCardsList } from 'widgets/TestCardsList/TestCardsList';
 import { NotFoundResults } from 'pages/AccountPage/Ui/NotFoundResults/NotFoundResults';
-import { CustomLink, LinkThemes } from 'shared/UI/CustomLink/CustomLink';
 import { testsApi } from 'entities/Tests';
 import { Loader } from 'shared/UI/Loader/Loader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { TestCreationSlice } from 'entities/TestCreation';
+import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 
 export const TeacherContent = (props) => {
     const { className } = props;
@@ -19,6 +21,14 @@ export const TeacherContent = (props) => {
         "role": role
     })
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+
+    function ClickHandler(){
+        navigate('/account/create-test')
+        dispatch(TestCreationSlice.actions.clearTestCreation())
+    }
 
 
 
@@ -35,7 +45,8 @@ export const TeacherContent = (props) => {
                     :
                     <Loader />
             }
-            <CustomLink to="/account/create-test" theme={LinkThemes.BUTTON} className={cls.button}>Создать свой тест</CustomLink>
+            <Button onClick={()=>ClickHandler()} theme={ButtonTheme.LIGHT} className={cls.button}>Создать свой тест</Button>
+
 
         </div>
  );

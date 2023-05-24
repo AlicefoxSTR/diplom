@@ -241,10 +241,12 @@ class TestsView(APIView):
     permission_classes = [IsAuthenticatedAndVerfyEmail]
 
     def get(self, request):
-        print(request.GET)
         
         if(request.GET.get('custom')):
-            tests = Test.objects.filter(is_custom=True, creator=self.request.user.teacher).prefetch_related('tasks', 'tasks__possible_answers')
+            if(request.GET.get('role')=='teacher'):
+                tests = Test.objects.filter(is_custom=True, creator=self.request.user.teacher).prefetch_related('tasks', 'tasks__possible_answers')
+            elif(request.GET.get('role')=='student'):
+                tests = Test.objects.filter(id__in=self.request.user.student.classroom.tests.all()).prefetch_related('tasks', 'tasks__possible_answers')
         else:
             tests = Test.objects.filter(is_custom=False).prefetch_related('tasks', 'tasks__possible_answers')
         tests_serializer = TestsSerializer(tests, many=True)
@@ -260,28 +262,28 @@ class TestsView(APIView):
         test_data = request.data
         teacher = Teacher.objects.get(user=self.request.user)
         tasks_data = test_data['tasks']
-        task_list =[]
+        task_list = []
         for task in tasks_data:
-            if 'fromApi' not in task or task['fromApi']==False:
-                possible_answers = []
-                correct_answers = []
-                for answer in task['answers']:
-                    new_answer = Answer.objects.create(text=answer['text'], creator=teacher, is_custom=True)
-                    possible_answers.append(new_answer)
-                    if answer['isCorrect']:
-                        correct_answers.append(new_answer)
-                    
-
+            possible_answers = []
+            correct_answers = []
+            try:
+                new_task = Task.objects.get(id=task['id'])   
+            except:
                 new_task = Task.objects.create(
                     question_type = task['type'],
                     question_text = task['question'],
                     is_custom = task['isPersonal'],
                     creator = teacher,
                 )
-                new_task.possible_answers.set(possible_answers)
-                new_task.correct_answers.set(correct_answers)
-                new_task.save()
-                task_list.append(new_task)
+                for answer in task['answers']:
+                    new_answer = Answer.objects.create(text=answer['text'], creator=teacher, is_custom=True)
+                    possible_answers.append(new_answer)
+                    if answer['isCorrect']:
+                        correct_answers.append(new_answer)
+            new_task.possible_answers.set(possible_answers)
+            new_task.correct_answers.set(correct_answers)
+            new_task.save()
+            task_list.append(new_task)
         new_test = Test.objects.create(
             name=test_data['name'],
             creator = teacher,
@@ -297,6 +299,50 @@ class TestsView(APIView):
             return Response({"message": "Тест успешно создан!."}, status=status.HTTP_200_OK)
         else: 
             return Response({"message": "Ошибка получения списка тестов."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def patch(self, request):
+
+        test_data = request.data
+        try:
+            test = Test.objects.get(id=test_data['id'])
+            teacher = Teacher.objects.get(user=self.request.user)
+            tasks_data = test_data['tasks']
+            task_list = []
+            for task in tasks_data:
+                try:
+                    new_task = Task.objects.get(id=task['id'])
+                    new_task.question_text = task['question']  
+                    new_task.question_type = task['type']  
+                    for answer in new_task.possible_answers.all():
+                        answer.delete()
+                except:
+                    new_task = Task.objects.create(
+                        question_type = task['type'],
+                        question_text = task['question'],
+                        is_custom = task['isPersonal'],
+                        creator = teacher,
+                    )
+
+                possible_answers = []
+                correct_answers = []
+                for answer in task['answers']:
+                    new_answer = Answer.objects.create(text=answer['text'], creator=teacher, is_custom=True)
+                    possible_answers.append(new_answer)
+                    if answer['isCorrect']:
+                        correct_answers.append(new_answer)
+                new_task.possible_answers.set(possible_answers)
+                new_task.correct_answers.set(correct_answers)
+                new_task.save()
+                task_list.append(new_task)
+            test.tasks.set(task_list)
+            test.save()
+            return Response({"message": "Тест успешно сохранен!."}, status=status.HTTP_200_OK)
+        except:
+            return Response({"message": "Ошибка изменения теста."}, status=status.HTTP_400_BAD_REQUEST)
+
+        
+
 
 
 

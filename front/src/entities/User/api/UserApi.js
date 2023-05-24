@@ -47,7 +47,7 @@ export const userApi =  createApi({
         }),
         fetchUserDetail: build.mutation({
             query: (token) => ({
-                url: 'v1/user',
+                url: 'v1/user/',
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`

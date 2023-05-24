@@ -3,8 +3,11 @@ import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './SmallTestCard.module.css';
 import { CustomLink, LinkThemes } from 'shared/UI/CustomLink/CustomLink';
 import Image from 'app/assets/img/test-img.png'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton';
+import { PopupsSlice } from 'entities/Popups';
+import { PopupNames } from 'entities/Popups/redux/PopupsSlice';
+import { UserSlice } from 'entities/User';
 
 
 export const SmallTestCard = (props) => {
@@ -14,7 +17,12 @@ export const SmallTestCard = (props) => {
     } = props;
 
     const { role } = useSelector(state=>state.user)
+    const dispatch = useDispatch()
 
+    function ClickHandler(){
+        dispatch(UserSlice.actions.setChosedTest(test))
+        dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ACTION_FOR_CUSTOM_TEST))
+    }
 
     return (
         <div className={ClassNames(cls.smallTestCard, {}, [className])}>
@@ -28,7 +36,11 @@ export const SmallTestCard = (props) => {
                         role === 'teacher'
                         ?
                         <>
-                            <SmallButton theme={SmallButtonTheme.DARK}>Выбрать</SmallButton>
+                            <SmallButton 
+                            theme={SmallButtonTheme.DARK} 
+                            onClick={()=>ClickHandler()}>
+                                Выбрать
+                            </SmallButton>
                         </>
                         :
                         <CustomLink
