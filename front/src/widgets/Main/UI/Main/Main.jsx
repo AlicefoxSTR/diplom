@@ -33,7 +33,7 @@ export const Main = (props) => {
                     dispatch(UserSlice.actions.refreshToken(res.data))
                   }else if(res.error){
                     dispatch(UserSlice.actions.logout())
-                    dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ROLE))
+                    dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))
                     navigate('/')
                   }
                 })

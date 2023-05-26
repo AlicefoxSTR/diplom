@@ -22,7 +22,7 @@ export const HomePage = () => {
       <div className={cls.block}>
         <HomeBorder />
         {
-          !isAuthenticate &&  <Button className={cls.btn} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ROLE))}>
+          !isAuthenticate &&  <Button className={cls.btn} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))}>
             Зарегистрироваться / Войти
           </Button> 
         }

@@ -1,1 +1,1 @@
-export { ResultsPage } from "./components/ResultsPage/ResultsPage";
+export { ResultsPage } from "./UI/ResultsPage/ResultsPage";

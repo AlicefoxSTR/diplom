@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './AddClassPopup.module.css';
-import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
 import { Cross } from 'shared/UI/Cross/Cross';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
-import { Input, InputTheme } from 'shared/UI/Input/Input';
-import { ClassesSlice, classesApi } from 'entities/Classes';
+import { InputTheme } from 'shared/UI/Input/Input';
+import { classesApi } from 'entities/Classes';
 import { Controller, useForm } from 'react-hook-form';
-import { FormInputRow } from 'widgets/FormInputRow/FormInputRow';
 import { PopupFormRow } from 'widgets/PopupFormRow/PopupFormRow';
 
 export const AddClassPopup = (props) => {
@@ -24,8 +22,6 @@ export const AddClassPopup = (props) => {
         formState: {errors}, 
         reset
     } = useForm({mode: 'onBlur'})
-
-
 
     function saveHandler(data) {
         saveClassRoom(data)

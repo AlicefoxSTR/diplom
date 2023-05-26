@@ -92,7 +92,7 @@ export const SigninPopup = (props) => {
             </form>
             <p className={cls.text}>
                 Еще не зарегистрированы? 
-                <span className={cls.link} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNUP))}>
+                <span className={cls.link} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ROLE))}>
                     Регистрация
                 </span>
             </p>

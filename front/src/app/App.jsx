@@ -1,6 +1,6 @@
 
-import {Routes, Route, useLocation} from 'react-router-dom'
-import './assets/styles/index.css'
+import {Routes, Route} from 'react-router-dom'
+import './styles/index.css'
 import { Layout } from '../widgets/Layout/Layout';
 import { HomePage } from '../pages/HomePage';
 import { NotFoundPage } from '../pages/NotFoundPage';

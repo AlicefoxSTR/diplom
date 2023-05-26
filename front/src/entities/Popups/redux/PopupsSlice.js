@@ -27,6 +27,7 @@ export const PopupNames = {
     NAME_CREATION_TEST: 'name_creation_test',
     CHOSE_ACTION_FOR_TEST: 'chose_action_for_test',
     OPEN_ACCESS: 'open_access',
+    MESSAGE_POPUP: 'message_popup',
 }
 
 

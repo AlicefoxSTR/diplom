@@ -6,7 +6,7 @@ import { PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 
 export const PopupWrapper = (props) => {
     const { className, children, closeHandler, ...otherProps } = props;
-    const { activePopup} = useSelector(state => state.popups)
+    const { activePopup } = useSelector(state => state.popups)
 
 
     const dispatch = useDispatch()

@@ -12,8 +12,9 @@
     position: relative;
     align-items: center;
     cursor: pointer;
-    height: 30px;
-    width: 30px;
+    font: var(--font-h2);
+    color: var(--secondary-color);
+    padding-left: 50px;
 
 }
 
@@ -24,10 +25,9 @@
     width: 30px;
     height: 30px;
     background: #fff;
-    left: 50%;
+    left: 0;
     top: 50%;
-    transform: translate(-50%, -50%);
-
+    transform: translateY(-50%);
     border-radius: 50%;
 }
 .label::after {
@@ -37,9 +37,9 @@
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    left: 50%;
+    left: 0;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(25%, -50%);
 }
 
 .input:checked + .label::after {

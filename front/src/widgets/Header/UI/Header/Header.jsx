@@ -1,6 +1,6 @@
 import React from 'react'
 import { ClassNames } from '../../../../shared/lib/ClassNames/ClassNames'
-import { HeaderTitle } from '../../UI/HeaderTitle/HeaderTitle'
+import { HeaderTitle } from '../HeaderTitle/HeaderTitle'
 import { HeaderNavigation } from '../HeaderNavigation/HeaderNavigation'
 import { HeaderSocial } from '../HeaderSocial/HeaderSocial'
 import cls from './Header.module.css'

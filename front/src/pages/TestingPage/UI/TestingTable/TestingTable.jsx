@@ -1,12 +1,14 @@
 import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TestingTable.module.css';
-import { CheckboxAnswers } from '../../pages/TestingPage/UI/CheckboxAnswers/CheckboxAnswers';
+import { CheckboxAnswers } from '../CheckboxAnswers/CheckboxAnswers';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { questionTypes } from 'shared/models/TestModels';
 import { TestingSlice, TestingTypes } from 'entities/Testing/TestingSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton';
+import { RadioAnswers } from 'pages/TestingPage/UI/RadioAnswers/RadioAnswers';
+import { TextAnswer } from 'pages/TestingPage/UI/TextAnswer/TextAnswer';
 
 export const TestingTable = (props) => {
     const { 
@@ -25,7 +27,6 @@ export const TestingTable = (props) => {
         dispatch(TestingSlice.actions.prevTask())
     }
     
-    console.log(taskIndex < test.tasks.length )
 
 
     return (
@@ -40,9 +41,9 @@ export const TestingTable = (props) => {
                     :
                     activeTask.type === questionTypes.RADIO
                     ?
-                    <CheckboxAnswers answers={activeTask.answers}/>
+                    <RadioAnswers answers={activeTask.answers}/>
                     :
-                    <CheckboxAnswers answers={activeTask.answers}/>
+                    <TextAnswer answers={activeTask.answers}/>
 
                     
                 }

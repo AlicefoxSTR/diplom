@@ -281,9 +281,9 @@ class TestsView(APIView):
                     possible_answers.append(new_answer)
                     if answer['isCorrect']:
                         correct_answers.append(new_answer)
-            new_task.possible_answers.set(possible_answers)
-            new_task.correct_answers.set(correct_answers)
-            new_task.save()
+                new_task.possible_answers.set(possible_answers)
+                new_task.correct_answers.set(correct_answers)
+                new_task.save()
             task_list.append(new_task)
         new_test = Test.objects.create(
             name=test_data['name'],

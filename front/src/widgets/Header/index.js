@@ -1,4 +1,4 @@
-export { Header } from "./components/Header/Header";
+export { Header } from "./UI/Header/Header";
 
 
 

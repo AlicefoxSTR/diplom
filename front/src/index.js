@@ -6,7 +6,7 @@ import App from './app/App';
 import {store, persistor} from './app/store'
 import { PersistGate } from 'redux-persist/integration/react';
 
-import './app/assets/styles/normalize.css'
+import './app/styles/normalize.css'
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 

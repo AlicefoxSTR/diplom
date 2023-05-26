@@ -4,7 +4,7 @@ import cls from './TestingPage.module.css';
 import { useSelector } from 'react-redux';
 import { ProgressBar } from 'widgets/ProgressBar/ProgressBar';
 import { Main } from 'widgets/Main';
-import { TestingTable } from 'widgets/TestingTable/TestingTable';
+import { TestingTable } from 'pages/TestingPage/UI/TestingTable/TestingTable';
 import { CustomLink, LinkThemes } from 'shared/UI/CustomLink/CustomLink';
 import { TestingTypes } from 'entities/Testing/TestingSlice';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
