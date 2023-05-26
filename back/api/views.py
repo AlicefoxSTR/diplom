@@ -30,7 +30,8 @@ from .serializers import (
     TestsSerializer,
     ClassDeleteSerializer,
     TaskSerializer, 
-    UserStageSerializer
+    UserStageSerializer,
+    ClassesForAccessSerializer
 )
 
 
@@ -342,6 +343,25 @@ class TestsView(APIView):
             return Response({"message": "Ошибка изменения теста."}, status=status.HTTP_400_BAD_REQUEST)
 
         
+    def delete(self, request):
+        try:
+            test_data = request.data
+            tasks_data = test_data['tasks']
+            teacher = self.request.user.teacher
+
+            if test_data['creator'] == teacher.id:
+                for task in tasks_data:
+                    if task['creator']==teacher.id:
+                        for answer in task['answers']:
+                            answer_query = Answer.objects.get(id=answer['id'])
+                            answer_query.delete()
+                        task_query = Task.objects.get(id=task['id'])
+                        task_query.delete()
+                test_query = Test.objects.get(id=test_data['id'])
+                test_query.delete()
+            return Response({"message": "Тест успешно удален."}, status=status.HTTP_200_OK)
+        except:
+            return Response({"message": "Ошибка удаления теста."}, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -357,7 +377,7 @@ class TaskView(APIView):
             ready_tasks = request.GET.get('tasks_id').split(',')
         if(request.GET.get('random')):
             tasks = Task.objects.filter(
-                    Q(is_custom=False) | Q(creator=self.request.user.teacher)
+                    Q(is_custom=False)
                 ).prefetch_related('possible_answers')
             if ready_tasks:
                 tasks = tasks.exclude(id__in=ready_tasks)
@@ -432,4 +452,38 @@ class StagesView(generics.ListAPIView):
     serializer_class = UserStageSerializer
     queryset = Stage.objects.all()
 
+
+class OpenAccessForStudent(APIView):
+
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+
+
+    def get(self, request):
+
+        classes = self.request.user.teacher.classes.all()
+        classes_serializer = ClassesForAccessSerializer(classes, many=True)
+
+        if classes:
+            return Response(classes_serializer.data, status=status.HTTP_200_OK)
+        else: 
+            return Response({"message": "Классы не найдены."}, status=status.HTTP_400_BAD_REQUEST)
+
    
+    def patch(self, request):
+
+        classes = request.data['classes']
+    
+        try:
+            for classroom in classes:
+                class_query = Class.objects.get(id=classroom['id'])
+                if classroom['test']:
+                    test = Test.objects.get(id=request.data['test'])
+                    class_query.tests.add(test)
+                else:
+                    tests = class_query.tests.exclude(id=request.data['test'])
+                    class_query.tests.set(tests)
+
+            return Response({"message": "Доступ успешно предоставлен"}, status=status.HTTP_200_OK)
+        except:
+            return Response({"message": "Ошибка предоставления доступа"}, status=status.HTTP_200_OK)
+

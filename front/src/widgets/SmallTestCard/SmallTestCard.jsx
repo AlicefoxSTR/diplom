@@ -8,6 +8,8 @@ import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton
 import { PopupsSlice } from 'entities/Popups';
 import { PopupNames } from 'entities/Popups/redux/PopupsSlice';
 import { UserSlice } from 'entities/User';
+import { TestingSlice, TestingTypes } from 'entities/Testing/TestingSlice';
+import { useNavigate } from 'react-router';
 
 
 export const SmallTestCard = (props) => {
@@ -18,11 +20,23 @@ export const SmallTestCard = (props) => {
 
     const { role } = useSelector(state=>state.user)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    
 
-    function ClickHandler(){
+    function ClickChoseHandler(){
         dispatch(UserSlice.actions.setChosedTest(test))
-        dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ACTION_FOR_CUSTOM_TEST))
+        dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ACTION_FOR_TEST))
     }
+
+    function ClickTestingHandler(){
+        dispatch(TestingSlice.actions.openTesting({
+            test: test,
+            type: TestingTypes.TESTING
+        }))
+        navigate('/testing')
+    }
+
+    
 
     return (
         <div className={ClassNames(cls.smallTestCard, {}, [className])}>
@@ -38,18 +52,19 @@ export const SmallTestCard = (props) => {
                         <>
                             <SmallButton 
                             theme={SmallButtonTheme.DARK} 
-                            onClick={()=>ClickHandler()}>
+                            onClick={()=>ClickChoseHandler()}>
                                 Выбрать
                             </SmallButton>
                         </>
                         :
-                        <CustomLink
+                        <SmallButton
                             to={`/test/${test.id}`} 
-                            theme={LinkThemes.BUTTON_DARK} 
+                            theme={SmallButtonTheme.DARK} 
                             className={ClassNames(cls.button, {}, [])} 
+                            onClick={ClickTestingHandler}
                         >
                             Пройти
-                        </CustomLink>
+                        </SmallButton>
                     }
                 </div>
                 

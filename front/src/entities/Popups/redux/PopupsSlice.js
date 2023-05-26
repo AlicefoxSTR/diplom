@@ -9,7 +9,9 @@ import { ChoseTestCategoryPopup } from "../UI/ChoseTestCategoryPopup/ChoseTestCa
 import { ChoseQuestionPopup } from "../UI/ChoseQuestionPopup/ChoseQuestionPopup"
 import { QuestionConstructorPopup } from "../UI/QuestionConstructorPopup/QuestionConstructorPopup"
 import { NameCreationTestPopup } from "../UI/NameCreationTestPopup/NameCreationTestPopup"
-import { ChoseActionForCustomTestPopup } from "../UI/ChoseActionForCustomTestPopup/ChoseActionForCustomTestPopup"
+import { ChoseActionForTestPopup } from "../UI/ChoseActionForTestPopup/ChoseActionForTestPopup"
+import { MessagePopup } from "../UI/MessagePopup/MessagePopup"
+import { OpenAccessPopup } from "../UI/OpenAccessPopup/OpenAccessPopup"
 
 
 export const PopupNames = {
@@ -23,7 +25,8 @@ export const PopupNames = {
     CHOSE_QUESTION: 'chose_question',
     QUESTION_CONSTRUCTOR: 'question_constructor',
     NAME_CREATION_TEST: 'name_creation_test',
-    CHOSE_ACTION_FOR_CUSTOM_TEST: 'chose_action_for_custom_test',
+    CHOSE_ACTION_FOR_TEST: 'chose_action_for_test',
+    OPEN_ACCESS: 'open_access',
 }
 
 
@@ -38,14 +41,16 @@ export const PopupBodies = {
     [PopupNames.CHOSE_QUESTION]: ChoseQuestionPopup,
     [PopupNames.QUESTION_CONSTRUCTOR]: QuestionConstructorPopup,
     [PopupNames.NAME_CREATION_TEST]: NameCreationTestPopup,
-    [PopupNames.CHOSE_ACTION_FOR_CUSTOM_TEST]: ChoseActionForCustomTestPopup,
+    [PopupNames.CHOSE_ACTION_FOR_TEST]: ChoseActionForTestPopup,
+    [PopupNames.MESSAGE_POPUP]: MessagePopup,
+    [PopupNames.OPEN_ACCESS]: OpenAccessPopup,
 
 }
 
 
 const initialState = {
-            
-    activePopup: null
+    activePopup: null,
+    message: ''
 }
 
 
@@ -58,7 +63,11 @@ export const PopupsSlice = createSlice({
         },
         closePopup(state){
             state.activePopup = null
-        }        
+        },
+        openMessage(state, action){
+            state.message = action.payload
+            state.activePopup = PopupNames.MESSAGE_POPUP
+        }   
     }
 })
 

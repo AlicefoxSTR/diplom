@@ -8,7 +8,6 @@ import { ParentPage } from '../pages/ParentPage';
 import { ProfilePage } from '../pages/ProfilePage';
 import { ProgressPage } from '../pages/ProgressPage';
 import { TeacherPage } from '../pages/TeacherPage';
-import { TestsPage } from '../pages/TestsPage';
 import { TestingPage } from 'pages/TestingPage';
 import { AccountPage } from 'pages/AccountPage';
 import { AccountTestsPage } from 'pages/AccountTestsPage';
@@ -16,6 +15,7 @@ import { AccountMyTestsPage } from 'pages/AccountMyTestsPage';
 import { CreateTestPage } from 'pages/CreateTestPage';
 import { ResultsPage } from 'pages/ResultsPage';
 import { Popups } from 'entities/Popups';
+import { TestsPage } from 'pages/TestsPage/TestsPage';
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
     <div className="App">
       <Routes>
           <Route path='/' element={<Layout />}>
-              <Route path='/' element={<HomePage qwe='qwe'/>} />
+              <Route path='/' element={<HomePage/>} />
               <Route path='/progress' element={<ProgressPage />} />
               <Route path='/profile' element={<ProfilePage />} />
               <Route path='/account' element={<AccountPage />} />
@@ -34,7 +34,7 @@ function App() {
               <Route path='/tests' element={<TestsPage />} />
               <Route path='/for-parents' element={<ParentPage />} />
               <Route path='/for-teachers' element={<TeacherPage />} />
-              <Route path='/test/:testId' element={<TestingPage />} />
+              <Route path='/testing' element={<TestingPage />} />
               <Route path='*' element={<NotFoundPage />} />
           </Route>
       </Routes>

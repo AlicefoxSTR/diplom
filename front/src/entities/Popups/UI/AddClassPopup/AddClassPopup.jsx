@@ -36,30 +36,28 @@ export const AddClassPopup = (props) => {
 
 
     return (
-        <PopupWrapper>
-            <div className={ClassNames(cls.addClassPopup, {}, [className])}>
-                <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
-                <h2 className={cls.title}>Введите название класса:</h2>
-                <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
-                    <Controller 
-                        name='class_name'
-                        control={control}
-                        rules={{
-                            required: 'Пожулайста введите название класса'
-                        }}
-                        render={
-                            ({field})=> <PopupFormRow 
-                                { ...field }
-                                theme={InputTheme.CLEAR} 
-                                error={errors.class_name?.message}
-                                placeholder={'5 А'} 
-                                className={cls.input} 
-                                />
-                            }
-                    />
-                    <Button className={cls.button} theme={ButtonTheme.DARK} >Сохранить</Button>
-                </form>
-            </div>
-        </PopupWrapper>
+        <div className={ClassNames(cls.addClassPopup, {}, [className])}>
+            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <h2 className={cls.title}>Введите название класса:</h2>
+            <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
+                <Controller 
+                    name='class_name'
+                    control={control}
+                    rules={{
+                        required: 'Пожулайста введите название класса'
+                    }}
+                    render={
+                        ({field})=> <PopupFormRow 
+                            { ...field }
+                            theme={InputTheme.CLEAR} 
+                            error={errors.class_name?.message}
+                            placeholder={'5 А'} 
+                            className={cls.input} 
+                            />
+                        }
+                />
+                <Button className={cls.button} theme={ButtonTheme.DARK} >Сохранить</Button>
+            </form>
+        </div>
  );
 }

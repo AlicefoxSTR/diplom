@@ -12,7 +12,7 @@ export const ClassList = (props) => {
     return (
         <div className={ClassNames(cls.classList, {}, [className])}>
             {
-                classes.map((item)=>(
+                classes && classes.map((item)=>(
                     <ClassItem className={cls.item} item={item} key={`classItem_${item.id}`}/>
                 ))
             }

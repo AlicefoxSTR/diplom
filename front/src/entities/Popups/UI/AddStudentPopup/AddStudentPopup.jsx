@@ -66,39 +66,37 @@ export const AddStudentPopup = (props) => {
 
 
     return (
-        <PopupWrapper closeHandler={closePopupHandler}>
-            <div className={ClassNames(cls.addClassPopup, {}, [className])}>
-                <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>closePopupHandler()} />
-                <h2 className={cls.title}>Введите данные ученика:</h2>
-                <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
-                    <Controller 
-                    name='fio'
-                    control={control}
-                    rules={{
-                        required: 'Пожулайста введите фио ученика',
-                        pattern: {
-                            value: fioRegEx,
-                            message: 'Пожалуйста введите корректные данные: Фамилия Имя'
-                        }
-                    }}
-                    defaultValue={
-                        editionalStudent.length !== 0
-                        ?classes
-                            .find(item => editionalClass === item.id).students
-                            .find(student => editionalStudent === student.id).fio
-                        : ''
+        <div className={ClassNames(cls.addClassPopup, {}, [className])}>
+            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>closePopupHandler()} />
+            <h2 className={cls.title}>Введите данные ученика:</h2>
+            <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
+                <Controller 
+                name='fio'
+                control={control}
+                rules={{
+                    required: 'Пожулайста введите фио ученика',
+                    pattern: {
+                        value: fioRegEx,
+                        message: 'Пожалуйста введите корректные данные: Фамилия Имя'
                     }
-                    render={ ({field}) => 
-                        <PopupFormRow 
-                        {...field}
-                        className={cls.input} 
-                        error={errors.fio?.message ?? ''}
-                        placeholder={'Иванов Иван'} 
-                    />
-                    } />
-                    <Button className={cls.button} theme={ButtonTheme.DARK} >Сохранить</Button>
-                </form>
-            </div>
-        </PopupWrapper>
+                }}
+                defaultValue={
+                    editionalStudent.length !== 0
+                    ?classes
+                        .find(item => editionalClass === item.id).students
+                        .find(student => editionalStudent === student.id).fio
+                    : ''
+                }
+                render={ ({field}) => 
+                    <PopupFormRow 
+                    {...field}
+                    className={cls.input} 
+                    error={errors.fio?.message ?? ''}
+                    placeholder={'Иванов Иван'} 
+                />
+                } />
+                <Button className={cls.button} theme={ButtonTheme.DARK} >Сохранить</Button>
+            </form>
+        </div>
  );
 }

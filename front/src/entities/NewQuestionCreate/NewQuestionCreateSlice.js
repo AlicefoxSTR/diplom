@@ -1,12 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { questionTypes } from 'shared/models/TestModels'
 
-
-
-export const questionTypes = {
-    TEXT: 'free_text',
-    CHECKBOX: 'multiple_choice',
-    RADIO: 'single_choice'
-}
 
 
 const initiatlState = {

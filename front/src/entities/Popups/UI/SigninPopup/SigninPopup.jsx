@@ -62,42 +62,40 @@ export const SigninPopup = (props) => {
     }
 
     return (
-        <PopupWrapper>
-            <PopupBoard className={ClassNames(cls.signinPopup, {}, [className]) }>
-                <Cross size={23} style={{top: '36.11px', right: '50.7px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
-                <h1 className={cls.title}>
-                    Вход
-                </h1>
-                <form onSubmit={handleSubmit(SubmitHandler)}>
-                    <Controller 
-                            name='username'
-                            control={control}
-                            rules={{
-                                required: 'Пожулайста введите Логин'
-                            }}
-                            render={({field})=> <PopupFormRow label={"Логин"} error={errors.username?.message} {...field} placeholder={'ivanovIvan'} className={cls.row} />}
-                        />
-                    <Controller 
-                            name='password'
-                            rules={{
-                                required: 'Пожалуйста введите пароль',
-                                pattern: {
-                                    value: passwordRegEx,
-                                    message: 'Проверьте правильность введенного пароля'
-                                }
-                            }}
-                            control={control}
-                            render={({field})=> <PopupFormRow error={errors.password?.message ?? ''} type={'password'}  label={'Пароль'} {...field}  placeholder={'Ivanov11'} className={cls.row} />}
-                        />
-                    <Button className={cls.button} theme={ButtonTheme.DARK} >Войти</Button>
-                </form>
-                <p className={cls.text}>
-                    Еще не зарегистрированы? 
-                    <span className={cls.link} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNUP))}>
-                        Регистрация
-                    </span>
-                </p>
-            </PopupBoard>
-        </PopupWrapper>
+        <PopupBoard className={ClassNames(cls.signinPopup, {}, [className]) }>
+            <Cross size={23} style={{top: '36.11px', right: '50.7px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <h1 className={cls.title}>
+                Вход
+            </h1>
+            <form onSubmit={handleSubmit(SubmitHandler)}>
+                <Controller 
+                        name='username'
+                        control={control}
+                        rules={{
+                            required: 'Пожулайста введите Логин'
+                        }}
+                        render={({field})=> <PopupFormRow label={"Логин"} error={errors.username?.message} {...field} placeholder={'ivanovIvan'} className={cls.row} />}
+                    />
+                <Controller 
+                        name='password'
+                        rules={{
+                            required: 'Пожалуйста введите пароль',
+                            pattern: {
+                                value: passwordRegEx,
+                                message: 'Проверьте правильность введенного пароля'
+                            }
+                        }}
+                        control={control}
+                        render={({field})=> <PopupFormRow error={errors.password?.message ?? ''} type={'password'}  label={'Пароль'} {...field}  placeholder={'Ivanov11'} className={cls.row} />}
+                    />
+                <Button className={cls.button} theme={ButtonTheme.DARK} >Войти</Button>
+            </form>
+            <p className={cls.text}>
+                Еще не зарегистрированы? 
+                <span className={cls.link} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNUP))}>
+                    Регистрация
+                </span>
+            </p>
+        </PopupBoard>
  );
 }

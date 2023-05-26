@@ -26,33 +26,30 @@ export const ChoseTestCategoryPopup = (props) => {
 
 
     return (
-        <PopupWrapper>
-            <PopupBoard className={ClassNames(cls.choseTestCategoryPopup, {}, [className])}>
-                <h2 className="popupTitle">
-                    Выберите категорию
-                </h2>
-                <div className={cls.cards}>
-                    {
-                        isLoading
-                        ?
-                        <Loader />
-                        :
-                        tests.map(test => (
-                            <div className={cls.card} key={`choseTestCategoryPopupCard_${test.id}`}>
-                                <span className={cls.cardText}>{ test.title }</span>
-                                <Button 
-                                    className={cls.button} 
-                                    theme={ButtonTheme.LIGHT} 
-                                    onClick={()=>openChoseQuestionPopupHandler(test.id)}
-                                >
-                                    Выбрать
-                                </Button>
-                            </div>
-                        ))
-                    }
-                </div>
-            </PopupBoard>
-        </PopupWrapper>
-        
+        <PopupBoard className={ClassNames(cls.choseTestCategoryPopup, {}, [className])}>
+            <h2 className="popupTitle">
+                Выберите категорию
+            </h2>
+            <div className={cls.cards}>
+                {
+                    isLoading
+                    ?
+                    <Loader />
+                    :
+                    tests.map(test => (
+                        <div className={cls.card} key={`choseTestCategoryPopupCard_${test.id}`}>
+                            <span className={cls.cardText}>{ test.title }</span>
+                            <Button 
+                                className={cls.button} 
+                                theme={ButtonTheme.LIGHT} 
+                                onClick={()=>openChoseQuestionPopupHandler(test.id)}
+                            >
+                                Выбрать
+                            </Button>
+                        </div>
+                    ))
+                }
+            </div>
+        </PopupBoard>        
  );
 }

@@ -27,7 +27,7 @@ export const UserSlice = createSlice({
             state.isAuthenticate = true
         },
         refreshToken(state, action){
-            state.access_token = action.payload
+            state.access_token = action.payload.access
         },
         logout(state, action){
             state.firstName=''

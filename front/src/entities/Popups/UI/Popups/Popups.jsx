@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { PopupBodies } from 'entities/Popups/redux/PopupsSlice';
+import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
 
 export const Popups = (props) => {
 
@@ -12,8 +13,15 @@ export const Popups = (props) => {
     return (
         <>
             {
-                SomePopup ? <SomePopup {...props}/> : null
+            SomePopup
+                ? 
+                    <PopupWrapper> 
+                        <SomePopup {...props}/> 
+                    </PopupWrapper> 
+                : 
+                    null
             }
         </>
+        
     )
 }

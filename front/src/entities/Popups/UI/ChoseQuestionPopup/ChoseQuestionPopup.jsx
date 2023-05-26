@@ -26,28 +26,25 @@ export const ChoseQuestionPopup = (props) => {
 
 
     return (
-        <PopupWrapper >
-            <PopupBoard className={ClassNames(cls.choseQuestionPopup, {}, [className])}>
-                <h2 className={'popupTitle'}>Выберите вопрос</h2>
-                <div className={cls.cards}>
-                    {
-                        isLoading
-                        ?
-                        <Loader/>
-                        :
-                        tasks.map(task => (
-                            <div className={cls.card} key={`chooseQuestionPopupCard_${task.id}`}>
-                                <span className={cls.question}>{task.question}</span>
-                                    <Button onClick={()=>addQuestionToListHandler(task.id)}>
-                                    Выбрать
-                                </Button>
-                            </div>
-                        )) 
+        <PopupBoard className={ClassNames(cls.choseQuestionPopup, {}, [className])}>
+            <h2 className={'popupTitle'}>Выберите вопрос</h2>
+            <div className={cls.cards}>
+                {
+                    isLoading
+                    ?
+                    <Loader/>
+                    :
+                    tasks.map(task => (
+                        <div className={cls.card} key={`chooseQuestionPopupCard_${task.id}`}>
+                            <span className={cls.question}>{task.question}</span>
+                                <Button onClick={()=>addQuestionToListHandler(task.id)}>
+                                Выбрать
+                            </Button>
+                        </div>
+                    )) 
 
-                    }
-                </div>
-            </PopupBoard>
-        </PopupWrapper>
-        
+                }
+            </div>
+        </PopupBoard>        
  );
 }

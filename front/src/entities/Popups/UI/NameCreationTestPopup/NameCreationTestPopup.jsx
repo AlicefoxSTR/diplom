@@ -70,31 +70,29 @@ export const NameCreationTestPopup = (props) => {
 
 
     return (
-        <PopupWrapper>
-            <div className={ClassNames(cls.nameCreationTestPopup, {}, [className])}>
-                <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
-                <h2 className={cls.title}>Введите название теста:</h2>
-                <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
-                    <Controller 
-                        name='name'
-                        control={control}
-                        defaultValue={name}
-                        rules={{
-                            required: 'Пожулайста введите название теста'
-                        }}
-                        render={
-                            ({field})=> <PopupFormRow 
-                                { ...field }
-                                theme={InputTheme.CLEAR} 
-                                error={errors.class_name?.message}
-                                placeholder={'Название теста'} 
-                                className={cls.input} 
-                                />
-                            }
-                    />
-                    <Button className={cls.button} theme={ButtonTheme.DARK} >Сохранить</Button>
-                </form>
-            </div>
-        </PopupWrapper>
+        <div className={ClassNames(cls.nameCreationTestPopup, {}, [className])}>
+            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <h2 className={cls.title}>Введите название теста:</h2>
+            <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
+                <Controller 
+                    name='name'
+                    control={control}
+                    defaultValue={name}
+                    rules={{
+                        required: 'Пожулайста введите название теста'
+                    }}
+                    render={
+                        ({field})=> <PopupFormRow 
+                            { ...field }
+                            theme={InputTheme.CLEAR} 
+                            error={errors.class_name?.message}
+                            placeholder={'Название теста'} 
+                            className={cls.input} 
+                            />
+                        }
+                />
+                <Button className={cls.button} theme={ButtonTheme.DARK} >Сохранить</Button>
+            </form>
+        </div>
  );
 }

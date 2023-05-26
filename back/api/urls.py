@@ -10,6 +10,7 @@ urlpatterns = [
     path('classes/delete/',  views.ClassDeleteView.as_view()),
     path('classes/student/',  views.StudentView.as_view()),
     path('tests/',  views.TestsView.as_view()),
+    path('test/open-access',  views.OpenAccessForStudent.as_view()),
     path('task/',  views.TaskView.as_view()),
     path('tasks/',  views.TasksView.as_view()),
     path('stages/',  views.StagesView.as_view()),

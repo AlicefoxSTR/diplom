@@ -30,8 +30,9 @@ export const Main = (props) => {
               if(res.error){
                 refreshToken({'refresh': refresh_token}).then(res => {
                   if(res.data){
-                    dispatch(UserSlice.actions.refreshToken(res.data.access))
+                    dispatch(UserSlice.actions.refreshToken(res.data))
                   }else if(res.error){
+                    dispatch(UserSlice.actions.logout())
                     dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_ROLE))
                     navigate('/')
                   }

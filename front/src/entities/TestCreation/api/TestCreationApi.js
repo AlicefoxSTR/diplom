@@ -60,8 +60,30 @@ export const testCreationApi =  createApi({
                 body: data
              }),
             invalidatesTags: ['CustomTests'],
-        })
+        }),
+        deleteTest: build.mutation({
+            query: (data) => ({
+                url: 'tests/',
+                method: 'DELETE',
+                body: data
+             }),
+            invalidatesTags: ['CustomTests'],
+        }),
+        fetchClassesForActivatioin: build.query({
+            query: (data) => ({
+                url: 'test/open-access',
+                method: 'GET',
+                params: data
+             }),
+        }),
+        setTestForClasses: build.mutation({
+            query: (data) => ({
+                url: 'test/open-access',
+                method: 'PATCH',
+                body: data
+             }),
+        }),
         
-        
+                
     }),
 })

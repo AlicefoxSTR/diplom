@@ -154,3 +154,16 @@ class TestsSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Test
         fields = ('id', 'tasks', 'title', 'description', 'creator' )
+
+
+
+class ClassesForAccessSerializer(serializers.ModelSerializer):
+
+
+    tests = TestsSerializer(many=True)
+    
+
+    class Meta: 
+        model = Class
+        fields = '__all__'
+

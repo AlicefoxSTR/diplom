@@ -62,70 +62,68 @@ export const SignupPopup = (props) => {
       };
 
     return (
-        <PopupWrapper>
-            <PopupBoard className={ClassNames(cls.signinPopup, {}, [className])}>
-                <Cross size={23} style={{top: '36.11px', right: '50.7px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
-                <h1 className={cls.title}>
-                    Регистрация
-                </h1>
-               <form onSubmit={handleSubmit(SubmitHandler)}>
-                    <Controller 
-                        name='fio'
-                        control={control}
-                        rules={{
-                            required: 'Пожулайста введите имя'
-                        }}
-                        render={({field})=> <PopupFormRow label={"Имя"} error={errors.fio?.message} {...field} placeholder={'Иванов Иван'} className={cls.row} />}
-                    />
-                    <Controller 
-                        name='username'
-                        control={control}
-                        rules={{
-                            required: 'Пожулайста введите Логин'
-                        }}
-                        render={({field})=> <PopupFormRow label={"Логин"} error={errors.username?.message} {...field} placeholder={'ivanovIvan'} className={cls.row} />}
-                    />
-                    <Controller 
-                        name='email'
-                        control={control}
-                        rules={{
-                            required: 'Пожалуйста введите email',
-                            pattern: {
-                                value: emailRegEx,
-                                message: 'Проверьте правильность введенной почты'
-                            }
-                        }}
-                        render={({field})=> <PopupFormRow error={errors.email?.message ?? ''}  label={'Почта'} {...field} placeholder={'ivanov@mail.ru'} className={cls.row} />}
-                    />
-                    <Controller 
-                        name='password'
-                        rules={{
-                            required: 'Пожалуйста введите пароль',
-                            pattern: {
-                                value: passwordRegEx,
-                                message: "Пароль должен состоять как минимум из 8 латинских символов и включать как минимум одну заглавную букву, одну цифру и спец. символ. Пожалуйста, проверьте правильность введенного пароля."
-                            }
-                        }}
-                        control={control}
-                        render={({field})=> <PopupFormRow error={errors.password?.message ?? ''} type={'password'}  label={'Пароль'} {...field}  placeholder={'Ivanov11'} className={cls.row} />}
-                    />
-                    <Controller 
-                        name='password2'
-                        rules={{
-                            required: 'Пожалуйста повторите пароль',
-                            validate: validatePasswordMatch
-                        }}
-                        control={control}
-                        render={({field})=> <PopupFormRow error={errors.password2?.message ?? ''} type={'password'} label={'Подтвердите пароль'} {...field} placeholder={'Ivanov11'} className={cls.row} />}
-                    />
-                    <Button type='submit' className={cls.button} theme={ButtonTheme.DARK} >Зарегистрироваться</Button>
-               </form>
-                <p className={cls.text}>
-                        Уже есть аккаунт? <span className={cls.link} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))}>
-                        Войти
-                    </span>
-                </p>
-            </PopupBoard>
-        </PopupWrapper>
+        <PopupBoard className={ClassNames(cls.signinPopup, {}, [className])}>
+            <Cross size={23} style={{top: '36.11px', right: '50.7px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <h1 className={cls.title}>
+                Регистрация
+            </h1>
+            <form onSubmit={handleSubmit(SubmitHandler)}>
+                <Controller 
+                    name='fio'
+                    control={control}
+                    rules={{
+                        required: 'Пожулайста введите имя'
+                    }}
+                    render={({field})=> <PopupFormRow label={"Имя"} error={errors.fio?.message} {...field} placeholder={'Иванов Иван'} className={cls.row} />}
+                />
+                <Controller 
+                    name='username'
+                    control={control}
+                    rules={{
+                        required: 'Пожулайста введите Логин'
+                    }}
+                    render={({field})=> <PopupFormRow label={"Логин"} error={errors.username?.message} {...field} placeholder={'ivanovIvan'} className={cls.row} />}
+                />
+                <Controller 
+                    name='email'
+                    control={control}
+                    rules={{
+                        required: 'Пожалуйста введите email',
+                        pattern: {
+                            value: emailRegEx,
+                            message: 'Проверьте правильность введенной почты'
+                        }
+                    }}
+                    render={({field})=> <PopupFormRow error={errors.email?.message ?? ''}  label={'Почта'} {...field} placeholder={'ivanov@mail.ru'} className={cls.row} />}
+                />
+                <Controller 
+                    name='password'
+                    rules={{
+                        required: 'Пожалуйста введите пароль',
+                        pattern: {
+                            value: passwordRegEx,
+                            message: "Пароль должен состоять как минимум из 8 латинских символов и включать как минимум одну заглавную букву, одну цифру и спец. символ. Пожалуйста, проверьте правильность введенного пароля."
+                        }
+                    }}
+                    control={control}
+                    render={({field})=> <PopupFormRow error={errors.password?.message ?? ''} type={'password'}  label={'Пароль'} {...field}  placeholder={'Ivanov11'} className={cls.row} />}
+                />
+                <Controller 
+                    name='password2'
+                    rules={{
+                        required: 'Пожалуйста повторите пароль',
+                        validate: validatePasswordMatch
+                    }}
+                    control={control}
+                    render={({field})=> <PopupFormRow error={errors.password2?.message ?? ''} type={'password'} label={'Подтвердите пароль'} {...field} placeholder={'Ivanov11'} className={cls.row} />}
+                />
+                <Button type='submit' className={cls.button} theme={ButtonTheme.DARK} >Зарегистрироваться</Button>
+            </form>
+            <p className={cls.text}>
+                    Уже есть аккаунт? <span className={cls.link} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))}>
+                    Войти
+                </span>
+            </p>
+        </PopupBoard>
  );
 }

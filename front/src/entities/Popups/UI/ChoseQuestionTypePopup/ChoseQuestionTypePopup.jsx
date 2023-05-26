@@ -43,14 +43,12 @@ export const ChoseQuestionTypePopup = (props) => {
 
 
     return (
-        <PopupWrapper>
-            <PopupBoard className={ClassNames(cls.choseQuestionTypePopup, {}, [className])}>
-                <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
-                <h2 className={cls.title}>Какой тип вопроса вы хотите добавить?</h2>
-                <Button className={cls.button} onClick={()=>addRandomQuestionHandler()} >Добавить случайный вопрос</Button>
-                <Button className={cls.button} onClick={()=>openChoseTestCategoryPopup()} >Выбрать вопрос из списка</Button>
-                <Button className={cls.button} onClick={()=>openQuestionConstructorPopup()} >Создать свой собственный вопрос</Button>
-            </PopupBoard>
-        </PopupWrapper>
+        <PopupBoard className={ClassNames(cls.choseQuestionTypePopup, {}, [className])}>
+            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <h2 className={cls.title}>Какой тип вопроса вы хотите добавить?</h2>
+            <Button className={cls.button} onClick={()=>addRandomQuestionHandler()} >Добавить случайный вопрос</Button>
+            <Button className={cls.button} onClick={()=>openChoseTestCategoryPopup()} >Выбрать вопрос из списка</Button>
+            <Button className={cls.button} onClick={()=>openQuestionConstructorPopup()} >Создать свой собственный вопрос</Button>
+        </PopupBoard>
  );
 }
