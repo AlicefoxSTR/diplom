@@ -18,7 +18,8 @@ from .models import (
     Class,
     Test,
     Task,
-    Answer
+    Answer,
+    TestResult
 )
 from .serializers import (
     UserSerializer,
@@ -31,7 +32,8 @@ from .serializers import (
     ClassDeleteSerializer,
     TaskSerializer, 
     UserStageSerializer,
-    ClassesForAccessSerializer
+    ClassesForAccessSerializer,
+    TestResultSerializer
 )
 
 
@@ -486,4 +488,40 @@ class OpenAccessForStudent(APIView):
             return Response({"message": "Доступ успешно предоставлен"}, status=status.HTTP_200_OK)
         except:
             return Response({"message": "Ошибка предоставления доступа"}, status=status.HTTP_200_OK)
+        
 
+
+class TestResultView(generics.ListCreateAPIView):
+
+    serializer_class = TestResultSerializer
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+
+
+    def get_queryset(self):
+        return TestResult.objects.filter(student=self.request.user.student).prefetch_related('test')
+
+    def post(self, request):
+        #Создание User
+        input_data = {
+            "student": self.request.user.student.id,
+            "test": Test.objects.get(id=request.data['testId']),
+            "correct_answers_count": request.data['correctAnweredQuestions'],
+            "total_answers_count": request.data['totalQuestions'],
+            "percent_correct": request.data['percent'],
+
+        }
+        serializer = self.get_serializer(data=input_data)
+        serializer.is_valid(raise_exception=True)
+        result = serializer.save() 
+
+        if result:
+            return Response(
+                {
+                    "message": "Результат успешно сохранен!",
+                },
+                status=status.HTTP_201_CREATED,
+            )
+        else:
+            return Response(
+                {"message": "Ошибка сохранения результата выполнения теста."}, status=status.HTTP_400_BAD_REQUEST
+            )

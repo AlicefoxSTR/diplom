@@ -9,7 +9,7 @@ import { TestCreationSlice, testCreationApi } from 'entities/TestCreation';
 import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
 import { useNavigate } from 'react-router';
 import { testsApi } from 'entities/Tests';
-import { TestingSlice, TestingTypes } from 'entities/Testing/TestingSlice';
+import { TestingSlice, TestingTypes } from 'entities/Testing/redux/TestingSlice';
 
 export const ChoseActionForTestPopup = (props) => {
     const { className } = props;

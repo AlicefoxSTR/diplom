@@ -12,10 +12,11 @@ import { Loader } from 'shared/UI/Loader/Loader';
 export const TeacherContent = (props) => {
     const { className } = props;
 
-    const { classes } = useSelector(state => state.classes)
     const dispatch = useDispatch()
 
-    const {  data, isLoading }= classesApi.useFetchClassRoomsQuery(null)
+    const [fetchClassRooms, {data, isLoading}] = classesApi.useLazyFetchClassRoomsQuery()
+
+    useEffect(()=>{fetchClassRooms(null)}, [])
 
    
     return (

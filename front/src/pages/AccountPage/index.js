@@ -1,2 +1,2 @@
-export { AccountPage } from "./Ui/AccountPage/AccountPage";
+export { AccountPage } from "./UI/AccountPage/AccountPage";
 

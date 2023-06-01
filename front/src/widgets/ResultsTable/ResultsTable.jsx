@@ -8,6 +8,7 @@ export const ResultsTable = (props) => {
         results
     } = props;
 
+
     return (
         <div className={ClassNames(cls.resultsTable, {}, [className])}>
              <div className={cls.tableHeader}>
@@ -25,16 +26,16 @@ export const ResultsTable = (props) => {
              </div>
             <div className={cls.tableBody}>
                 {
-                    results.map((item) => (
-                        <div className={cls.row} key={`resultTableRow_${item.id}`}>
+                    results.map((result) => (
+                        <div className={cls.row} key={`resultTableRow_${result.id}`}>
                             <div className={cls.col}>
-                                <span>{item.name}</span>
+                                <span>{result.test.title}</span>
                             </div>
                             <div className={ClassNames(cls.col, {}, [cls.centerCol])}>
-                                <span>{item.date}</span>
+                                <span>{new Date(result.created_at).toLocaleString()}</span>
                             </div>
                             <div className={cls.col}>
-                                <span>{item.value}</span>
+                                <span>{result.correct_answers_count}/{result.total_answers_count}</span>
                             </div>
                         </div>
                     ))

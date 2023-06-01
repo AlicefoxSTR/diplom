@@ -4,16 +4,26 @@ import cls from './StudentContent.module.css';
 import { NotFoundResults } from '../NotFoundResults/NotFoundResults';
 import { useSelector } from 'react-redux';
 import { ResultsTable } from 'widgets/ResultsTable/ResultsTable';
+import { testResultApi } from 'entities/TestResult';
+import { Loader } from 'shared/UI/Loader/Loader';
 
 export const StudentContent = (props) => {
     const { className } = props;
 
-    const { results } = useSelector(state=>state.testResult)
+    const { role } = useSelector(state => state.user)
+    const { data: results, isLoading } = testResultApi.useGetResultsQuery({role: role})
+    // const { results } = useSelector(state=>state.testResult)
+    
+
 
     return (
         <div className={ClassNames(cls.studentContent, {}, [className])}>
             {
-                results.length > 0
+               isLoading
+               ?
+               <Loader />
+               :
+               results.length > 0
                 ?
                 <ResultsTable results={results} className={cls.table} />
                 :

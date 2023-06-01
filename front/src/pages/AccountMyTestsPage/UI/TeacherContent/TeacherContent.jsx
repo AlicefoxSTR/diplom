@@ -2,7 +2,7 @@ import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TeacherContent.module.css';
 import { TestCardsList } from 'widgets/TestCardsList/TestCardsList';
-import { NotFoundResults } from 'pages/AccountPage/Ui/NotFoundResults/NotFoundResults';
+import { NotFoundResults } from 'pages/AccountPage/UI/NotFoundResults/NotFoundResults';
 import { testsApi } from 'entities/Tests';
 import { Loader } from 'shared/UI/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';

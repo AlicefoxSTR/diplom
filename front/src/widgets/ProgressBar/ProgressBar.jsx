@@ -14,7 +14,7 @@ export const ProgressBar = (props) => {
 
     return (
         <div className={ClassNames(cls.progressBar, {}, [className])}>
-            { tasks.map((task, index) => (
+            { tasks && tasks.map((task, index) => (
                 <div className={ClassNames(cls.label, {[cls.active]: activeTask.id===task.id}, [])} key={`testingBarLabel_${index}`}>{index+1} Вопрос</div>
             )) }
         </div>

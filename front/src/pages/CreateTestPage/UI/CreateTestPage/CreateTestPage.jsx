@@ -1,7 +1,7 @@
 import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './CreateTestPage.module.css';
-import { NotFoundResults } from 'pages/AccountPage/Ui/NotFoundResults/NotFoundResults';
+import { NotFoundResults } from 'pages/AccountPage/UI/NotFoundResults/NotFoundResults';
 import { Main, MainNavigation } from 'widgets/Main';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';

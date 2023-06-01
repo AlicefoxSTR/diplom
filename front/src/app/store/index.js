@@ -11,11 +11,10 @@ import {
     PURGE,
     REGISTER,
   } from 'redux-persist';
-import { TestingSlice } from "entities/Testing/TestingSlice";
+import { TestingSlice } from "entities/Testing";
 import { TestsSlice, testsApi  } from "entities/Tests";     
 import { UserSlice } from "entities/User";
 import { PopupsSlice } from "entities/Popups/redux/PopupsSlice";
-import { TestResultSlice } from "entities/TestResult/TestResultSlice";
 import { TeacherTestsSlice } from "entities/TeacherTests";
 import { TestCreationSlice } from "entities/TestCreation";
 import { ClassesSlice, classesApi } from "entities/Classes";
@@ -23,6 +22,7 @@ import { ResultsSlice } from "entities/Results/ResultsSlice";
 import { NewQuestionCreateReducer } from "entities/NewQuestionCreate";
 import { userApi } from "entities/User/api/UserApi";
 import { testCreationApi } from "entities/TestCreation";
+import { TestResultSlice, testResultApi } from "entities/TestResult";
 
 
 
@@ -52,6 +52,7 @@ const rootReducer = combineReducers({
     [classesApi.reducerPath]: classesApi.reducer,
     [testsApi.reducerPath]: testsApi.reducer,
     [testCreationApi.reducerPath]: testCreationApi.reducer,
+    [testResultApi.reducerPath]: testResultApi.reducer,
 })
 
 
@@ -63,6 +64,7 @@ const persistConfig = {
       [classesApi.reducerPath],
       [testsApi.reducerPath],
       [testCreationApi.reducerPath],
+      [testResultApi.reducerPath],
     ]
 }
 
@@ -83,6 +85,7 @@ export const store = configureStore({
     .concat(classesApi.middleware)
     .concat(testsApi.middleware)
     .concat(testCreationApi.middleware)
+    .concat(testResultApi.middleware)
   })
 
 export const persistor = persistStore(store)

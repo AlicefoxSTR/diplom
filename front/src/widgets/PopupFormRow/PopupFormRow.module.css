@@ -15,7 +15,12 @@
 
 .isError {
     border: 5px solid var(--error-color);
-    color: var(--error-color);
+    color: var(--error-color) !important;
+}
+
+.isCorrect {
+    border: 5px solid var(--success-color);
+    color: var(--success-color) !important;
 }
 
 .error {

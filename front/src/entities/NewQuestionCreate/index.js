@@ -1,5 +1,5 @@
-import { NewQuestionCreateSlice } from './NewQuestionCreateSlice';
-import NewQuestionCreateReducer from './NewQuestionCreateSlice';
+import { NewQuestionCreateSlice } from './redux/NewQuestionCreateSlice';
+import NewQuestionCreateReducer from './redux/NewQuestionCreateSlice';
 
 
 export {

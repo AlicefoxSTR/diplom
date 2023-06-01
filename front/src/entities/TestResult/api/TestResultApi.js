@@ -1,0 +1,35 @@
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react'
+import { baseApiUrl } from 'shared/lib/ClassNames/ApiConfig/ApiConfig'
+
+
+export const testResultApi =  createApi({
+    reducerPath: 'testResultApi',
+    baseQuery: fetchBaseQuery({
+        baseUrl: `${baseApiUrl}/v1/`,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    prepareHeaders: (headers, { getState }) => {
+        const token = getState().user.access_token
+        headers.set('Authorization', `Bearer ${token}`)
+        return headers
+    }
+    }),
+    endpoints: (build) => ({
+        sendResults: build.mutation({
+            query: (data) => ({
+                url: 'results/',
+                method: 'POST',
+                body: data
+            }),
+            
+        }), 
+        getResults: build.query({
+            query: (params) => ({
+                url: 'results/',
+                method: 'GET',
+                params: params
+            }),
+        }) 
+    }),
+})

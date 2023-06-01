@@ -5,7 +5,18 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from rest_framework import serializers
-from .models import User, Teacher, Student, UserStage, Stage, Class, Test, Task, Answer
+from .models import (
+    User, 
+    Teacher, 
+    Student, 
+    UserStage, 
+    Stage, 
+    Class, 
+    Test, 
+    Task, 
+    Answer, 
+    TestResult
+)
 
 
 
@@ -165,5 +176,16 @@ class ClassesForAccessSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = Class
+        fields = '__all__'
+
+
+
+class TestResultSerializer(serializers.ModelSerializer):
+
+
+    test = TestsSerializer(many=False)
+    
+    class Meta: 
+        model = TestResult
         fields = '__all__'
 

@@ -8,7 +8,7 @@ import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton
 import { PopupsSlice } from 'entities/Popups';
 import { PopupNames } from 'entities/Popups/redux/PopupsSlice';
 import { UserSlice } from 'entities/User';
-import { TestingSlice, TestingTypes } from 'entities/Testing/TestingSlice';
+import { TestingSlice, TestingTypes } from 'entities/Testing/redux/TestingSlice';
 import { useNavigate } from 'react-router';
 
 
@@ -31,7 +31,7 @@ export const SmallTestCard = (props) => {
     function ClickTestingHandler(){
         dispatch(TestingSlice.actions.openTesting({
             test: test,
-            type: TestingTypes.TESTING
+            type: TestingTypes.STUDENT_TESTING
         }))
         navigate('/testing')
     }

@@ -45,3 +45,33 @@
 .input:checked + .label::after {
     background: var(--main-color);
 }
+
+.disabled > .label {
+    color: var(--disabled-dark-color);
+}
+.disabled > .label::before {
+    background: var(--disabled-dark-color);
+}
+
+
+.wrong > .label {
+    color: var(--error-color) !important;
+}
+.wrong > .label::after {
+    background: var(--error-color) !important;
+}
+
+.correct > .label::before,
+.wrong > .label::before {
+    background: #fff ;
+}
+
+
+
+.correct > .label {
+    color: var(--success-color) !important ;
+}
+
+.correct > .label::after {
+    background: var(--success-color) !important;
+}

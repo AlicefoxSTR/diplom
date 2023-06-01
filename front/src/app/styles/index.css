@@ -93,7 +93,9 @@ body::-webkit-scrollbar-thumb:hover {
     --yellow-color: #F3C301;
     --disabled-light-color: #C0C0C0;
     --disabled-dark-color: #706D71;
+
     --error-color: #F2778D;
+    --success-color: #67BD7F;
 
 
     --test-card-width: 850px;

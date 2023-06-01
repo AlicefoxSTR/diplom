@@ -10,12 +10,21 @@ export const PopupFormRow = React.forwardRef((props, ref) => {
         id, 
         label, 
         error, 
+        isCorrect=false,
         ...otherProps } = props;
 
     return (
         <div className={ClassNames(cls.FormInputRow, {}, [className])}>
             <label htmlFor={id} className={cls.label}>{label}</label>
-            <Input id={id} theme={InputTheme.CLEAR} className={ClassNames(cls.input, {[cls.isError]: Boolean(error)}, [])} {...otherProps} />
+            <Input 
+                id={id} 
+                theme={InputTheme.CLEAR} 
+                className={ClassNames(cls.input, {
+                    [cls.isError]: Boolean(error),
+                    [cls.isCorrect]: isCorrect
+                }, [])} 
+                {...otherProps} 
+            />
             {error && <span className={cls.error} >{error}</span>}
         </div>
  );

@@ -41,7 +41,7 @@ export const ChoseRolePopup = (props) => {
                         Получай именную грамоту
                     </li>
                 </ul>
-                <Button theme={ButtonTheme.DARK} className={cls.button} onClick={()=>ClickHandler(PopupNames.SIGNUP, 'user')} >Войти как пользователь</Button>
+                <Button theme={ButtonTheme.DARK} className={cls.button} onClick={()=>ClickHandler(PopupNames.SIGNUP, 'user')} >Зарегестрироваться как пользователь</Button>
             </div>
             <div className={ClassNames(cls.block, {}, [className])}>
                 <p className={cls.role}>
@@ -58,7 +58,7 @@ export const ChoseRolePopup = (props) => {
                         Отслеживай успеваемость
                     </li>
                 </ul>
-                <Button theme={ButtonTheme.DARK} className={cls.button}  onClick={()=>ClickHandler(PopupNames.SIGNUP, 'teacher')}  >Войти как учитель</Button>
+                <Button theme={ButtonTheme.DARK} className={cls.button}  onClick={()=>ClickHandler(PopupNames.SIGNUP, 'teacher')}  >Зарегестрироваться как учитель</Button>
             </div>
         </div>
     );

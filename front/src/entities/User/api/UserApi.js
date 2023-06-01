@@ -1,7 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react'
 import { baseApiUrl } from 'shared/lib/ClassNames/ApiConfig/ApiConfig'
 import { UserSlice } from '../redux/UserSlice'
-import { classesApi } from 'entities/Classes'
 
 
 export const userApi =  createApi({

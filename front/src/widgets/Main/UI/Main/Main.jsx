@@ -13,13 +13,13 @@ export const Main = (props) => {
 
   const {children, className, isPrivate=false, ...otherProps} = props
 
-  const { isAuthenticate, access_token, refresh_token } = useSelector(state=>state.user)
-    const { activePopup } = useSelector(state=>state.popups)
-    const navigate = useNavigate()
-  
-    const dispatch = useDispatch()
-    const [fetchUserDetail]  = userApi.useFetchUserDetailMutation()
-    const [ refreshToken ]  = userApi.useRefreshTokenMutation()
+  const { access_token, refresh_token } = useSelector(state=>state.user)
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const [ fetchUserDetail ]  = userApi.useFetchUserDetailMutation()
+  const [ refreshToken ]  = userApi.useRefreshTokenMutation()
   
     //Проверяем при посещении приватных страниц авторизован ли пользователь и действителен ли его access token
     useEffect(()=>{
@@ -41,10 +41,7 @@ export const Main = (props) => {
             }
           )
        }
-
-      
-       
-    }, [activePopup, isAuthenticate, dispatch])
+    }, [])
 
   return (
     <main className={ClassNames(c.main, {}, ['container', className])} {...otherProps}>

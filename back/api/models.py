@@ -167,9 +167,8 @@ class Answer(models.Model):
 
 
 class TestResult(models.Model):
-    student = models.OneToOneField('Student', on_delete=models.CASCADE, verbose_name='Ученик')
-    test = models.OneToOneField('Test', on_delete=models.CASCADE, verbose_name='Тест')
-    answers = models.ManyToManyField(Answer, verbose_name='Ответы ученика')
+    student = models.ForeignKey('Student', on_delete=models.CASCADE, verbose_name='Ученик')
+    test = models.ForeignKey('Test', on_delete=models.CASCADE, verbose_name='Тест')
     correct_answers_count = models.IntegerField(verbose_name='Кол-во правильно отвеченных вопросов')
     total_answers_count = models.IntegerField(verbose_name='Общее число вопросов')
     percent_correct = models.IntegerField(verbose_name='Процент правильных ответов к общему числу ответов')
