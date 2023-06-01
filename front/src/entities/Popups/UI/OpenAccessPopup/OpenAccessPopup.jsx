@@ -9,6 +9,8 @@ import { CheckSides, Checkbox } from 'shared/UI/Checkbox/Checkbox';
 import { Controller, useForm } from 'react-hook-form';
 import { testCreationApi } from 'entities/TestCreation';
 import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton';
+import { PopupCloser } from 'features/PopupCloser/PopupCloser';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const OpenAccessPopup = (props) => {
     const { className } = props;
@@ -53,7 +55,7 @@ export const OpenAccessPopup = (props) => {
 
     return (
         <PopupBoard className={ClassNames(cls.openAccessPopup, {}, [className])}>
-            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <PopupNavigation />
             
             <h2 className={cls.title}>Предоставление доступа к тесту: <br />{chosedTest.title}</h2>
 

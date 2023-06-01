@@ -10,6 +10,8 @@ import { testResultApi } from 'entities/TestResult';
 import { TestingSlice } from 'entities/Testing';
 import { useNavigate } from 'react-router';
 import { TestingTypes } from 'entities/Testing/redux/TestingSlice';
+import { PopupCloser } from 'features/PopupCloser/PopupCloser';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const TestResultPopup = (props) => {
     const { className } = props;
@@ -34,7 +36,7 @@ export const TestResultPopup = (props) => {
 
     return (
         <PopupBoard className={ClassNames(cls.testResultPopup, {}, [className])}>
-            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <PopupNavigation />
             <h2 className={cls.title}>Поздравляем!</h2>
             <p className={cls.text}>Ты прошёл тест на {result.correctAnweredQuestions}/{result.totalQuestions}</p>
             <SmallButton 

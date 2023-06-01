@@ -1,5 +1,6 @@
 .popupBoard {
     display: flex;
+    position: relative;
     flex-direction: column;
     position: relative;
     min-width: 853px;

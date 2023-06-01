@@ -8,6 +8,8 @@ import { Button } from 'shared/UI/Button/Button';
 import { Cross } from 'shared/UI/Cross/Cross';
 import { TestCreationSlice, testCreationApi } from 'entities/TestCreation';
 import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
+import { PopupCloser } from 'features/PopupCloser/PopupCloser';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const ChoseQuestionTypePopup = (props) => {
     const { className } = props;
@@ -44,7 +46,7 @@ export const ChoseQuestionTypePopup = (props) => {
 
     return (
         <PopupBoard className={ClassNames(cls.choseQuestionTypePopup, {}, [className])}>
-            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <PopupNavigation />
             <h2 className={cls.title}>Какой тип вопроса вы хотите добавить?</h2>
             <Button className={cls.button} onClick={()=>addRandomQuestionHandler()} >Добавить случайный вопрос</Button>
             <Button className={cls.button} onClick={()=>openChoseTestCategoryPopup()} >Выбрать вопрос из списка</Button>

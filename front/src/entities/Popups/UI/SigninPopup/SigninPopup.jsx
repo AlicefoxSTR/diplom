@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
+import { PopupCloser } from 'features/PopupCloser/PopupCloser';
 import cls from './SigninPopup.module.css';
-import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
 import { PopupFormRow } from 'widgets/PopupFormRow/PopupFormRow';
-import { Cross } from 'shared/UI/Cross/Cross';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
 import { Controller, useForm } from 'react-hook-form';
@@ -13,6 +12,7 @@ import { passwordRegEx } from 'shared/lib/regEx';
 import { userApi } from 'entities/User/api/UserApi';
 import { UserSlice } from 'entities/User';
 import { useNavigate } from 'react-router';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const SigninPopup = (props) => {
     const { className } = props;
@@ -63,7 +63,7 @@ export const SigninPopup = (props) => {
 
     return (
         <PopupBoard className={ClassNames(cls.signinPopup, {}, [className]) }>
-            <Cross size={23} style={{top: '36.11px', right: '50.7px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <PopupNavigation />
             <h1 className={cls.title}>
                 Вход
             </h1>

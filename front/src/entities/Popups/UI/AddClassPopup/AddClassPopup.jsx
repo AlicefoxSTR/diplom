@@ -9,6 +9,8 @@ import { InputTheme } from 'shared/UI/Input/Input';
 import { classesApi } from 'entities/Classes';
 import { Controller, useForm } from 'react-hook-form';
 import { PopupFormRow } from 'widgets/PopupFormRow/PopupFormRow';
+import { PopupCloser } from 'features/PopupCloser/PopupCloser';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const AddClassPopup = (props) => {
     const { className } = props;
@@ -33,7 +35,7 @@ export const AddClassPopup = (props) => {
 
     return (
         <div className={ClassNames(cls.addClassPopup, {}, [className])}>
-            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <PopupNavigation />
             <h2 className={cls.title}>Введите название класса:</h2>
             <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
                 <Controller 

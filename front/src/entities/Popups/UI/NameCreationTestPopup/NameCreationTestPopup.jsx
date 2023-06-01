@@ -12,6 +12,8 @@ import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import { useNavigate } from 'react-router';
 import { testsApi } from 'entities/Tests';
+import { PopupCloser } from 'features/PopupCloser/PopupCloser';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const NameCreationTestPopup = (props) => {
     const { className } = props;
@@ -71,7 +73,7 @@ export const NameCreationTestPopup = (props) => {
 
     return (
         <div className={ClassNames(cls.nameCreationTestPopup, {}, [className])}>
-            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <PopupNavigation />
             <h2 className={cls.title}>Введите название теста:</h2>
             <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
                 <Controller 

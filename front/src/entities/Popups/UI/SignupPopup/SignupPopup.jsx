@@ -1,9 +1,7 @@
 import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './SignupPopup.module.css';
-import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
 import { PopupFormRow } from 'widgets/PopupFormRow/PopupFormRow';
-import { Cross } from 'shared/UI/Cross/Cross';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
@@ -11,6 +9,7 @@ import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
 import { Controller, useForm } from 'react-hook-form';
 import { emailRegEx, passwordRegEx } from 'shared/lib/regEx';
 import { userApi } from 'entities/User/api/UserApi';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const SignupPopup = (props) => {
     const { className } = props;
@@ -63,7 +62,7 @@ export const SignupPopup = (props) => {
 
     return (
         <PopupBoard className={ClassNames(cls.signinPopup, {}, [className])}>
-            <Cross size={23} style={{top: '36.11px', right: '50.7px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <PopupNavigation />
             <h1 className={cls.title}>
                 Регистрация
             </h1>

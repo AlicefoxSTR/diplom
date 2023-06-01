@@ -1,10 +1,14 @@
 
 
+
+
+.cross{
+    position: relative;
+}
 .cross,
 .cross::after,
 .cross::before {
     display: block;
-    position: absolute;
     cursor: pointer;
     transition: transform 1s ;
 }
@@ -15,6 +19,7 @@
 
 .cross::before,
 .cross::after {
+    position: absolute;
     top: 50%;
     content: "";
     width: 100%;

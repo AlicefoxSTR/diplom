@@ -7,6 +7,8 @@ import { Cross } from 'shared/UI/Cross/Cross';
 import { useDispatch } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { UserSlice } from 'entities/User';
+import { PopupCloser } from 'features/PopupCloser/PopupCloser';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const ChoseRolePopup = (props) => {
 
@@ -25,7 +27,7 @@ export const ChoseRolePopup = (props) => {
 
     return (
         <div className={ClassNames(cls.chosePopup, {}, [className])}>
-            <Cross style={{top: '25px', right: '25px'}} size={25} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <PopupNavigation />
             <div className={ClassNames(cls.block, {}, [className, cls.firstBlock])}>
                 <p className={cls.role}>
                     Я - пользователь

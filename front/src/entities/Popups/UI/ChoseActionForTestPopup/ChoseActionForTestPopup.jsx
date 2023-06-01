@@ -10,6 +10,8 @@ import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
 import { useNavigate } from 'react-router';
 import { testsApi } from 'entities/Tests';
 import { TestingSlice, TestingTypes } from 'entities/Testing/redux/TestingSlice';
+import { PopupCloser } from 'features/PopupCloser/PopupCloser';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const ChoseActionForTestPopup = (props) => {
     const { className } = props;
@@ -54,7 +56,7 @@ export const ChoseActionForTestPopup = (props) => {
 
     return (
         <PopupBoard className={ClassNames(cls.choseActionForCustomTest, {}, [className])}>
-            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>dispatch(PopupsSlice.actions.closePopup())} />
+            <PopupNavigation />
             <h2 className={cls.title}>{chosedTest.title}</h2>
             <Button 
                 className={cls.button} 

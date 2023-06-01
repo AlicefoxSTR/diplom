@@ -54,6 +54,7 @@ export const PopupBodies = {
 
 const initialState = {
     activePopup: null,
+    previousPopups: [],
     message: ''
 }
 
@@ -63,10 +64,23 @@ export const PopupsSlice = createSlice({
     name: 'popups',
     reducers: {
         showPopup(state, action){
+            if(state.activePopup){
+                state.previousPopups.push(state.activePopup)
+            }
             state.activePopup = action.payload
         },
         closePopup(state){
             state.activePopup = null
+            state.previousPopups = []
+        },
+        showPreviousPopup(state){
+            if(state.previousPopups.length > 0){
+                const previousPopup = state.previousPopups.pop()
+                state.activePopup = previousPopup
+            }else {
+                state.activePopup = null
+                state.previousPopups = []
+            }       
         },
         openMessage(state, action){
             state.message = action.payload

@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './AddStudentPopup.module.css';
-import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
-import { Cross } from 'shared/UI/Cross/Cross';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
-import { Input } from 'shared/UI/Input/Input';
-import { editStudentAction, saveStudentAction } from 'entities/Classes/redux/ClassesActions';
 import { ClassesSlice, classesApi } from 'entities/Classes';
 import { Controller, useForm } from 'react-hook-form';
 import { PopupFormRow } from 'widgets/PopupFormRow/PopupFormRow';
 import { fioRegEx } from 'shared/lib/regEx';
+import { PopupCloser } from 'features/PopupCloser/PopupCloser';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const AddStudentPopup = (props) => {
     const { className } = props;
-    const [ input, setInput ] = useState('')
 
     const { editionalClass, editionalStudent, classes } = useSelector(state=>state.classes)
     const dispatch = useDispatch()
@@ -67,7 +64,7 @@ export const AddStudentPopup = (props) => {
 
     return (
         <div className={ClassNames(cls.addClassPopup, {}, [className])}>
-            <Cross size={23} style={{top: '30px', right: '30px'}} onClick={()=>closePopupHandler()} />
+            <PopupNavigation handler={()=>closePopupHandler()} />
             <h2 className={cls.title}>Введите данные ученика:</h2>
             <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
                 <Controller 
