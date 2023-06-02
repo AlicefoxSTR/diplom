@@ -33,7 +33,8 @@ from .serializers import (
     TaskSerializer, 
     UserStageSerializer,
     ClassesForAccessSerializer,
-    TestResultSerializer
+    TestResultSerializer,
+    TeacherTestResultSerializer
 )
 
 
@@ -245,13 +246,16 @@ class TestsView(APIView):
 
     def get(self, request):
         
-        if(request.GET.get('custom')):
+        if(request.GET.get('custom') == 'true'):
             if(request.GET.get('role')=='teacher'):
                 tests = Test.objects.filter(is_custom=True, creator=self.request.user.teacher).prefetch_related('tasks', 'tasks__possible_answers')
+        elif(request.GET.get('custom') == 'false'):
+            tests = Test.objects.filter(is_custom=False).prefetch_related('tasks', 'tasks__possible_answers')
+        else:
+            if(request.GET.get('role')=='teacher'):
+                tests = Test.objects.filter(Q(creator=self.request.user.teacher) | Q(is_custom=False)).prefetch_related('tasks', 'tasks__possible_answers')
             elif(request.GET.get('role')=='student'):
                 tests = Test.objects.filter(id__in=self.request.user.student.classroom.tests.all()).prefetch_related('tasks', 'tasks__possible_answers')
-        else:
-            tests = Test.objects.filter(is_custom=False).prefetch_related('tasks', 'tasks__possible_answers')
         tests_serializer = TestsSerializer(tests, many=True)
 
         if tests:
@@ -500,15 +504,53 @@ class TestResultView(generics.ListCreateAPIView):
     def get_queryset(self):
         return TestResult.objects.filter(student=self.request.user.student).prefetch_related('test')
 
+    
+    
+
+    def get(self, request):
+        if 'role' in request.query_params and request.query_params['role'] == 'teacher':
+            try:
+                if 'classroom' in request.query_params:
+                    students = Student.objects.filter(classroom=request.query_params['classroom'])
+                else:
+                    classes = self.request.user.teacher.classes
+                    students = Student.objects.filter(classroom__in=classes.all())
+
+                if 'test' in request.query_params:
+                    results = (
+                        TestResult.objects
+                            .filter(student__in=students.all(), test__id=request.query_params['test'])
+                            .prefetch_related('student')
+                        )
+                else:
+                    results = (
+                        TestResult.objects
+                            .filter(student__in=students.all())
+                            .prefetch_related('student')
+                        )
+                serializer = TeacherTestResultSerializer(results, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except:
+                return Response({'message': 'Ошибка получения результатов теста'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            if 'test' in request.query_params:
+                results = (
+                    TestResult.objects
+                        .filter(student=self.request.user.student, test__id=request.query_params['test'])
+                        .prefetch_related('student')
+                    )
+                serializer = TeacherTestResultSerializer(results, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return super().get(request)
+
     def post(self, request):
         #Создание User
         input_data = {
             "student": self.request.user.student.id,
-            "test": Test.objects.get(id=request.data['testId']),
+            "test": TestsSerializer(Test.objects.get(id=request.data['testId'])).data,
             "correct_answers_count": request.data['correctAnweredQuestions'],
             "total_answers_count": request.data['totalQuestions'],
             "percent_correct": request.data['percent'],
-
         }
         serializer = self.get_serializer(data=input_data)
         serializer.is_valid(raise_exception=True)
@@ -525,3 +567,4 @@ class TestResultView(generics.ListCreateAPIView):
             return Response(
                 {"message": "Ошибка сохранения результата выполнения теста."}, status=status.HTTP_400_BAD_REQUEST
             )
+

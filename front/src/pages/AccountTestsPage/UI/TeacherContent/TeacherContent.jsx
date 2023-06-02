@@ -1,7 +1,7 @@
 import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TeacherContent.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TestCardsList } from 'widgets/TestCardsList/TestCardsList';
 import { NotFoundResults } from 'pages/AccountPage/UI/NotFoundResults/NotFoundResults';
 import { testsApi } from 'entities/Tests';
@@ -15,8 +15,10 @@ export const TeacherContent = (props) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { role } = useSelector(state=>state.user)
 
-    const { data, isLoading } = testsApi.useFetchTestsQuery()
+
+    const { data, isLoading } = testsApi.useFetchTestsQuery({role: role, custom: 'false'})
 
     function ClickHandler(){
         navigate('/account/create-test')

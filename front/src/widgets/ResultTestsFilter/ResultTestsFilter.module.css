@@ -26,6 +26,24 @@
     transform: translateY(-50%);
     transition: transform 0.3s;
     z-index: -1;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+.body::-webkit-scrollbar {
+    width: 8px; /* ширина скроллбара */
+  }
+  
+/* дорожка скроллбара */
+.body::-webkit-scrollbar-track {
+    background-color: var(--main-color); /* белый цвет дорожки */
+}
+
+/* скроллбар */
+.body::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color); /* основной цвет скролла */
+    border-radius: 6px; /* скругление краев */
 }
 
 .body.active {

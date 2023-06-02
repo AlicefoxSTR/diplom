@@ -34,22 +34,6 @@ export const testsApi =  createApi({
             },
             providesTags: ['CustomTests'],
         }),
-        fetchCustomTests: build.query({
-            query: (params) => ({
-                url: `tests/`,
-                params: params
-            }),
-            async onQueryStarted(args, {dispatch, queryFulfilled}){
-                try {
-                    const { data } = await queryFulfilled
-                    if (data){
-                        dispatch(TestsSlice.actions.setTests(data))
-                    }
-                    
-                }catch(error){}
-            },
-            providesTags: ['CustomTests'],
-        }),
         
         
       

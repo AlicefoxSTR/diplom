@@ -30,7 +30,7 @@ export const NameCreationTestPopup = (props) => {
 
     const navigate = useNavigate()
 
-    const [ fetchCustomTests ] = testsApi.useLazyFetchCustomTestsQuery()
+    const [ fetchTests ] = testsApi.useLazyFetchTestsQuery()
     const { tasks, name, id, isEdit } = useSelector(state => state.testCreation)
 
 
@@ -46,7 +46,7 @@ export const NameCreationTestPopup = (props) => {
             .then(res => {
                 if(res.data){
                     dispatch(TestCreationSlice.actions.clearTestCreation())
-                    fetchCustomTests({custom:true, role:role})
+                    fetchTests({custom:'true', role:role})
                     reset()
                     navigate('/account/my-tests')
                 }
@@ -56,7 +56,7 @@ export const NameCreationTestPopup = (props) => {
             .then(res => {
                 if(res.data){
                     dispatch(TestCreationSlice.actions.clearTestCreation())
-                    fetchCustomTests({custom:true, role:role})
+                    fetchTests({custom:'true', role:role})
                     reset()
                     navigate('/account/my-tests')
                 }

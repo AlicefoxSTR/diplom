@@ -21,9 +21,14 @@ export const ResultTestsFilter = (props) => {
         setActive(prev => !prev)
     }
 
-    function setActiveTestsFilterHandler(id){
-        dispatch(ResultsSlice.actions.setActiveTestsFilter(id))
-        setActive(false)
+    function setActiveTestsFilterHandler(test){
+        if(test === 'all'){
+            dispatch(ResultsSlice.actions.setActiveTestsFilter(''))
+            setActive(false)
+        }else{
+            dispatch(ResultsSlice.actions.setActiveTestsFilter(test))
+            setActive(false)
+        }
     }
 
     return (
@@ -35,15 +40,20 @@ export const ResultTestsFilter = (props) => {
                 {
                     activeTestsFilter
                     ?
-                    items.find(test => test.id === activeTestsFilter).title
+                    items && items.find(test => test.id === activeTestsFilter).title
                     :
                     placeholder
                 } 
                 <Arrow className={ClassNames(cls.icon, {[cls.active]: active}, [])} /> 
             </span>
             <div className={ClassNames(cls.body, {[cls.active]: active}, [])}>
+                <div className={cls.row} key={`resultsTestsFilterItem_all`} 
+                    onClick={()=>setActiveTestsFilterHandler('all')}
+                >
+                    <span className={cls}>Все тесты</span> 
+                </div> 
                 {
-                    items.map(test => (
+                    items && items.map(test => (
                         <div className={cls.row} key={`resultsTestsFilterItem_${test.id}`} 
                             onClick={()=>setActiveTestsFilterHandler(test.id)}
                         >

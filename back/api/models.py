@@ -64,7 +64,6 @@ class Student(models.Model):
     username = models.CharField(max_length=100, verbose_name='Логин')
     password = models.CharField(max_length=255, verbose_name='Пароль')
     classroom = models.ForeignKey('Class', on_delete=models.CASCADE, related_name='students', verbose_name='Класс')
-    # stages = models.ManyToManyField('Stage', related_name='students', blank=True, verbose_name='Этапы')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
 

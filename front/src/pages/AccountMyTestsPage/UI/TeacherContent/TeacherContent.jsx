@@ -16,8 +16,8 @@ export const TeacherContent = (props) => {
     const { role } = useSelector(state=>state.user)
 
 
-    const { data, isLoading } = testsApi.useFetchCustomTestsQuery({
-        "custom": true,
+    const { data, isLoading } = testsApi.useFetchTestsQuery({
+        "custom": 'true',
         "role": role
     })
 

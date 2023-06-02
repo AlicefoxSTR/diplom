@@ -17,7 +17,7 @@ export const ChoseActionForTestPopup = (props) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [ deleteTest ] = testCreationApi.useDeleteTestMutation()
-    const [ fetchTests ] = testsApi.useLazyFetchCustomTestsQuery()
+    const [ fetchTests ] = testsApi.useLazyFetchTestsQuery()
 
         
     const { chosedTest, role } = useSelector(state => state.user)
@@ -31,7 +31,7 @@ export const ChoseActionForTestPopup = (props) => {
     function ClickDeleteHandler(){
         deleteTest(chosedTest).then(res => {
             if(res.data){
-                fetchTests({role: role, custom: true})
+                fetchTests({role: role, custom: 'true'})
                 dispatch(PopupsSlice.actions.openMessage(res.data.message))
             }else if(res.error){
                 dispatch(PopupsSlice.actions.openMessage(res.error.message))

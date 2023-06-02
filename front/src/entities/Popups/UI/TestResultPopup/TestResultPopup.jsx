@@ -19,31 +19,31 @@ export const TestResultPopup = (props) => {
 
     const [ sendResults] = testResultApi.useSendResultsMutation()
 
-    function FinishTestingHandler(){
+    function CloseHandler(){
         sendResults(result).then(() => {
-            navigate('/account/tests')
             dispatch(TestingSlice.actions.clearTesting())
-            dispatch(PopupsSlice.actions.closePopup())
         })
+    }
+
+    function ClickFinishHandler(){
+        navigate('/account/tests')
+        dispatch(PopupsSlice.actions.closePopup())
     }
 
     function ShowResultsHandler(){
-        sendResults(result).then(() => {
-            dispatch(TestingSlice.actions.showResults())
-            dispatch(PopupsSlice.actions.closePopup())
-        })
-        
+        dispatch(TestingSlice.actions.showResults())
+        dispatch(PopupsSlice.actions.closePopup())
     }
 
     return (
-        <PopupBoard className={ClassNames(cls.testResultPopup, {}, [className])}>
-            <PopupNavigation />
+        <PopupBoard closeHandler={CloseHandler} className={ClassNames(cls.testResultPopup, {}, [className])}>
+            <PopupNavigation handler={CloseHandler} />
             <h2 className={cls.title}>Поздравляем!</h2>
             <p className={cls.text}>Ты прошёл тест на {result.correctAnweredQuestions}/{result.totalQuestions}</p>
             <SmallButton 
                 theme={SmallButtonTheme.DARK} 
                 className={cls.button}
-                onClick={()=>FinishTestingHandler()}
+                onClick={()=>ClickFinishHandler()}
             >
                 Завершить
             </SmallButton>

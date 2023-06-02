@@ -159,12 +159,13 @@ class TaskSerializer(serializers.ModelSerializer):
 
 class TestsSerializer(serializers.ModelSerializer):
 
+    id = serializers.IntegerField(read_only=False)
     tasks = TaskSerializer(read_only=True, many=True)
     title = serializers.CharField(source='name')
 
     class Meta: 
         model = Test
-        fields = ('id', 'tasks', 'title', 'description', 'creator' )
+        fields = ['id', 'tasks', 'title', 'description', 'creator']
 
 
 
@@ -183,7 +184,27 @@ class ClassesForAccessSerializer(serializers.ModelSerializer):
 class TestResultSerializer(serializers.ModelSerializer):
 
 
-    test = TestsSerializer(many=False)
+    test = TestsSerializer(read_only=False)
+    
+    class Meta: 
+        model = TestResult
+        fields = '__all__'
+
+
+    def create(self, validated_data):
+        test_data = validated_data.pop('test')
+        test = Test.objects.get(id=test_data['id'])
+        
+        test_result = TestResult.objects.create(test=test, **validated_data)
+        
+        return test_result
+
+
+class TeacherTestResultSerializer(serializers.ModelSerializer):
+
+
+    test = TestsSerializer(read_only=True)
+    student = StudentSerializer(read_only=True)
     
     class Meta: 
         model = TestResult

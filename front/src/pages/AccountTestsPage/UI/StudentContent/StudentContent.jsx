@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './StudentContent.module.css';
 import { NotFoundResults } from 'pages/AccountPage/UI/NotFoundResults/NotFoundResults';
@@ -13,11 +13,11 @@ export const StudentContent = (props) => {
     const { role } = useSelector(state=>state.user)
 
 
-    const { data, isLoading } = testsApi.useFetchCustomTestsQuery({
-        "custom": true,
-        "role": role
-    })
+    const [ fetchTests, { data, isLoading }] = testsApi.useLazyFetchTestsQuery({role: role, custom: 'true'})
 
+    useEffect(()=>{
+        fetchTests({role: role, custom: 'true'})
+    },[])
 
     return (
         <div className={ClassNames(cls.studentContent, {}, [className])}>
