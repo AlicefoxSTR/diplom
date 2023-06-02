@@ -1,7 +1,6 @@
 import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './AddClassPopup.module.css';
-import { Cross } from 'shared/UI/Cross/Cross';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { useDispatch } from 'react-redux';
 import { PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
@@ -9,7 +8,6 @@ import { InputTheme } from 'shared/UI/Input/Input';
 import { classesApi } from 'entities/Classes';
 import { Controller, useForm } from 'react-hook-form';
 import { PopupFormRow } from 'widgets/PopupFormRow/PopupFormRow';
-import { PopupCloser } from 'features/PopupCloser/PopupCloser';
 import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const AddClassPopup = (props) => {

@@ -1,13 +1,10 @@
 import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './ChoseRolePopup.module.css';
-import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
-import { Cross } from 'shared/UI/Cross/Cross';
 import { useDispatch } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { UserSlice } from 'entities/User';
-import { PopupCloser } from 'features/PopupCloser/PopupCloser';
 import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const ChoseRolePopup = (props) => {

@@ -11,6 +11,7 @@ import { Button } from 'shared/UI/Button/Button';
 import { TestCreationSlice } from 'entities/TestCreation';
 import { PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { questionTypes } from 'shared/models/TestModels';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 
 export const QuestionConstructorPopup = (props) => {
@@ -58,7 +59,8 @@ export const QuestionConstructorPopup = (props) => {
 
 
     return (
-        <PopupBoard className={ClassNames(cls.choseTestCategoryPopup, {}, [className])}>
+        <PopupBoard closeHandler={closeHandler} className={ClassNames(cls.choseTestCategoryPopup, {}, [className])}>
+            <PopupNavigation handler={closeHandler} />
             <h2 className="popupTitle">
                 Новый вопрос
             </h2>

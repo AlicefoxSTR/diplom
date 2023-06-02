@@ -2,18 +2,17 @@ import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './ChoseTestCategoryPopup.module.css';
 import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
-import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { TestCreationSlice, testCreationApi } from 'entities/TestCreation';
 import { Loader } from 'shared/UI/Loader/Loader';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const ChoseTestCategoryPopup = (props) => {
 
     const { className } = props;
 
-    // const { tests } = useSelector(state=>state.tests)
     const dispatch = useDispatch()
     const { data: tests, isLoading } = testCreationApi.useGetAllStagesQuery()
 
@@ -26,7 +25,8 @@ export const ChoseTestCategoryPopup = (props) => {
 
 
     return (
-        <PopupBoard className={ClassNames(cls.choseTestCategoryPopup, {}, [className])}>
+        <PopupBoard  className={ClassNames(cls.choseTestCategoryPopup, {}, [className])}>
+            <PopupNavigation />
             <h2 className="popupTitle">
                 Выберите категорию
             </h2>

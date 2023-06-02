@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './AddStudentPopup.module.css';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
@@ -8,8 +8,8 @@ import { ClassesSlice, classesApi } from 'entities/Classes';
 import { Controller, useForm } from 'react-hook-form';
 import { PopupFormRow } from 'widgets/PopupFormRow/PopupFormRow';
 import { fioRegEx } from 'shared/lib/regEx';
-import { PopupCloser } from 'features/PopupCloser/PopupCloser';
 import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
+import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
 
 export const AddStudentPopup = (props) => {
     const { className } = props;
@@ -63,8 +63,8 @@ export const AddStudentPopup = (props) => {
 
 
     return (
-        <div className={ClassNames(cls.addClassPopup, {}, [className])}>
-            <PopupNavigation handler={()=>closePopupHandler()} />
+        <PopupBoard closeHandler={closePopupHandler}  className={ClassNames(cls.addClassPopup, {}, [className])}>
+            <PopupNavigation handler={closePopupHandler} />
             <h2 className={cls.title}>Введите данные ученика:</h2>
             <form onSubmit={handleSubmit(saveHandler)} className={cls.form}>
                 <Controller 
@@ -94,6 +94,6 @@ export const AddStudentPopup = (props) => {
                 } />
                 <Button className={cls.button} theme={ButtonTheme.DARK} >Сохранить</Button>
             </form>
-        </div>
+        </PopupBoard>
  );
 }

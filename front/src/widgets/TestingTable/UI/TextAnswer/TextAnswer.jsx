@@ -22,11 +22,11 @@ export const TextAnswer = (props) => {
             value = {activeTask.answers?.length > 0 && activeTask.answers[0].value}
             disabled = {isResults}
             error = {
-                Boolean(activeTask.answers.find(answer => answer.value ?? '' === answer.text)) && isResults
+                Boolean(activeTask.answers.find(answer => answer.value ?? '' !== answer.text)) && isResults
                 ? `Возможные варианты ответов: ${activeTask.answers.map(answer => answer.text).join(', ')}`
                 : null
             }
-            isCorrect = {Boolean(activeTask.answers.find(answer => answer.value === answer.text)) && isResults}
+            isCorrect = {Boolean(activeTask.answers.find(answer => answer.value ?? '' === answer.text)) && isResults}
         />
  );
 }

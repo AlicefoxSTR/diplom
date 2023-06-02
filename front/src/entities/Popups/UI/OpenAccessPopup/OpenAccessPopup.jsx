@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import cls from './OpenAccessPopup.module.css';
 import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
-import { Cross } from 'shared/UI/Cross/Cross';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
@@ -9,7 +8,6 @@ import { CheckSides, Checkbox } from 'shared/UI/Checkbox/Checkbox';
 import { Controller, useForm } from 'react-hook-form';
 import { testCreationApi } from 'entities/TestCreation';
 import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton';
-import { PopupCloser } from 'features/PopupCloser/PopupCloser';
 import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const OpenAccessPopup = (props) => {

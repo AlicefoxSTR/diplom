@@ -1,7 +1,5 @@
 import React from 'react';
 import cls from './NameCreationTestPopup.module.css';
-import { PopupWrapper } from 'widgets/PopupWrapper/PopupWrapper';
-import { Cross } from 'shared/UI/Cross/Cross';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import { PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
@@ -12,7 +10,6 @@ import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import { useNavigate } from 'react-router';
 import { testsApi } from 'entities/Tests';
-import { PopupCloser } from 'features/PopupCloser/PopupCloser';
 import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const NameCreationTestPopup = (props) => {

@@ -3,7 +3,6 @@ import cls from './MessagePopup.module.css';
 import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
 import { useSelector } from 'react-redux';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
-import { PopupCloser } from 'features/PopupCloser/PopupCloser';
 import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const MessagePopup = (props) => {

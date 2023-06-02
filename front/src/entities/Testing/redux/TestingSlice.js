@@ -8,7 +8,8 @@ export const TestingTypes = {
     VIEW: 'view',
     STUDENT_TESTING: 'student_testing',
     USER_TESTING: 'user_testing',
-    RESULTS: 'results'
+    RESULTS: 'results',
+    ONE_TASK_VIEW: 'one_task_view'
 }
 
 
@@ -18,6 +19,7 @@ const initialState = {
     result: {},
     activeTask: '',
     testingType: TestingTypes.VIEW,
+    taskIndex: 0
 
 }
 
@@ -29,8 +31,10 @@ export const TestingSlice = createSlice({
         openTesting(state, action){
             state.test = action.payload.test
             state.testingType = action.payload.type
-            state.activeTask = state.test.tasks[0]
-            state.taskIndex = 0
+            state.activeTask = action.payload.activeTask ?? state.test.tasks[0] 
+            state.taskIndex = action.payload.taskIndex ?? 0
+
+            console.log(state.activeTask)
         },
         nextTask(state){
             if(state.taskIndex < state.test.tasks.length){

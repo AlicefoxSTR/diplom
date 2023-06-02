@@ -4,6 +4,7 @@ import { baseApiUrl } from 'shared/lib/ClassNames/ApiConfig/ApiConfig'
 
 export const testResultApi =  createApi({
     reducerPath: 'testResultApi',
+    tagTypes: ['Results'],
     baseQuery: fetchBaseQuery({
         baseUrl: `${baseApiUrl}/v1/`,
         headers: {
@@ -20,9 +21,9 @@ export const testResultApi =  createApi({
             query: (data) => ({
                 url: 'results/',
                 method: 'POST',
-                body: data
+                body: JSON.stringify(data)
             }),
-            
+            invalidatesTags: ['Results']
         }), 
         getResults: build.query({
             query: (params) => ({
@@ -30,6 +31,8 @@ export const testResultApi =  createApi({
                 method: 'GET',
                 params: params
             }),
+            providesTags: ['Results']
+
         }) 
     }),
 })

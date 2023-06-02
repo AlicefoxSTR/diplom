@@ -12,7 +12,6 @@ export const StudentContent = (props) => {
 
     const { role } = useSelector(state => state.user)
     const { data: results, isLoading } = testResultApi.useGetResultsQuery({role: role})
-    // const { results } = useSelector(state=>state.testResult)
     
 
 

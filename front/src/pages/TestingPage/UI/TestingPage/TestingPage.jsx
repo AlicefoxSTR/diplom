@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TestingPage.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProgressBar } from 'widgets/ProgressBar/ProgressBar';
 import { Main } from 'widgets/Main';
-import { TestingTable } from 'pages/TestingPage/UI/TestingTable/TestingTable';
 import { CustomLink, LinkThemes } from 'shared/UI/CustomLink/CustomLink';
 import { TestingSlice, TestingTypes } from 'entities/Testing/redux/TestingSlice';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { useNavigate } from 'react-router';
 import { SmallButton } from 'shared/UI/SmallButton/SmallButton';
-import { TestingResult } from 'features/TestingResult/TestingResult';
 import { PopupsSlice } from 'entities/Popups';
 import { PopupNames } from 'entities/Popups/redux/PopupsSlice';
+import { TestingTable } from 'widgets/TestingTable';
 
 export const TestingPage = (props) => {
     const { 
@@ -36,13 +35,22 @@ export const TestingPage = (props) => {
     return (
         <Main className={cls.testigPage}>
             <div className={ClassNames(cls.testingPage, {}, [className])}>
-                <ProgressBar tasks={test.tasks} activeIndex={activeTask.id} className={cls.progressBar} />
+                {
+                    testingType !== TestingTypes.ONE_TASK_VIEW
+                        ?
+                        <ProgressBar tasks={test.tasks} activeIndex={activeTask.id} className={cls.progressBar} />
+                        :
+                        null
+                }
                 <TestingTable 
+                    task={activeTask}
+                    taskIndex={taskIndex}
+                    testingType={testingType}
                     className={cls.testingTable}
                 />
             </div>
             {
-                testingType === TestingTypes.VIEW || testingType === TestingTypes.RESULTS
+                testingType === TestingTypes.VIEW || testingType === TestingTypes.RESULTS || testingType === TestingTypes.ONE_TASK_VIEW
                 ?
                     <Button onClick={()=>navigate(-1)} theme={ButtonTheme.LIGHT} className={cls.link} >Завершить просмотр</Button>
                 :

@@ -7,12 +7,30 @@ import { Button, ButtonTheme } from 'shared/UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { TaskRow } from 'widgets/TaskRow/TaskRow';
+import { TestingSlice } from 'entities/Testing';
+import { TestingTypes } from 'entities/Testing/redux/TestingSlice';
+import { useNavigate } from 'react-router';
 
 export const CreateTestPage = (props) => {
     const { className } = props;
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const { tasks } = useSelector(state => state.testCreation)
+
+    function ShowTestHandler(){
+        dispatch(
+            TestingSlice.actions.openTesting({
+                test: {
+                    id: 0,
+                    tasks: tasks
+                },
+                type: TestingTypes.VIEW
+            })
+        )
+        navigate('/testing')
+    }
 
     return (
         <Main className={ClassNames(cls.createTestPage, {}, [className])} isPrivate={true}>
@@ -29,7 +47,7 @@ export const CreateTestPage = (props) => {
                         }
                         <div className={cls.buttons}>
                             <Button className={cls.button} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.CHOSE_QUESTION_TYPE))}>Добавить вопрос</Button>
-                            <Button className={cls.button}>Просмотреть тест</Button>
+                            <Button className={cls.button} onClick={()=>ShowTestHandler()}>Просмотреть тест</Button>
                             <Button className={cls.yellow} onClick={()=>dispatch(PopupsSlice.actions.showPopup(PopupNames.NAME_CREATION_TEST))} >Сохранить тест</Button>
                         </div>
                         </>

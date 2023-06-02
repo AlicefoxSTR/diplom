@@ -40,6 +40,6 @@ export function TestingResult(test){
         testId: test.id,
         correctAnweredQuestions,
         totalQuestions,
-        percent
+        percent: Math.floor(percent)
     }
 }

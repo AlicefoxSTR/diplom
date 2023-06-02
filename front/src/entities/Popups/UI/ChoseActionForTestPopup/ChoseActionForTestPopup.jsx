@@ -4,13 +4,11 @@ import cls from './ChoseActionForTestPopup.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
-import { Cross } from 'shared/UI/Cross/Cross';
 import { TestCreationSlice, testCreationApi } from 'entities/TestCreation';
 import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
 import { useNavigate } from 'react-router';
 import { testsApi } from 'entities/Tests';
 import { TestingSlice, TestingTypes } from 'entities/Testing/redux/TestingSlice';
-import { PopupCloser } from 'features/PopupCloser/PopupCloser';
 import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const ChoseActionForTestPopup = (props) => {

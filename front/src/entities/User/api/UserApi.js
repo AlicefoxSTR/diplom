@@ -18,7 +18,6 @@ export const userApi =  createApi({
                 method: 'POST',
                 body: JSON.stringify(data)
             }),
-
             async onQueryStarted(args, {dispatch, queryFulfilled}){
                 try {
                     const { data } = await queryFulfilled

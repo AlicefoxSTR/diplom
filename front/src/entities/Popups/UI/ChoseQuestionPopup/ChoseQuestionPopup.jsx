@@ -8,6 +8,7 @@ import { PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { Button } from 'shared/UI/Button/Button';
 import { TestCreationSlice, testCreationApi } from 'entities/TestCreation';
 import { Loader } from 'shared/UI/Loader/Loader';
+import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
 export const ChoseQuestionPopup = (props) => {
     const { className } = props;
@@ -27,6 +28,7 @@ export const ChoseQuestionPopup = (props) => {
 
     return (
         <PopupBoard className={ClassNames(cls.choseQuestionPopup, {}, [className])}>
+            <PopupNavigation />
             <h2 className={'popupTitle'}>Выберите вопрос</h2>
             <div className={cls.cards}>
                 {

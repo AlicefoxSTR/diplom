@@ -1,6 +1,5 @@
 import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
-import { PopupCloser } from 'features/PopupCloser/PopupCloser';
 import cls from './SigninPopup.module.css';
 import { PopupFormRow } from 'widgets/PopupFormRow/PopupFormRow';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
