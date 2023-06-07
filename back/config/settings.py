@@ -15,7 +15,7 @@ DEBUG = bool(int(os.environ.get('DEBUG')))
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://192.168.0.176:3000",
-    "http://94.43.53.181:8000",
+    "http://93.159.221.90",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -23,7 +23,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS=[
     "http://127.0.0.1:3000",
     "http://192.168.0.176:3000",
-    "http://94.43.53.181:8000",
+    "http://93.159.221.90",
 ]
 
 
