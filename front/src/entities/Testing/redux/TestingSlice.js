@@ -73,10 +73,9 @@ export const TestingSlice = createSlice({
             state.result = TestingResult(state.test)
         },
         clearTesting(state){
-            state.test= {
-            }
-            state.result= {}
-            state.activeTask = {}
+            state.test = null
+            state.result = null
+            state.activeTask = null
             state.testingType = TestingTypes.VIEW
         
         }

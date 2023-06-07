@@ -1,6 +1,6 @@
 import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
-import cls from './TestResultPopup.module.css';
+import cls from './TestingStudentResultPopup.module.css';
 import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
@@ -10,7 +10,7 @@ import { TestingSlice } from 'entities/Testing';
 import { useNavigate } from 'react-router';
 import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
-export const TestResultPopup = (props) => {
+export const TestingStudentResultPopup = (props) => {
     const { className } = props;
     const dispatch = useDispatch()
     const navigate = useNavigate()

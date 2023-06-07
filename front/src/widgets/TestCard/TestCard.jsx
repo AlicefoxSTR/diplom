@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TestCard.module.css';
-import { CustomLink } from 'shared/UI/CustomLink/CustomLink';
-import { LinkThemes } from 'shared/UI/CustomLink/CustomLink';
+import Image from 'app/assets/img/test-img.png'
+import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton';
+import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { TestsSlice, testsApi } from 'entities/Tests';
+
 
 export const TestCard = (props) => {
     const { 
@@ -10,18 +14,45 @@ export const TestCard = (props) => {
         card
     } = props;
 
+    const [ disabled, setDisabled ] = useState(false)
+
+
+    const navigation = useNavigate()
+    const disptach = useDispatch()
+
+    const { isAuthenticate } = useSelector(state => state.user)
+    const { data: stages } = testsApi.useFetchStagesQuery()
+
+    function ClickHandler(){
+        disptach(TestsSlice.actions.setStage(card))
+        navigation('/stage')
+    }
+
+    useEffect(()=>{
+        if(!card.allow_unauthenticated && !isAuthenticate){
+            setDisabled(true)
+        }
+    },[])
+
     return (
         <div className={ClassNames(cls.testCard, {[cls.disabled]: card.disabled}, [className])}>
-            <img src={card.img} alt="" className={ClassNames(cls.img, {[cls.disabled]: card.disabled}, [])}/>
+            <img src={card.img ?? Image} alt="" className={ClassNames(cls.img, {[cls.disabled]: card.disabled}, [])}/>
             <div className={cls.block}>
                 <h2 className={cls.title}>
                     {card.title}
                 </h2>
                 <p className={cls.text}>
-                    {card.text}
+                    {card.description}
                 </p>
             </div>
-            <CustomLink to={`/test/${card.id}`} disabled={card.disabled} theme={LinkThemes.BUTTON_DARK} className={ClassNames(cls.button, {[cls.disabled]: card.disabled}, [])} >Начать</CustomLink>
+            <SmallButton 
+                disabled={disabled} 
+                theme={SmallButtonTheme.DARK} 
+                onClick={()=>ClickHandler()}
+                className={ClassNames(cls.button, {}, [])} 
+            >
+                Начать
+            </SmallButton>
         </div>
  );
 }

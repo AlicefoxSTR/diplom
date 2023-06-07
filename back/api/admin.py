@@ -7,7 +7,7 @@ from .models import User, UserStage, Teacher, Student, Class, Stage, Task, Test,
 # Register your models here.
 class StageAdminForm(forms.ModelForm):
     # Подключение виджета для поля теории при настройке этапов в админке
-    theory = forms.CharField(label='Теоритическая информация', widget=CKEditorUploadingWidget())
+    information = forms.CharField(label='Теоритическая информация', widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Stage
@@ -24,7 +24,6 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(UserStage)
 class UserStageAdmin(admin.ModelAdmin):
     list_display = ['user']
-    
 
 # Регистрация модели Teacher
 @admin.register(Teacher)
@@ -52,6 +51,7 @@ class ClassAdmin(admin.ModelAdmin):
 @admin.register(Stage)
 class StageAdmin(admin.ModelAdmin):
     list_display = ['title', 'order']
+    form=StageAdminForm
     
 
 # Регистрация модели Task

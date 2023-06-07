@@ -8,3 +8,15 @@
     align-items: center;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 905px) {
+    .popupNavigation {
+        padding: 25px 35px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .popupNavigation {
+        padding: 20px 35px;
+    }
+}

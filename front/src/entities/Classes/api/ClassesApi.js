@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react'
-import { baseApiUrl } from 'shared/lib/ClassNames/ApiConfig/ApiConfig'
+import { baseApiUrl } from 'shared/lib/ApiConfig/ApiConfig'
 import { ClassesSlice } from '../redux/ClassesSlice'
 import { UserSlice } from 'entities/User'
 import { userApi } from 'entities/User/api/UserApi'

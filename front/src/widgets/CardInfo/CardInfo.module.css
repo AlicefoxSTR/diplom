@@ -21,3 +21,31 @@
     font: var(--font-h2);
     color: var(--secondary-color);
 }
+
+@media screen and (max-width: 1160px) {
+    .cardInfo {
+        width: 55%;
+        margin-bottom: 15px;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .cardInfo {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .cardInfo {
+        width: 100%;
+    }
+    .cardInfo:nth-child(2n+2){
+        margin: auto;
+        margin-bottom: 20px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .title {
+        font: var(--font-h2);
+    }
+}
+

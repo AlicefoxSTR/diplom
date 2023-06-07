@@ -2,17 +2,21 @@ import React from 'react'
 import { CustomLink } from '../../../../shared/UI/CustomLink/CustomLink'
 import cls from './FooterLinks.module.css'
 import { useSelector } from 'react-redux'
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames'
 
-const FooterLinks = () => {
+const FooterLinks = (props) => {
+
+  const { className } = props
+
 
   const { role } = useSelector(state=>state.user)
 
 
   return (
-    <div className={cls.links}>
+    <div className={ClassNames(cls.links, {}, [className])}>
         <CustomLink theme={'footer'} className={cls.link} to={'/'}>Главная</CustomLink>
         {
-          role==='user' && <CustomLink theme="header" className={[cls.link]} to='/progress'>Достижения</CustomLink>
+          role==='user' && <CustomLink theme={'footer'} className={cls.link} to='/progress'>Достижения</CustomLink>
         }
         <CustomLink theme={'footer'} className={cls.link} to={'/profile'}>Профиль</CustomLink>
         <CustomLink theme={'footer'} className={cls.link} to={'/tests'}>Испытания</CustomLink>

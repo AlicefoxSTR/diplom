@@ -4,10 +4,18 @@
 
 .link {
     align-self: flex-end;
+    margin: 0 10px;
     margin-bottom: 64px;
 }
 
 .testigPage {
     display: flex;
     flex-direction: column;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0 -10px;
 }

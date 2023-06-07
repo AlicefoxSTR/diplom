@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton'
 import { UserSlice } from 'entities/User'
 import { useNavigate } from 'react-router'
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames'
+import { HeaderSocial } from '../HeaderSocial/HeaderSocial'
 
 
-export const HeaderNavigation = () => {
-
+export const HeaderNavigation = (props) => {
+  const { className, ...otherProps } = props
   const { isAuthenticate, role } = useSelector(state=>state.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -18,7 +20,8 @@ export const HeaderNavigation = () => {
     navigate('/')
   }
   return (
-    <nav className={cls.nav}>
+    <nav className={ClassNames(cls.nav, {}, [className])} {...otherProps}>
+        <HeaderSocial className={'_mob'} />
         <CustomLink theme="header" className={[cls.link]} to='/'>Главная</CustomLink>
         {
           role==='user' && <CustomLink theme="header" className={[cls.link]} to='/progress'>Достижения</CustomLink>
@@ -29,10 +32,11 @@ export const HeaderNavigation = () => {
           isAuthenticate && <SmallButton 
             theme={SmallButtonTheme.LIGHT} 
             onClick={LogoutHandler} 
-            className={[cls.link]}
-            >
-              Выход
-            </SmallButton> }
+            className={cls.link}
+          >
+            Выход
+          </SmallButton> 
+        }
     </nav>
   )
 }

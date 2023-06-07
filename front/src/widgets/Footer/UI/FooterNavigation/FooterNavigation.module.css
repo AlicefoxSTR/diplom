@@ -6,3 +6,19 @@
     border-bottom: 2px solid var(--main-light-color);
     margin-bottom: 4px;
 }
+
+@media screen and (max-width: 860px) {
+    .nav {
+        flex-direction: column;
+    }
+
+    .links {
+        margin: 20px 0;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .links {
+        flex-direction: column;
+    }
+}

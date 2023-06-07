@@ -26,3 +26,18 @@
     fill: var(--secondary-color);
 }
 
+
+@media screen and (max-width: 750px) {
+
+    .parentInfo {
+        padding-right: 60px;
+    }
+    
+}
+@media screen and (max-width: 450px) {
+
+    .parentInfo {
+        padding-right: 20px;
+    }
+    
+}

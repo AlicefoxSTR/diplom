@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Main, MainNavigation } from 'widgets/Main'
 import { Button } from 'shared/UI/Button/Button'
 import cls from './HomePage.module.css'

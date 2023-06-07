@@ -26,18 +26,27 @@ from .models import (
 
     
 
-   
 class UserStageSerializer(serializers.ModelSerializer):
 
+    stages = serializers.SerializerMethodField()
+
+    def get_stages(self, user_stage):
+        return {
+            # 'stage' : 
+        }
+
     class Meta:
-        model = Stage
-        fields = ('id', 'title')
+        model = UserStage
+        fields = ('stages', 'certificate')
+
 
 class UserDetailSerializer(serializers.ModelSerializer):
 
+    user = UserStageSerializer(many=False, read_only=True)
+
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'role')
+        fields = ('first_name', 'last_name', 'email', 'role', 'user')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -210,3 +219,11 @@ class TeacherTestResultSerializer(serializers.ModelSerializer):
         model = TestResult
         fields = '__all__'
 
+
+class StageSerializer(serializers.ModelSerializer):
+
+    test = TestsSerializer(read_only=True, many=False)
+
+    class Meta:
+        model = Stage
+        fields = ('id', 'title', 'information', 'description', 'test', 'allow_unauthenticated', 'image')

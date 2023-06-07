@@ -50,6 +50,9 @@ export const UserSlice = createSlice({
         },
         setChosedTest(state, action){
             state.chosedTest = action.payload
+        },
+        setStages(state, action){
+            state.completedStages = action.payload
         }
     }
 })

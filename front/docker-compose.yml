@@ -1,0 +1,18 @@
+version: '3'
+
+services: 
+ 
+  react:
+    image: node:lts-alpine
+    volumes:
+      - ./build:/home/app
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    external: true
+
+
+

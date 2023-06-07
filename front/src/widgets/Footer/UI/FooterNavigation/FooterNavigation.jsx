@@ -8,7 +8,7 @@ const FooterNavigation = () => {
   return (
     <nav className={cls.nav}>
         <FooterTitle to={'/'}>Интернет-Грамота</FooterTitle>
-        <FooterLinks />
+        <FooterLinks className={cls.links} />
         <FooterSocial />
     </nav>
 

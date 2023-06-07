@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TestingPage.module.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,12 +25,25 @@ export const TestingPage = (props) => {
 
 
     async function EndTestHandler(){
-        dispatch(TestingSlice.actions.saveAnswers())
-        dispatch(TestingSlice.actions.finishTest())
-        dispatch(PopupsSlice.actions.showPopup(PopupNames.TESTING_RESULT))
+        if(testingType === TestingTypes.STUDENT_TESTING){
+            dispatch(TestingSlice.actions.saveAnswers())
+            dispatch(TestingSlice.actions.finishTest())
+            dispatch(PopupsSlice.actions.showPopup(PopupNames.TESTING_RESULT))
+        }else{
+            dispatch(TestingSlice.actions.saveAnswers())
+            dispatch(TestingSlice.actions.finishTest())
+            dispatch(PopupsSlice.actions.showPopup(PopupNames.TESTING_USER_RESULT))
+
+        }
 
     }
 
+    useEffect(()=>{
+        if(!test){
+            navigate(-1)
+        }
+    },[test])
+    
 
     return (
         <Main className={cls.testigPage}>
@@ -38,7 +51,7 @@ export const TestingPage = (props) => {
                 {
                     testingType !== TestingTypes.ONE_TASK_VIEW
                         ?
-                        <ProgressBar tasks={test.tasks} activeIndex={activeTask.id} className={cls.progressBar} />
+                        <ProgressBar tasks={test?.tasks} activeIndex={activeTask?.id} className={cls.progressBar} />
                         :
                         null
                 }
@@ -56,12 +69,12 @@ export const TestingPage = (props) => {
                 :
                 testingType === TestingTypes.USER_TESTING
                 ?
-                    <>
+                    <div className={cls.buttons}>
                         <CustomLink to="/tests" theme={LinkThemes.BUTTON} className={cls.link} >Вернуться к теории</CustomLink>
                         {
                             taskIndex === test.tasks.length - 1 && <SmallButton className={cls.link} onClick={EndTestHandler}> Закончить тест </SmallButton>
                         }
-                    </>
+                    </div>
                 :
                 testingType === TestingTypes.STUDENT_TESTING
                 ?

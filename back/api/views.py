@@ -31,7 +31,7 @@ from .serializers import (
     TestsSerializer,
     ClassDeleteSerializer,
     TaskSerializer, 
-    UserStageSerializer,
+    StageSerializer,
     ClassesForAccessSerializer,
     TestResultSerializer,
     TeacherTestResultSerializer
@@ -454,9 +454,8 @@ class TasksView(APIView):
 
 class StagesView(generics.ListAPIView):
 
-    permission_classes = [IsAuthenticatedAndVerfyEmail]
-    serializer_class = UserStageSerializer
-    queryset = Stage.objects.all()
+    serializer_class = StageSerializer
+    queryset = Stage.objects.all().order_by('order')
 
 
 class OpenAccessForStudent(APIView):

@@ -44,5 +44,5 @@
 .disabled, .disabled:hover{
     background: var(--disabled-light-color);
     color: var(--disabled-dark-color);
-    border: none;
+    border: none !important;
 }

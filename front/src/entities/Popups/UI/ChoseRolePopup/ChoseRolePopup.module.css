@@ -6,18 +6,6 @@
     border-radius: 24px;
 }
 
-.chosePopup::before {
-    content: '';
-    display: block;
-    width: 277px;
-    height: 232.16px;
-    position: absolute;
-    top: 100%;
-    transform: translate(-144px, -166px);
-    left: 0;
-    background: url('../../../../app/assets//img/fox.png');
-}
-
 
 .role {
     font: var(--font-h1);
@@ -65,4 +53,50 @@
 
 .firstBlock {
     border-right: 2px solid var(--secondary-color);
+}
+
+@media screen and (max-width: 1440px) {
+    .block {
+        padding: 0 35px;
+    }
+}
+
+@media screen and (max-width: 1160px) {
+    .block {
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .chosePopup::before {
+        display: none;
+    }   
+}
+
+@media screen and (max-width: 1000px) {
+    .chosePopup {
+        position: absolute;
+        top: 0;
+        border-radius: 0;
+        flex-direction: column;
+        overflow: hidden;
+    }   
+
+    .block {
+        padding: 35px 0;
+    }
+
+    .firstBlock {
+        border-right: none;
+        border-bottom: 2px solid var(--secondary-color);
+
+    }
+}
+
+
+@media screen and (max-width: 540px) {
+    .chosePopup {
+        width: 100%;
+        padding: 25px;
+    }   
 }

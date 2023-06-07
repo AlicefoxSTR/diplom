@@ -4,3 +4,28 @@
     align-items: center;
     padding: 42px 0;
 }
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+}
+
+.burgerButton {
+    display: none;
+}
+
+
+
+@media screen and (max-width: 1030px) {
+    .burgerButton {
+        display: block;
+    }
+    
+    .social {
+        display: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+}

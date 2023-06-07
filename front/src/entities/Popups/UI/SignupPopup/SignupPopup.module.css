@@ -33,6 +33,6 @@
 }
 
 .link:hover {
-    /* text-decoration: none; */
     text-decoration-color: var(--main-color);
 }
+

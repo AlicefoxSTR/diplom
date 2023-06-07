@@ -23,24 +23,23 @@ export const Main = (props) => {
   
     //Проверяем при посещении приватных страниц авторизован ли пользователь и действителен ли его access token
     useEffect(()=>{
-      if(isPrivate){
-        fetchUserDetail(access_token)
-          .then(
-            res => {
-              if(res.error){
-                refreshToken({'refresh': refresh_token}).then(res => {
-                  if(res.data){
-                    dispatch(UserSlice.actions.refreshToken(res.data))
-                  }else if(res.error){
-                    dispatch(UserSlice.actions.logout())
-                    dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))
-                    navigate('/')
-                  }
-                })
-              }
+      fetchUserDetail(access_token)
+        .then(res => {
+            if(res.error){
+              refreshToken({'refresh': refresh_token}).then(res => {
+                if(res.data){
+                  dispatch(UserSlice.actions.refreshToken(res.data))
+                }else if(res.error){
+                if(isPrivate){
+                  dispatch(UserSlice.actions.logout())
+                  dispatch(PopupsSlice.actions.showPopup(PopupNames.SIGNIN))
+                  navigate('/')
+                }
+                }
+              })
             }
-          )
-       }
+          }
+        )
     }, [])
 
   return (

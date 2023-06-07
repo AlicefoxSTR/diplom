@@ -23,6 +23,7 @@ export const SignupPopup = (props) => {
         reset
     } = useForm({mode: 'onBlur'})
     const { role, completedStages } = useSelector(state => state.user)
+    const { result } = useSelector(state => state.testing)
     const [ registerUser ] = userApi.useRegisterUserMutation()
 
     const dispatch = useDispatch()
@@ -61,7 +62,7 @@ export const SignupPopup = (props) => {
       };
 
     return (
-        <PopupBoard className={ClassNames(cls.signinPopup, {}, [className])}>
+        <PopupBoard className={ClassNames(cls.signupPopup, {}, [className])}>
             <PopupNavigation />
             <h1 className={cls.title}>
                 Регистрация

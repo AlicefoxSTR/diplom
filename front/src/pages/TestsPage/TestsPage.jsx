@@ -2,12 +2,16 @@ import React from 'react'
 import { Main, MainNavigation } from '../../widgets/Main'
 import { TestCard } from 'widgets/TestCard/TestCard'
 import cls from './TestsPage.module.css'
-import { useSelector } from 'react-redux'
+import { testsApi } from 'entities/Tests'
+import { Loader } from 'shared/UI/Loader/Loader'
 
 
 export const TestsPage = () => {
 
-  const { tests } = useSelector(state => state.tests)
+
+  const { data: stages, isLoading, isError, error } = testsApi.useFetchStagesQuery({refetchOnFocus: true})
+
+  console.log(error)
 
 
   return (
@@ -15,9 +19,17 @@ export const TestsPage = () => {
       <MainNavigation />
       <div className={cls.content}>
         {
-          tests.map(card => (
+         isLoading
+         ?
+         <Loader />
+         :
+         isError
+         ?
+         <span>{error.data.detail ?? ''}</span>
+         :
+          stages && stages.map(card => (
             <TestCard  className={cls.card} card={card} key={`TestCard_${card.id}`}/>
-          ) )
+          ))
         }
       </div>
     </Main>

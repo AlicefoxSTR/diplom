@@ -12,7 +12,8 @@ import { NameCreationTestPopup } from "../UI/NameCreationTestPopup/NameCreationT
 import { ChoseActionForTestPopup } from "../UI/ChoseActionForTestPopup/ChoseActionForTestPopup"
 import { MessagePopup } from "../UI/MessagePopup/MessagePopup"
 import { OpenAccessPopup } from "../UI/OpenAccessPopup/OpenAccessPopup"
-import { TestResultPopup } from "../UI/TestResultPopup/TestResultPopup"
+import { TestingStudentResultPopup } from "../UI/TestingStudentResultPopup/TestingStudentResultPopup"
+import { TestingUserResultPopup } from "../UI/TestingUserResultPopup/TestingUserResultPopup/TestingUserResultPopup"
 
 
 export const PopupNames = {
@@ -29,7 +30,8 @@ export const PopupNames = {
     CHOSE_ACTION_FOR_TEST: 'chose_action_for_test',
     OPEN_ACCESS: 'open_access',
     MESSAGE_POPUP: 'message_popup',
-    TESTING_RESULT: 'testing_result',
+    TESTING_STUDENT_RESULT: 'testing_student_result',
+    TESTING_USER_RESULT: 'testing_user_result',
 }
 
 
@@ -47,7 +49,8 @@ export const PopupBodies = {
     [PopupNames.CHOSE_ACTION_FOR_TEST]: ChoseActionForTestPopup,
     [PopupNames.MESSAGE_POPUP]: MessagePopup,
     [PopupNames.OPEN_ACCESS]: OpenAccessPopup,
-    [PopupNames.TESTING_RESULT]: TestResultPopup,
+    [PopupNames.TESTING_STUDENT_RESULT]: TestingStudentResultPopup,
+    [PopupNames.TESTING_USER_RESULT]: TestingUserResultPopup,
 
 }
 

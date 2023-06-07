@@ -15,3 +15,14 @@
     display: flex;
     align-items: center;
 }
+
+@media screen and (max-width: 1030px) {
+    .icon {
+        fill: var(--secondary-color);
+    }
+
+    .social {
+        margin-top: 30px;
+    }
+   
+}

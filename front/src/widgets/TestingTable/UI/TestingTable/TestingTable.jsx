@@ -34,23 +34,25 @@ export const TestingTable = (props) => {
         dispatch(TestingSlice.actions.prevTask())
     }
 
-    console.log(testingType)
-
     return (
         <div className={ClassNames(cls.testingTable, {}, [className])}>
             <h2 className={cls.title}>{taskIndex+1} Вопрос</h2>
-            <h2 className={cls.title}>{activeTask.question}</h2>
+            <h2 className={cls.title}>{activeTask?.question}</h2>
             <div className={cls.answers}>
                 {
-                    activeTask.type === questionTypes.CHECKBOX
+                    activeTask?.type === questionTypes.CHECKBOX
                     ?
                     <CheckboxAnswers answers={activeTask.answers} isResults={testingType === TestingTypes.RESULTS || testingType === TestingTypes.ONE_TASK_VIEW}/>
                     :
-                    activeTask.type === questionTypes.RADIO
+                    activeTask?.type === questionTypes.RADIO
                     ?
-                    <RadioAnswers answers={activeTask.answers} isResults={testingType === TestingTypes.RESULTS || testingType === TestingTypes.ONE_TASK_VIEW}/>
+                    <RadioAnswers answers={activeTask?.answers} isResults={testingType === TestingTypes.RESULTS || testingType === TestingTypes.ONE_TASK_VIEW}/>
                     :
-                    <TextAnswer answers={activeTask.answers} isResults={testingType === TestingTypes.RESULTS || testingType === TestingTypes.ONE_TASK_VIEW}/>
+                    activeTask?.type === questionTypes.TEXT
+                    ?
+                    <TextAnswer answers={activeTask?.answers} isResults={testingType === TestingTypes.RESULTS || testingType === TestingTypes.ONE_TASK_VIEW}/>
+                    :
+                    null
                 }
             </div>
             {
@@ -66,7 +68,7 @@ export const TestingTable = (props) => {
                         Назад
                     </SmallButton>
                     <SmallButton 
-                        disabled={taskIndex === test.tasks?.length - 1} 
+                        disabled={taskIndex === test?.tasks?.length - 1} 
                         theme={ButtonTheme.DARK} 
                         className={cls.button} 
                         onClick={ClickNextHandler}

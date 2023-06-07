@@ -16,6 +16,7 @@ import { CreateTestPage } from 'pages/CreateTestPage';
 import { ResultsPage } from 'pages/ResultsPage';
 import { Popups } from 'entities/Popups';
 import { TestsPage } from 'pages/TestsPage/TestsPage';
+import { StagePage } from 'pages/StagePage/StagePage';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
               <Route path='/account/my-tests' element={<AccountMyTestsPage />} />
               <Route path='/account/create-test' element={<CreateTestPage />} />
               <Route path='/tests' element={<TestsPage />} />
+              <Route path='/stage' element={<StagePage />} />
               <Route path='/for-parents' element={<ParentPage />} />
               <Route path='/for-teachers' element={<TeacherPage />} />
               <Route path='/testing' element={<TestingPage />} />

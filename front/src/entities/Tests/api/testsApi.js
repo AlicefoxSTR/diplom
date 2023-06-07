@@ -1,11 +1,11 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react'
-import { baseApiUrl } from 'shared/lib/ClassNames/ApiConfig/ApiConfig'
+import { baseApiUrl } from 'shared/lib/ApiConfig/ApiConfig'
 import { TestsSlice } from '../redux/TestsSlice'
 
 
 export const testsApi =  createApi({
     reducerPath: 'testsApi',
-    tagTypes: ['Tests', 'CustomTests'],
+    tagTypes: ['Tests', 'CustomTests', 'Stages'],
     baseQuery: fetchBaseQuery({
         baseUrl: `${baseApiUrl}/v1/`,
         headers: {
@@ -13,7 +13,9 @@ export const testsApi =  createApi({
         },
         prepareHeaders: (headers, { getState }) => {
             const token = getState().user.access_token
-            headers.set('Authorization', `Bearer ${token}`)
+            if(token){
+                headers.set('Authorization', `Bearer ${token}`)
+            } 
             return headers
         }
     }),
@@ -32,10 +34,22 @@ export const testsApi =  createApi({
                     
                 }catch(error){}
             },
-            providesTags: ['CustomTests'],
+            providesTags: ['Tests', 'CustomTests'],
         }),
-        
-        
-      
+        fetchStages: build.query({
+            query: () => ({
+                url: 'stages/'
+            }),
+            // async onQueryStarted(args, {dispatch, queryFulfilled}){
+            //     try {
+            //         const { data } = await queryFulfilled
+            //         if (data){
+            //             dispatch(TestsSlice.actions.setTests(data))
+            //         }
+                    
+            //     }catch(error){}
+            // },
+            providesTags: ['Stages'],
+        }),
     })
 })

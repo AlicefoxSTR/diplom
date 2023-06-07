@@ -5,22 +5,25 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-l=n$h+(uvvg4(l5r21q0(ql3g3l*f1oa%hb69v+121^)nwfy^z'
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get('DEBUG')))
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
+    "http://192.168.0.176:3000",
+    "http://94.43.53.181:8000",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
 CSRF_TRUSTED_ORIGINS=[
     "http://127.0.0.1:3000",
+    "http://192.168.0.176:3000",
+    "http://94.43.53.181:8000",
 ]
 
 
@@ -34,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
@@ -79,14 +83,26 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'db_internet_charter',
+#         'USER': 'internet_charter_admin',
+#         'PASSWORD': 'wqfw214fewWqdw',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_internet_charter',
-        'USER': 'internet_charter_admin',
-        'PASSWORD': 'wqfw214fewWqdw',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
 
@@ -126,12 +142,14 @@ SITE_ID = 1
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'staticfiles/'
 MEDIA_URL = 'media/'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 STATICFIELS_DIRS = [
-    BASE_DIR / "static"
+    BASE_DIR / "staticfiles"
 ]
 
 # Default primary key field type
@@ -145,7 +163,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
-
 
 CKEDITOR_CONFIGS = {
     'default': {
