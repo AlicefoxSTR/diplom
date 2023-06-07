@@ -148,9 +148,9 @@ MEDIA_URL = 'media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATICFIELS_DIRS = [
-    BASE_DIR / "staticfiles"
-]
+# STATICFIELS_DIRS = [
+#     BASE_DIR / "staticfiles"
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -160,9 +160,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #CKEditor configs
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_BASEPATH = "/staticfiles/ckeditor/ckeditor/"
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_UPLOAD_PATH = "media/uploads/"
 
 CKEDITOR_CONFIGS = {
     'default': {

@@ -4,14 +4,6 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 from .models import User, UserStage, Teacher, Student, Class, Stage, Task, Test, Answer, TestResult
 
-# Register your models here.
-class StageAdminForm(forms.ModelForm):
-    # Подключение виджета для поля теории при настройке этапов в админке
-    information = forms.CharField(label='Теоритическая информация', widget=CKEditorUploadingWidget())
-
-    class Meta:
-        model = Stage
-        fields= "__all__"
 
 
 # Регистрация модели User
@@ -46,6 +38,16 @@ class ClassAdmin(admin.ModelAdmin):
         return ', '.join([f'login: {teacher.user.username}, ФИО: {teacher.user.get_full_name()}' for teacher in obj.teachers.all()])
     teacher_name.short_description = 'Учитель'
     
+
+# Register your models here.
+class StageAdminForm(forms.ModelForm):
+    # Подключение виджета для поля теории при настройке этапов в админке
+    information = forms.CharField(label='Теоритическая информация', widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Stage
+        fields= "__all__"
+
 
 # Регистрация модели Stage
 @admin.register(Stage)

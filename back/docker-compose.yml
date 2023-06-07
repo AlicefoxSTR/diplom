@@ -11,7 +11,7 @@ services:
       - 8000:8000
     restart: unless-stopped
     volumes:
-    - back_static:/home/app/back/static
+    - back_static:/home/app/back/staticfiles
     - back_media:/home/app/back/media 
     env_file:
       - ./.env.prod
@@ -35,7 +35,9 @@ services:
 
 volumes:
   back_static:
+    external: true
   back_media:
+    external: true
   back_db_data:
 
 
