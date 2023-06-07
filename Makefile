@@ -1,10 +1,6 @@
 
 
 
-up_front:
-	cd front && docker-compose up --build -d
-down_front:
-	cd front && docker-compose down
 
 up_back:
 	cd back && docker-compose up --build -d
@@ -18,9 +14,9 @@ down_server:
 
 
 up_app: 
-	make up_server && make up_back && make up_front
+	make up_server && make up_back 
 
 down_app: 
-	make down_server && make down_back && make down_front
+	make down_server && make down_back
 
 
