@@ -12,6 +12,7 @@ export const ProfileForm = (props) => {
     const { className, rabbitView=true } = props;
     const { firstName, secondName, email, access_token } = useSelector(state => state.user)
     const [ formDisabled, setFormDisabled ] = useState(true)    
+    const [ saveUser ] = userApi.useSaveUserMutation()
 
     const {
         control, 
@@ -28,6 +29,12 @@ export const ProfileForm = (props) => {
     })
 
     function SubmitHandler(data){
+        setFormDisabled(true)
+        saveUser({formData: data, token: access_token}).then(res => {
+            if (res.data){
+                reset({first_name: data.first_name, last_name: data.last_name, email: data.email})
+            }
+        })
     }
 
     const [ fetchUser ] = userApi.useFetchUserDetailMutation()
@@ -35,8 +42,10 @@ export const ProfileForm = (props) => {
 
 
     useEffect(()=>{
-        console.log()
-        fetchUser(access_token).then(res => reset({first_name: res.data?.first_name, last_name: res.data?.last_name, email: res.data?.email}))
+        fetchUser(access_token)
+            .then(res => 
+                reset({first_name: res.data?.first_name, last_name: res.data?.last_name, email: res.data?.email})
+                )
         
     },[firstName])
     
@@ -110,9 +119,9 @@ export const ProfileForm = (props) => {
                 :
                     dirtyFields.first_name || dirtyFields.last_name
                     ?
-                    <Button type={'submit'} className={cls.button} onClick={()=>setFormDisabled(false)}  >Сохранить</Button>
+                    <Button className={cls.button}  >Сохранить</Button>
                     :
-                    <Button type={'submit'} className={cls.button} onClick={()=>setFormDisabled(true)}  >Отмена</Button>
+                    <Button className={cls.button} onClick={()=>setFormDisabled(true)}  >Отмена</Button>
 
             }
         </form>

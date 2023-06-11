@@ -51,6 +51,17 @@ export const userApi =  createApi({
                 }
             })
         }),
+        saveUser: build.mutation({
+            query: (data) => ({
+                url: 'v1/user/',
+                method: 'PATCH',
+                body: JSON.stringify(data.formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${data.token}`
+                }
+            })
+        }),
     }),
 
 })

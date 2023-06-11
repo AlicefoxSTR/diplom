@@ -94,7 +94,20 @@ class UserView(APIView):
         if(user_serializer):
             return Response(user_serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response({"message": "Ошибка"})
+            return Response({"message": "Ошибка получения данных пользователя."}, status=status.HTTP_400_BAD_REQUEST)
+        
+    def patch(self, request):
+
+        # try: 
+            user = self.request.user
+            user.first_name = request.data['first_name']
+            user.last_name = request.data['last_name']
+            user.save()
+            return Response({"message": "Данные успешно сохранены."}, status=status.HTTP_200_OK)
+
+        # except:
+            # return Response({"message": "Ошибка сохранения данных пользователя."}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ClassListView(generics.ListAPIView):
 
