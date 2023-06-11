@@ -87,7 +87,11 @@ export const PopupsSlice = createSlice({
         },
         openMessage(state, action){
             state.message = action.payload
+            if(state.activePopup){
+                state.previousPopups.push(state.activePopup)
+            }
             state.activePopup = PopupNames.MESSAGE_POPUP
+            
         }   
     }
 })

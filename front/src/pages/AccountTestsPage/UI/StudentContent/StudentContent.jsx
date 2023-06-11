@@ -9,15 +9,19 @@ import { Loader } from 'shared/UI/Loader/Loader';
 
 export const StudentContent = (props) => {
     const { className } = props;
-
     const { role } = useSelector(state=>state.user)
 
 
-    const [ fetchTests, { data, isLoading }] = testsApi.useLazyFetchTestsQuery({role: role, custom: 'true'})
+    const [ fetchTests, { data, isLoading } ] = testsApi.useLazyFetchTestsQuery({
+        "role": role
+    })
+    
 
-    useEffect(()=>{
-        fetchTests({role: role, custom: 'true'})
-    },[])
+    useEffect(() => {
+        fetchTests({
+            "role": role
+        })
+    }, [])
 
     return (
         <div className={ClassNames(cls.studentContent, {}, [className])}>

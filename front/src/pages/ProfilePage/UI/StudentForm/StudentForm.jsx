@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './StudentForm.module.css';
 import { FormInputRow } from 'widgets/FormInputRow/FormInputRow';
-import { userApi } from 'entities/User/api/UserApi';
 import { useSelector } from 'react-redux';
 
 export const StudentForm = (props) => {
     const { className } = props;
     const { firstName, secondName } = useSelector(state => state.user)
+
 
     return (
         <div className={ClassNames(cls.ProfileForm, {}, [className])}>

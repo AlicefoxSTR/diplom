@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
 import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
 import { Controller, useForm } from 'react-hook-form';
-import { emailRegEx, passwordRegEx } from 'shared/lib/regEx';
+import { emailRegEx, fioRegEx, passwordRegEx } from 'shared/lib/regEx';
 import { userApi } from 'entities/User/api/UserApi';
 import { PopupNavigation } from '../PopupNavigation/PopupNavigation';
 
@@ -22,8 +22,9 @@ export const SignupPopup = (props) => {
         setError,
         reset
     } = useForm({mode: 'onBlur'})
-    const { role, completedStages } = useSelector(state => state.user)
+    const { role } = useSelector(state => state.user)
     const { result } = useSelector(state => state.testing)
+    const { stage } = useSelector(state => state.tests)
     const [ registerUser ] = userApi.useRegisterUserMutation()
 
     const dispatch = useDispatch()
@@ -32,8 +33,9 @@ export const SignupPopup = (props) => {
     function SubmitHandler(data){
         const formData = data
         formData.role = role
-        if(completedStages){
-            formData.stages = completedStages
+        const percent = result.percent
+        if(percent && percent === 100){
+            formData.stages = [stage.id]
         }
         registerUser(formData)
             .then(res => {
@@ -72,7 +74,11 @@ export const SignupPopup = (props) => {
                     name='fio'
                     control={control}
                     rules={{
-                        required: 'Пожулайста введите имя'
+                        required: 'Пожулайста введите ФИО',
+                        pattern: {
+                            value: fioRegEx,
+                            message: 'Пожалуйста введите корректные данные: Фамилия Имя'
+                        }
                     }}
                     render={({field})=> <PopupFormRow label={"Имя"} error={errors.fio?.message} {...field} placeholder={'Иванов Иван'} className={cls.row} />}
                 />

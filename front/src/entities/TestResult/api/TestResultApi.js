@@ -33,6 +33,15 @@ export const testResultApi =  createApi({
             }),
             providesTags: ['Results']
 
-        }) 
+        }),
+        sendStageResults: build.mutation({
+            query: (data) => ({
+                url: 'stages/result/',
+                method: 'POST',
+                body: JSON.stringify(data)
+            }),
+            invalidatesTags: ['Stages']
+        }), 
+        
     }),
 })

@@ -36,19 +36,16 @@ export const testsApi =  createApi({
             },
             providesTags: ['Tests', 'CustomTests'],
         }),
-        fetchStages: build.query({
+        fetchAllStages: build.query({
             query: () => ({
                 url: 'stages/'
             }),
-            // async onQueryStarted(args, {dispatch, queryFulfilled}){
-            //     try {
-            //         const { data } = await queryFulfilled
-            //         if (data){
-            //             dispatch(TestsSlice.actions.setTests(data))
-            //         }
-                    
-            //     }catch(error){}
-            // },
+            providesTags: ['Stages'],
+        }),
+        fetchCompletedStages: build.query({
+            query: () => ({
+                url: 'stages/completed/'
+            }),
             providesTags: ['Stages'],
         }),
     })

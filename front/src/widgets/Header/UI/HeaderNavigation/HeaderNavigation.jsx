@@ -10,7 +10,7 @@ import { HeaderSocial } from '../HeaderSocial/HeaderSocial'
 
 
 export const HeaderNavigation = (props) => {
-  const { className, ...otherProps } = props
+  const { className, linkClick, ...otherProps } = props
   const { isAuthenticate, role } = useSelector(state=>state.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -22,12 +22,12 @@ export const HeaderNavigation = (props) => {
   return (
     <nav className={ClassNames(cls.nav, {}, [className])} {...otherProps}>
         <HeaderSocial className={'_mob'} />
-        <CustomLink theme="header" className={[cls.link]} to='/'>Главная</CustomLink>
+        <CustomLink theme="header" className={[cls.link]} onClick={linkClick} to='/'>Главная</CustomLink>
         {
-          role==='user' && <CustomLink theme="header" className={[cls.link]} to='/progress'>Достижения</CustomLink>
+          role==='user' && <CustomLink onClick={linkClick} theme="header" className={[cls.link]} to='/progress'>Достижения</CustomLink>
         }
         
-        <CustomLink theme="header" className={[cls.link]} to='/profile'>Профиль</CustomLink>
+        <CustomLink onClick={linkClick} theme="header" className={[cls.link]} to='/profile'>Профиль</CustomLink>
         {
           isAuthenticate && <SmallButton 
             theme={SmallButtonTheme.LIGHT} 

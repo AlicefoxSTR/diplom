@@ -3,6 +3,7 @@
     min-width: auto;
     flex: none;
     padding-top: 82px;
+    max-width: 35vw;
 }
 
 .messagePopup::before {

@@ -6,10 +6,11 @@ import { Button } from 'shared/UI/Button/Button';
 import { useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import { emailRegEx } from 'shared/lib/regEx';
+import { userApi } from 'entities/User';
 
 export const ProfileForm = (props) => {
     const { className, rabbitView=true } = props;
-    const { firstName, secondName, email } = useSelector(state => state.user)
+    const { firstName, secondName, email, access_token } = useSelector(state => state.user)
     const [ formDisabled, setFormDisabled ] = useState(true)    
 
     const {
@@ -22,11 +23,23 @@ export const ProfileForm = (props) => {
         defaultValues: {
             first_name: firstName,
             last_name: secondName,
+            email: email
         }
     })
 
     function SubmitHandler(data){
     }
+
+    const [ fetchUser ] = userApi.useFetchUserDetailMutation()
+
+
+
+    useEffect(()=>{
+        console.log()
+        fetchUser(access_token).then(res => reset({first_name: res.data?.first_name, last_name: res.data?.last_name, email: res.data?.email}))
+        
+    },[firstName])
+    
 
 
 
@@ -36,9 +49,9 @@ export const ProfileForm = (props) => {
             <Controller 
                 name='first_name'
                 control={control}
-                defaultValue={firstName}
+                defaultValue={firstName }
                 render={({field})=>  <FormInputRow 
-                    { ...field }
+                { ...field }
                     theme={'border'} 
                     id={'firstname'} 
                     placeholder='Иван' 

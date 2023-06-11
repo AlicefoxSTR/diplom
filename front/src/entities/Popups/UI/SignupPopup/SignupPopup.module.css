@@ -1,4 +1,11 @@
 
+.signupPopup{
+    min-height: 100vh;
+    position: absolute;
+    justify-content: center;
+    top: 0;
+}
+
 .title {
     text-align: center;
     margin: 0 auto;

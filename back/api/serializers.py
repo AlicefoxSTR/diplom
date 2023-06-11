@@ -144,13 +144,13 @@ class TaskSerializer(serializers.ModelSerializer):
 
     type = serializers.CharField(source='question_type')
     question = serializers.CharField(source='question_text')
-    answers = serializers.SerializerMethodField()
     isPersonal = serializers.BooleanField(source='is_custom')
+    answers = serializers.SerializerMethodField()
 
     def get_answers(self, task):
 
         answers = []
-        for answer in task.possible_answers.all():
+        for answer in task.possible_answers.all().order_by('?'):
             answers.append({
                 "id": answer.id,
                 "text": answer.text,
@@ -169,13 +169,13 @@ class TaskSerializer(serializers.ModelSerializer):
 class TestsSerializer(serializers.ModelSerializer):
 
     id = serializers.IntegerField(read_only=False)
+    
     tasks = TaskSerializer(read_only=True, many=True)
     title = serializers.CharField(source='name')
 
     class Meta: 
         model = Test
         fields = ['id', 'tasks', 'title', 'description', 'creator']
-
 
 
 class ClassesForAccessSerializer(serializers.ModelSerializer):
@@ -223,6 +223,8 @@ class TeacherTestResultSerializer(serializers.ModelSerializer):
 class StageSerializer(serializers.ModelSerializer):
 
     test = TestsSerializer(read_only=True, many=False)
+    
+
 
     class Meta:
         model = Stage

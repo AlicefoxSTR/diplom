@@ -15,11 +15,11 @@ export const StudentContent = (props) => {
     const { role } = useSelector(state => state.user)
     const { activeTestsFilter } = useSelector(state => state.results)
     const [ getResults , { data: results, isLoading }] = testResultApi.useLazyGetResultsQuery({role: role})
-    const [fetchTests, { data: tests, isLoading: testLoading}] = testsApi.useLazyFetchTestsQuery({role: role, custom: 'true'})
+    const [fetchTests, { data: tests, isLoading: testLoading}] = testsApi.useLazyFetchTestsQuery({role: role})
 
     
     useEffect(()=>{
-        fetchTests({role: role, custom: 'true'})
+        fetchTests({role: role})
         if(activeTestsFilter){
             getResults({role: role, test: activeTestsFilter})
         }else{

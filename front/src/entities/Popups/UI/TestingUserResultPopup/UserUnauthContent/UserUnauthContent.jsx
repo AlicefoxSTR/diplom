@@ -7,6 +7,10 @@ import { useNavigate } from 'react-router';
 import { Button } from 'shared/UI/Button/Button';
 import { ButtonTheme } from 'shared/UI/Button/Button';
 import { UserSlice } from 'entities/User';
+import { PopupBoard } from 'widgets/PopupBoard/PopupBoard';
+import { PopupNavigation } from '../../PopupNavigation/PopupNavigation';
+import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
+import { TestingSlice } from 'entities/Testing';
 
 export const UserUnauthContent = (props) => {
     const { className } = props;
@@ -36,11 +40,14 @@ export const UserUnauthContent = (props) => {
         dispatch(PopupsSlice.actions.closePopup())
     }
 
-    
+    function CloseHandler(){
+        dispatch(TestingSlice.actions.clearTesting())
+    }
 
 
     return (
-        <>
+        <PopupBoard  className={ClassNames(cls.testingUserResultPopup, {}, [className])}>
+            <PopupNavigation handler={CloseHandler} />
             <h2 className={cls.title}>Упс! Ты не зарегистрирован!</h2>
             <p className={cls.text}>Чтобы сохранить прогресс, а также получить доступ к новым испытаниям необходимо войти или зарегистрироваться.</p>
             <SmallButton 
@@ -58,6 +65,6 @@ export const UserUnauthContent = (props) => {
                 Войти
             </SmallButton>
             <Button  theme={ButtonTheme.CLEAR} onClick={()=>BackHomeHandler()}>Вернуться на главную</Button>                        
-        </>
+        </PopupBoard>
  );
 }

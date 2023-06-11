@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Main, MainNavigation } from '../../widgets/Main'
 import { TestCard } from 'widgets/TestCard/TestCard'
 import cls from './TestsPage.module.css'
@@ -9,10 +9,14 @@ import { Loader } from 'shared/UI/Loader/Loader'
 export const TestsPage = () => {
 
 
-  const { data: stages, isLoading, isError, error } = testsApi.useFetchStagesQuery({refetchOnFocus: true})
+  const [fetchStages, { data: stages, isLoading, isError, error }] = testsApi.useLazyFetchAllStagesQuery({refetchOnFocus: true})
+  const [fetchCompletedStages, { data: completedStages }] = testsApi.useLazyFetchCompletedStagesQuery()
 
-  console.log(error)
 
+  useEffect(()=>{
+    fetchStages()
+    fetchCompletedStages()
+  },[])
 
   return (
     <Main>
@@ -27,8 +31,13 @@ export const TestsPage = () => {
          ?
          <span>{error.data.detail ?? ''}</span>
          :
-          stages && stages.map(card => (
-            <TestCard  className={cls.card} card={card} key={`TestCard_${card.id}`}/>
+          stages && stages.map((card, index) => (
+            <TestCard  
+              className={cls.card} 
+              active={completedStages && completedStages.length  >= index} 
+              card={card} 
+              key={`TestCard_${card.id}`}
+            />
           ))
         }
       </div>

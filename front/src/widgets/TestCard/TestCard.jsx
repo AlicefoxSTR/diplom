@@ -11,7 +11,8 @@ import { TestsSlice, testsApi } from 'entities/Tests';
 export const TestCard = (props) => {
     const { 
         className,
-        card
+        card,
+        active
     } = props;
 
     const [ disabled, setDisabled ] = useState(false)
@@ -21,7 +22,6 @@ export const TestCard = (props) => {
     const disptach = useDispatch()
 
     const { isAuthenticate } = useSelector(state => state.user)
-    const { data: stages } = testsApi.useFetchStagesQuery()
 
     function ClickHandler(){
         disptach(TestsSlice.actions.setStage(card))
@@ -32,6 +32,7 @@ export const TestCard = (props) => {
         if(!card.allow_unauthenticated && !isAuthenticate){
             setDisabled(true)
         }
+        console.log(active)
     },[])
 
     return (
@@ -46,7 +47,7 @@ export const TestCard = (props) => {
                 </p>
             </div>
             <SmallButton 
-                disabled={disabled} 
+                disabled={disabled || !active} 
                 theme={SmallButtonTheme.DARK} 
                 onClick={()=>ClickHandler()}
                 className={ClassNames(cls.button, {}, [])} 

@@ -15,7 +15,7 @@ export const HeaderSocial = (props) => {
         <CustomLink to='https://vk.com/lisooooooo'  className={cls.link}>
           <IconVK className={cls.icon} size={'28px'} />
         </CustomLink>
-        <CustomLink to='https://t.me/sheverdin_mikhail'  className={cls.link}>
+        <CustomLink to='https://t.me/li_sa_s'  className={cls.link}>
           <IconTG className={cls.icon} size={'22.61px'} />
         </CustomLink>
     </div>

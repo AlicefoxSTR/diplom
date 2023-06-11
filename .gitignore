@@ -37,3 +37,5 @@ questions.txt
 discuss_about.txt
 
 **/.env**
+
+**/docker-compose.dev.yml

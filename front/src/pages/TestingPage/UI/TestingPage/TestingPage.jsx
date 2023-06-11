@@ -70,7 +70,7 @@ export const TestingPage = (props) => {
                 testingType === TestingTypes.USER_TESTING
                 ?
                     <div className={cls.buttons}>
-                        <CustomLink to="/tests" theme={LinkThemes.BUTTON} className={cls.link} >Вернуться к теории</CustomLink>
+                        <CustomLink to={'/stage'} theme={LinkThemes.BUTTON} className={cls.link} >Вернуться к теории</CustomLink>
                         {
                             taskIndex === test.tasks.length - 1 && <SmallButton className={cls.link} onClick={EndTestHandler}> Закончить тест </SmallButton>
                         }

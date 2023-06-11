@@ -63,9 +63,9 @@ class UserRegistrationView(generics.CreateAPIView):
             user.save()
         elif request.data['role'] == 'user' or 'role' not in request.data:
             user_stage = UserStage.objects.create(user=user)
-            if 'stage' in request.data:
-                stages_passed = Stage.objects.filter(id__in = request.data['stage'])
-                stages_not_passed = Stage.objects.exclude(id__in = request.data['stage'])
+            if 'stages' in request.data:
+                stages_passed = Stage.objects.filter(id__in = request.data['stages'])
+                stages_not_passed = Stage.objects.exclude(id__in = request.data['stages'])
                 user_stage.stages_passed.set(stages_passed)
                 user_stage.stages_not_passed.set(stages_not_passed)
             user_stage.save()
@@ -246,21 +246,21 @@ class TestsView(APIView):
 
     def get(self, request):
         
-        if(request.GET.get('custom') == 'true'):
-            if(request.GET.get('role')=='teacher'):
-                tests = Test.objects.filter(is_custom=True, creator=self.request.user.teacher).prefetch_related('tasks', 'tasks__possible_answers')
-        elif(request.GET.get('custom') == 'false'):
-            tests = Test.objects.filter(is_custom=False).prefetch_related('tasks', 'tasks__possible_answers')
-        else:
-            if(request.GET.get('role')=='teacher'):
-                tests = Test.objects.filter(Q(creator=self.request.user.teacher) | Q(is_custom=False)).prefetch_related('tasks', 'tasks__possible_answers')
-            elif(request.GET.get('role')=='student'):
-                tests = Test.objects.filter(id__in=self.request.user.student.classroom.tests.all()).prefetch_related('tasks', 'tasks__possible_answers')
-        tests_serializer = TestsSerializer(tests, many=True)
-
-        if tests:
+        try:
+            if(request.GET.get('custom') == 'true'):
+                if(request.GET.get('role')=='teacher'):
+                    tests = Test.objects.filter(is_custom=True, creator=self.request.user.teacher).prefetch_related('tasks', 'tasks__possible_answers')
+            elif(request.GET.get('custom') == 'false'):
+                tests = Test.objects.filter(is_custom=False).prefetch_related('tasks', 'tasks__possible_answers')
+            else:
+                if(request.GET.get('role')=='teacher'):
+                    tests = Test.objects.filter(Q(creator=self.request.user.teacher) | Q(is_custom=False)).prefetch_related('tasks', 'tasks__possible_answers')
+                elif(request.GET.get('role')=='student'):
+                    tests = Test.objects.filter(id__in=self.request.user.student.classroom.tests.all()).prefetch_related('tasks', 'tasks__possible_answers')
+            tests_serializer = TestsSerializer(tests, many=True)
             return Response(tests_serializer.data, status=status.HTTP_200_OK)
-        else:
+
+        except:
             return Response({"message": "Ошибка получения списка тестов."}, status=status.HTTP_400_BAD_REQUEST)
 
     
@@ -452,11 +452,6 @@ class TasksView(APIView):
             return Response({"message": "Ошибка сохранения заданий."}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class StagesView(generics.ListAPIView):
-
-    serializer_class = StageSerializer
-    queryset = Stage.objects.all().order_by('order')
-
 
 class OpenAccessForStudent(APIView):
 
@@ -567,3 +562,53 @@ class TestResultView(generics.ListCreateAPIView):
                 {"message": "Ошибка сохранения результата выполнения теста."}, status=status.HTTP_400_BAD_REQUEST
             )
 
+class StagesView(generics.ListAPIView):
+
+    serializer_class = StageSerializer
+    queryset = Stage.objects.all().order_by('order')
+
+    
+class CompletedStagesView(generics.ListAPIView):
+
+    serializer_class = StageSerializer
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+
+
+    def get_queryset(self):
+        queryset = self.request.user.user.stages_passed.all()
+        return queryset
+
+class StageResult(APIView):
+
+    permission_classes = [IsAuthenticatedAndVerfyEmail]
+
+    def post(self, request):
+        try:
+            user_stages = self.request.user.user
+            stage_passed = Stage.objects.get(id=request.data['id'])
+            user_stages.stages_passed.add(stage_passed)
+
+            stages_not_passed = Stage.objects.exclude(id__in = user_stages.stages_passed.all())
+            user_stages.stages_not_passed.set(stages_not_passed)
+            user_stages.save()
+            if user_stages.stages_not_passed.exists():
+                return Response(
+                    {
+                        "message": "Этапы успешно сохранены!",
+                        'sertificate': False
+                    },
+                    status=status.HTTP_201_CREATED,
+                )
+            else:
+                return Response(
+                    {
+                        "message": "Ты прошёл все испытания и получаешь именной сертификат!",
+                        'sertificate': True
+                    },
+                    status=status.HTTP_201_CREATED,
+                )
+        except:
+            return Response(
+                {"message": "Ошибка сохранения этапа."}, status=status.HTTP_400_BAD_REQUEST
+            )
+    

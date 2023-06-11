@@ -26,7 +26,11 @@ export const Header = () => {
         <HeaderTitle to='/'>
           Интернет-грамота
         </HeaderTitle>
-        <HeaderNavigation className={ClassNames(cls.nav, {[cls.hidden]: !btnActive}, [])} onClick = {()=>setBtnActive(prev=>!prev)}/>
+        <HeaderNavigation className={ClassNames(cls.nav, {[cls.hidden]: !btnActive}, [])} linkClick = {()=>{
+          if(btnActive){
+            setBtnActive(false)
+          }
+        }}/>
         <HeaderSocial className={ClassNames(cls.social, {}, [])} />
         <BurgerButton 
           active={btnActive}  
