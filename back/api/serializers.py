@@ -28,13 +28,6 @@ from .models import (
 
 class UserStageSerializer(serializers.ModelSerializer):
 
-    stages = serializers.SerializerMethodField()
-
-    def get_stages(self, user_stage):
-        return {
-            # 'stage' : 
-        }
-
     class Meta:
         model = UserStage
         fields = ('stages', 'certificate')

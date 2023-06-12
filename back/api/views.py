@@ -588,8 +588,8 @@ class CompletedStagesView(generics.ListAPIView):
 
 
     def get_queryset(self):
-        queryset = self.request.user.user.stages_passed.all()
-        return queryset
+        user_stage = UserStage.objects.get(user=self.request.user)
+        return user_stage.stages_passed.all()
 
 class StageResult(APIView):
 

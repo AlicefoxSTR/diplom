@@ -9,6 +9,8 @@ import { Loader } from 'shared/UI/Loader/Loader'
 export const TestsPage = () => {
 
 
+  // const { data: stages, isLoading, isError, error } = testsApi.useFetchAllStagesQuery({refetchOnFocus: true})
+  // const { data: completedStages } = testsApi.useFetchCompletedStagesQuery()
   const [fetchStages, { data: stages, isLoading, isError, error }] = testsApi.useLazyFetchAllStagesQuery({refetchOnFocus: true})
   const [fetchCompletedStages, { data: completedStages }] = testsApi.useLazyFetchCompletedStagesQuery()
 
@@ -16,7 +18,7 @@ export const TestsPage = () => {
   useEffect(()=>{
     fetchStages()
     fetchCompletedStages()
-  },[completedStages, stages])
+  },[])
 
   return (
     <Main>

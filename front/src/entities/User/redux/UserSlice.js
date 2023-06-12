@@ -41,11 +41,13 @@ export const UserSlice = createSlice({
             state.completedStages=[]
         },
         setUser(state, action){
+            console.log('set')
+            console.log(action.payload)
             state.firstName = action.payload.first_name
             state.secondName = action.payload.last_name
             state.role = action.payload.role
             state.email = action.payload.email
-            state.certificate = action.payload.user.certificate
+            state.certificate = action.payload.user?.certificate ?? false
         },
         getAccessToken(state){
             return state.access_token
@@ -56,7 +58,7 @@ export const UserSlice = createSlice({
         setStages(state, action){
             state.completedStages = action.payload
         },
-        setCertificate(state, action){
+        setCertificate(state){
             state.certificate = true
         },
     }
