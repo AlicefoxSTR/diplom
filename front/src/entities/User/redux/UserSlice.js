@@ -9,7 +9,8 @@ const initialState = {
     refresh_token: '',
     isAuthenticate: false,
     completedStages: [],
-    chosedTest: null
+    chosedTest: null,
+    certificate: false
 }
 
 
@@ -44,6 +45,7 @@ export const UserSlice = createSlice({
             state.secondName = action.payload.last_name
             state.role = action.payload.role
             state.email = action.payload.email
+            state.certificate = action.payload.user.certificate
         },
         getAccessToken(state){
             return state.access_token
@@ -53,6 +55,9 @@ export const UserSlice = createSlice({
         },
         setStages(state, action){
             state.completedStages = action.payload
-        }
+        },
+        setCertificate(state, action){
+            state.certificate = true
+        },
     }
 })

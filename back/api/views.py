@@ -98,15 +98,15 @@ class UserView(APIView):
         
     def patch(self, request):
 
-        # try: 
+        try: 
             user = self.request.user
             user.first_name = request.data['first_name']
             user.last_name = request.data['last_name']
             user.save()
             return Response({"message": "Данные успешно сохранены."}, status=status.HTTP_200_OK)
 
-        # except:
-            # return Response({"message": "Ошибка сохранения данных пользователя."}, status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response({"message": "Ошибка сохранения данных пользователя."}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ClassListView(generics.ListAPIView):
@@ -608,15 +608,17 @@ class StageResult(APIView):
                 return Response(
                     {
                         "message": "Этапы успешно сохранены!",
-                        'sertificate': False
+                        'certificate': False
                     },
                     status=status.HTTP_201_CREATED,
                 )
             else:
+                user_stages.certificate = True
+                user_stages.save()
                 return Response(
                     {
                         "message": "Ты прошёл все испытания и получаешь именной сертификат!",
-                        'sertificate': True
+                        'certificate': True
                     },
                     status=status.HTTP_201_CREATED,
                 )

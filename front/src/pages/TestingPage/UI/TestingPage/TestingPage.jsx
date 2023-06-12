@@ -28,7 +28,7 @@ export const TestingPage = (props) => {
         if(testingType === TestingTypes.STUDENT_TESTING){
             dispatch(TestingSlice.actions.saveAnswers())
             dispatch(TestingSlice.actions.finishTest())
-            dispatch(PopupsSlice.actions.showPopup(PopupNames.TESTING_RESULT))
+            dispatch(PopupsSlice.actions.showPopup(PopupNames.TESTING_STUDENT_RESULT))
         }else{
             dispatch(TestingSlice.actions.saveAnswers())
             dispatch(TestingSlice.actions.finishTest())

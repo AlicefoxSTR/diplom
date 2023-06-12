@@ -18,7 +18,7 @@
     left: 0;
     width: 277px;
     height: 232px;
-    background: url('../../../../app/assets/img/fox.png') center no-repeat;
+    background: url('shared/assets/img/fox.png') center no-repeat;
 }
 
 .title {

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './ClassItem.module.css';
 import { Button, ButtonTheme } from 'shared/UI/Button/Button';
-import { ReactComponent as Arrow} from 'app/assets/icons/arrow-top.svg'
+import { ReactComponent as Arrow} from 'shared/assets/icons/arrow-top.svg'
 import { useDispatch } from 'react-redux';
 import { PopupNames, PopupsSlice } from 'entities/Popups/redux/PopupsSlice';
-import {ReactComponent as Edit} from 'app/assets/icons/edit-icon.svg'
-import {ReactComponent as Cross} from 'app/assets/icons/cross-icon.svg'
+import {ReactComponent as Edit} from 'shared/assets/icons/edit-icon.svg'
+import {ReactComponent as Cross} from 'shared/assets/icons/cross-icon.svg'
 import { ClassesSlice } from 'entities/Classes/redux/ClassesSlice';
 import { classesApi } from 'entities/Classes';
 

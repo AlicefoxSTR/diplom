@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './Select.module.css';
-import { ReactComponent as Arrow} from 'app/assets/icons/arrow-top.svg'
+import { ReactComponent as Arrow} from 'shared/assets/icons/arrow-top.svg'
 import { useDispatch } from 'react-redux';
 import { NewQuestionCreateSlice } from 'entities/NewQuestionCreate';
 

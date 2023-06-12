@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import Image from 'app/assets/img/small-test-img.png'
+import Image from 'shared/assets/img/small-test-img.png'
 
 const initiatlState = {
     tests: [

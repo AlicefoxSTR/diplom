@@ -16,7 +16,7 @@ export const TestsPage = () => {
   useEffect(()=>{
     fetchStages()
     fetchCompletedStages()
-  },[])
+  },[completedStages, stages])
 
   return (
     <Main>

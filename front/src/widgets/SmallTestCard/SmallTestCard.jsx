@@ -2,7 +2,7 @@ import React from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './SmallTestCard.module.css';
 import { CustomLink, LinkThemes } from 'shared/UI/CustomLink/CustomLink';
-import Image from 'app/assets/img/test-img.png'
+import Image from 'shared/assets/img/test-img.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton';
 import { PopupsSlice } from 'entities/Popups';

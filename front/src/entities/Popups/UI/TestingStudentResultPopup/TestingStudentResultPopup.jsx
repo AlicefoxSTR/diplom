@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TestingStudentResultPopup.module.css';
 import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton';
@@ -16,12 +16,15 @@ export const TestingStudentResultPopup = (props) => {
     const navigate = useNavigate()
 
     const { result } = useSelector(state => state.testing)
+    const  [ isShowResults, setIsShowResults ] = useState(false)
 
     const [ sendResults] = testResultApi.useSendResultsMutation()
 
     function CloseHandler(){
         sendResults(result).then(() => {
-            dispatch(TestingSlice.actions.clearTesting())
+            if(isShowResults){
+                dispatch(TestingSlice.actions.clearTesting())
+            }
         })
     }
 
@@ -31,15 +34,16 @@ export const TestingStudentResultPopup = (props) => {
     }
 
     function ShowResultsHandler(){
+        setIsShowResults(true)
         dispatch(TestingSlice.actions.showResults())
         dispatch(PopupsSlice.actions.closePopup())
     }
 
     return (
         <PopupBoard closeHandler={CloseHandler} className={ClassNames(cls.testResultPopup, {}, [className])}>
-            <PopupNavigation handler={CloseHandler} />
+            <PopupNavigation />
             <h2 className={cls.title}>Поздравляем!</h2>
-            <p className={cls.text}>Ты прошёл тест на {result.correctAnweredQuestions}/{result.totalQuestions}</p>
+            <p className={cls.text}>Ты прошёл тест на {result?.correctAnweredQuestions}/{result?.totalQuestions}</p>
             <SmallButton 
                 theme={SmallButtonTheme.DARK} 
                 className={cls.button}

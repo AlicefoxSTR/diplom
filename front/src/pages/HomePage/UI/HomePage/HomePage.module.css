@@ -21,7 +21,7 @@
     content: "";
     display: block;    
     position: absolute;
-    background: url('../../../../app/assets/img/dog.png') center no-repeat;
+    background: url('shared/assets/img/dog.png') center no-repeat;
     width: 343.81px;
     height: 417.92px;
     right: -50px;

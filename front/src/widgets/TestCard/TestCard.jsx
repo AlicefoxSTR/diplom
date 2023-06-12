@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './TestCard.module.css';
-import Image from 'app/assets/img/test-img.png'
+import Image from 'shared/assets/img/test-img.png'
 import { SmallButton, SmallButtonTheme } from 'shared/UI/SmallButton/SmallButton';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,8 +31,9 @@ export const TestCard = (props) => {
     useEffect(()=>{
         if(!card.allow_unauthenticated && !isAuthenticate){
             setDisabled(true)
+        }else if(!active  && isAuthenticate){
+            setDisabled(true)
         }
-        console.log(active)
     },[])
 
     return (
@@ -47,7 +48,7 @@ export const TestCard = (props) => {
                 </p>
             </div>
             <SmallButton 
-                disabled={disabled || !active} 
+                disabled={disabled} 
                 theme={SmallButtonTheme.DARK} 
                 onClick={()=>ClickHandler()}
                 className={ClassNames(cls.button, {}, [])} 
