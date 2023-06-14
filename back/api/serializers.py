@@ -28,9 +28,10 @@ from .models import (
 
 class UserStageSerializer(serializers.ModelSerializer):
 
+
     class Meta:
         model = UserStage
-        fields = ('stages', 'certificate')
+        fields = ['certificate']
 
 
 class UserDetailSerializer(serializers.ModelSerializer):

@@ -41,8 +41,6 @@ export const UserSlice = createSlice({
             state.completedStages=[]
         },
         setUser(state, action){
-            console.log('set')
-            console.log(action.payload)
             state.firstName = action.payload.first_name
             state.secondName = action.payload.last_name
             state.role = action.payload.role
@@ -60,6 +58,10 @@ export const UserSlice = createSlice({
         },
         setCertificate(state){
             state.certificate = true
+        },
+        setFio(state, action){
+            state.firstName = action.payload.first_name
+            state.secondName = action.payload.last_name
         },
     }
 })

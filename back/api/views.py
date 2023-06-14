@@ -89,7 +89,6 @@ class UserView(APIView):
 
     
     def get(self, request):
-        
         user_serializer = UserDetailSerializer(self.request.user)
         if(user_serializer):
             return Response(user_serializer.data, status=status.HTTP_200_OK)
@@ -326,6 +325,7 @@ class TestsView(APIView):
         test_data = request.data
         try:
             test = Test.objects.get(id=test_data['id'])
+            test.name = request.data['name']
             teacher = Teacher.objects.get(user=self.request.user)
             tasks_data = test_data['tasks']
             task_list = []

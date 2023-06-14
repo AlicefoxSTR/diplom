@@ -3,16 +3,18 @@ import { ClassNames } from 'shared/lib/ClassNames/ClassNames';
 import cls from './ProfileForm.module.css';
 import { FormInputRow } from 'widgets/FormInputRow/FormInputRow';
 import { Button } from 'shared/UI/Button/Button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import { emailRegEx } from 'shared/lib/regEx';
-import { userApi } from 'entities/User';
+import { UserSlice, userApi } from 'entities/User';
 
 export const ProfileForm = (props) => {
     const { className, rabbitView=true } = props;
     const { firstName, secondName, email, access_token } = useSelector(state => state.user)
     const [ formDisabled, setFormDisabled ] = useState(true)    
     const [ saveUser ] = userApi.useSaveUserMutation()
+    const dispatch = useDispatch()
+
 
     const {
         control, 
@@ -33,6 +35,7 @@ export const ProfileForm = (props) => {
         saveUser({formData: data, token: access_token}).then(res => {
             if (res.data){
                 reset({first_name: data.first_name, last_name: data.last_name, email: data.email})
+                dispatch(UserSlice.actions.setFio({first_name: data.first_name, last_name: data.last_name}))
             }
         })
     }
