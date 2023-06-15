@@ -17,17 +17,42 @@ export const HeaderNavigation = (props) => {
 
   const LogoutHandler = () => {
     dispatch(UserSlice.actions.logout())
+    linkClick()
     navigate('/')
   }
   return (
     <nav className={ClassNames(cls.nav, {}, [className])} {...otherProps}>
         <HeaderSocial className={'_mob'} />
-        <CustomLink theme="header" className={[cls.link]} onClick={linkClick} to='/'>Главная</CustomLink>
+        <CustomLink onClick={linkClick}  theme="header" className={cls.link} to='/'>Главная</CustomLink>
+        <CustomLink onClick={linkClick}  theme="header" className={cls.link} to='/profile'>Профиль</CustomLink>
         {
-          role==='user' && <CustomLink onClick={linkClick} theme="header" className={[cls.link]} to='/progress'>Достижения</CustomLink>
+          role==='user' 
+            ?
+            <>
+              <CustomLink onClick={linkClick}  theme="header" className={cls.link} to='/progress'>Достижения</CustomLink>
+              <CustomLink onClick={linkClick}  theme="header" className={ClassNames(cls.link, {}, ['_mob'])} to={'/tests'}>Испытания</CustomLink>
+              <CustomLink onClick={linkClick}  theme="header" className={ClassNames(cls.link, {}, ['_mob'])} to={'/for-parents'}>Для родителей</CustomLink>
+            </>
+            :
+            role === 'student'
+            ?
+            <>
+            <CustomLink onClick={linkClick}  theme="header" className={ClassNames(cls.link, {}, ['_mob'])} to='/account'>Личный кабинет</CustomLink>
+            <CustomLink onClick={linkClick}  theme="header" className={ClassNames(cls.link, {}, ['_mob'])} to='/account/tests'>Тесты</CustomLink>
+            </>
+            :
+            role === 'teacher'
+            ?
+            <>
+              <CustomLink onClick={linkClick}  theme="header" className={ClassNames(cls.link, {}, ['_mob'])} to='/account'>Личный кабинет</CustomLink>
+              <CustomLink onClick={linkClick}  theme="header" className={ClassNames(cls.link, {}, ['_mob'])} to='/account/tests'>Тесты</CustomLink>
+              <CustomLink onClick={linkClick}  theme="header" className={ClassNames(cls.link, {}, ['_mob'])} to='/account/my-tests'>Мои тесты</CustomLink>
+              <CustomLink onClick={linkClick}  theme="header" className={ClassNames(cls.link, {}, ['_mob'])} to='/account/results'>Результаты</CustomLink>
+            </>
+            :
+            null  
         }
         
-        <CustomLink onClick={linkClick} theme="header" className={[cls.link]} to='/profile'>Профиль</CustomLink>
         {
           isAuthenticate && <SmallButton 
             theme={SmallButtonTheme.LIGHT} 

@@ -48,23 +48,32 @@
 }
 
 
+.buttons {
+    display: flex;
+}
+
+
 .button {
     border: 3px solid var(--secondary-color);
     margin: 30px 5px 0 5px
 }
 
 .row {
+    display: flex;   
+    justify-content: space-between;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+.information {
     display: flex;
     align-items: center;
     padding: 20px 0;
     font: var(--font-h2);
-    border-bottom: 3px solid var(--secondary-color);
-
-
 }
 
 .fio {
     flex-grow: 1;
+    margin-right: 15px;
 }
 
 .login {
@@ -84,4 +93,49 @@
 .icon {
     margin: 0 7px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 950px) {
+
+    .classItem {
+        width: 100%;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width: 620px) {
+
+ 
+    .row {
+        flex-direction:  row;
+        justify-content: space-between;
+    }
+
+    .information {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .information > span {
+        margin-bottom: 15px;
+    }
+
+    .controlls {
+        margin-bottom: 20px;
+        align-self: center;
+    }
+}
+
+
+@media screen and (max-width: 420px) {
+
+ 
+    .row {
+        flex-direction:  column;
+        align-items: flex-start;
+    }
 }

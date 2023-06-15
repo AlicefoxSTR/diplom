@@ -24,7 +24,7 @@ export const ResultsPage = (props) => {
 
 
     useEffect(()=>{
-        fetchTests({role: role}).then(res => console.log(res.data))
+        fetchTests({role: role})
     }, [])
 
 

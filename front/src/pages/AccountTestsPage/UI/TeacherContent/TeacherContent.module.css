@@ -9,3 +9,12 @@
     margin-top: 60px;
     align-self: center;
 }
+
+
+@media screen and (max-width: 950px) {
+
+    .teacherContent {
+        align-items: center;
+        flex-direction: column;
+    }
+}

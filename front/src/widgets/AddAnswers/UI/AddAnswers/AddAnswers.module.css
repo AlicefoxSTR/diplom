@@ -22,3 +22,14 @@ background-color: var(--main-color); /* белый цвет дорожки */
 background-color: var(--secondary-color); /* основной цвет скролла */
 border-radius: 6px; /* скругление краев */
 }
+
+
+@media screen and (max-width: 950px) {
+    .addAnswers {
+        max-height: 25vh;
+        padding: 0;
+        padding-right: 10px;
+    }
+    
+    
+}

@@ -37,6 +37,7 @@
 @media screen and (max-width: 820px) {
     .cardInfo {
         width: 100%;
+        padding: 30px 30px;
     }
     .cardInfo:nth-child(2n+2){
         margin: auto;

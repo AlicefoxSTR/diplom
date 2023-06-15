@@ -12,3 +12,12 @@
 .card {
     margin: 25px 8px;
 }
+
+
+@media screen and (max-width: 950px) {
+
+    .testCardsList {
+        margin: 0;
+        flex-direction: column;
+    }
+}

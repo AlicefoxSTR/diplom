@@ -3,6 +3,7 @@
 }
 .link {
     margin: 0 33px;
+    text-align: center;
 }
 
 
@@ -23,6 +24,8 @@
         opacity: 1;
         left: 0;
         margin: 0;
+        overflow-y: auto;
+        padding: 0 0 100px 0;
     }
 
     
@@ -30,7 +33,7 @@
     .link {
         font-size: 32px;
         color: var(--secondary-color);
-        padding: 20px 50px;
+        padding: 20px 30px;
     } 
     
 }

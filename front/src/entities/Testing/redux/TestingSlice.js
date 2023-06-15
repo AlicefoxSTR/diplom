@@ -33,8 +33,6 @@ export const TestingSlice = createSlice({
             state.testingType = action.payload.type
             state.activeTask = action.payload.activeTask ?? state.test.tasks[0] 
             state.taskIndex = action.payload.taskIndex ?? 0
-
-            console.log(state.activeTask)
         },
         nextTask(state){
             if(state.taskIndex < state.test.tasks.length){

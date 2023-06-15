@@ -15,3 +15,24 @@
 .question {
     flex-grow: 1;
 }
+
+
+@media screen and (max-width: 950px) {
+    .taskRow {
+        flex-direction: column;
+    }
+
+    .number {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    .question {
+        margin-bottom: 15px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+    
+}

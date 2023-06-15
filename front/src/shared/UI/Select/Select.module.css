@@ -93,3 +93,13 @@
     display: block;
 
 }
+
+
+
+@media screen and (max-width: 950px) {
+    .select {
+        min-width: auto;
+    }
+    
+    
+}

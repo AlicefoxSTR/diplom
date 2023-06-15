@@ -34,3 +34,40 @@
 .buttons {
     display: flex;
 }
+
+
+@media screen and (max-width: 950px) {
+
+    
+    .smallTestCard{
+        flex: auto;
+        justify-content: space-between;
+        margin: 0;
+        margin-bottom: 40px;
+    }
+
+    .block {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+}
+
+@media screen and (max-width: 570px) {
+
+    .smallTestCard{
+        flex-direction: column;
+    }
+
+    .img {
+        margin-bottom: 15px;
+    }
+
+    .block {
+        padding: 0;
+        width: 100%;
+        flex-direction: column;
+    }
+
+}

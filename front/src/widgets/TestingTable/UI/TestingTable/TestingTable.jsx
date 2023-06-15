@@ -58,7 +58,7 @@ export const TestingTable = (props) => {
             {
                 testingType !== TestingTypes.ONE_TASK_VIEW
                 ?
-                <div>
+                <div className={cls.buttons}>
                     <SmallButton 
                         disabled={taskIndex === 0} 
                         theme={SmallButtonTheme.DARK} 

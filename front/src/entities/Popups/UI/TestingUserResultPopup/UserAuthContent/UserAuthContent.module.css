@@ -21,6 +21,7 @@
 
 .icon {
     margin: 30px 0;
+    width: 20%;
 }
 
 .text {
@@ -37,5 +38,12 @@
     text-align: center;
 }
 
+
+@media screen and (max-width: 650px) {
+    .icon {
+        width: 30%;
+    }
+    
+}
 
 

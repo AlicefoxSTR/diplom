@@ -61,9 +61,11 @@ export const ClassItem = (props) => {
                 {
                     item.students.map(student => (
                         <div className={cls.row} key={`classItemStuddent_${student.id}`} >
-                            <span className={cls.fio}>{student.fio}</span> 
-                            <span className={cls.login}>Логин: {student.login}</span> 
-                            <span className={cls.password}>Пароль: {student.password}</span> 
+                            <div className={cls.information}>
+                                <span className={cls.fio}>{student.fio}</span> 
+                                <span className={cls.login}>Логин: {student.login}</span> 
+                                <span className={cls.password}>Пароль: {student.password}</span> 
+                            </div>
                             <div className={cls.controlls}>
                                 <Edit className={cls.icon} onClick={()=>editHandler({
                                     class: item.id, 
@@ -76,16 +78,18 @@ export const ClassItem = (props) => {
                         </div> 
                     ))
                 }
-                <Button
-                    className={cls.button} 
-                    theme={ButtonTheme.DARK}
-                    onClick={()=>openPopuptHandler(item.id)} 
-                >Добавить ученика</Button>
-                <Button
-                    className={ClassNames(cls.button, {}, [])} 
-                    theme={ButtonTheme.DARK}
-                    onClick={()=>deleteClassHandler(item.id)} 
-                >Удалить класс</Button>
+                <div className={cls.buttons} >
+                    <Button
+                        className={cls.button} 
+                        theme={ButtonTheme.DARK}
+                        onClick={()=>openPopuptHandler(item.id)} 
+                    >Добавить ученика</Button>
+                    <Button
+                        className={ClassNames(cls.button, {}, [])} 
+                        theme={ButtonTheme.DARK}
+                        onClick={()=>deleteClassHandler(item.id)} 
+                    >Удалить класс</Button>
+                </div>
             </div>
         </div>
  );

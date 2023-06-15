@@ -19,3 +19,18 @@
     align-items: center;
     margin: 0 -10px;
 }
+
+
+@media screen and (max-width: 550px) {
+    .buttons {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .link {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        margin-bottom: 15px;
+    }
+}

@@ -5,7 +5,6 @@ import { Main, MainNavigation } from 'widgets/Main'
 import cls from './ProgressPage.module.css'
 import { ReactComponent as ActiveMedal } from 'shared/assets/icons/active-medal-icon.svg'
 import { ReactComponent as UnactiveMedal } from 'shared/assets/icons/unactive-medal-icon.svg'
-import { ClassNames } from 'shared/lib/ClassNames/ClassNames'
 import { useSelector } from 'react-redux'
 import { Certificate } from 'widgets/Certificate/Certificate'
 
@@ -19,7 +18,8 @@ export const ProgressPage = () => {
 
   useEffect(()=>{
     fetchStages()
-    fetchCompletedStages()
+    fetchCompletedStages().then(res => console.log(res))
+    console.log(completedStages)
   },[completedStages, stages])
 
 
@@ -47,9 +47,7 @@ export const ProgressPage = () => {
           </div>
           <p className={cls.text}>Твой сертификат:</p>
           <div className={cls.imgContainer}>
-            {/* <img src={Certificate} className={ClassNames(cls.certificate, {}, [])} alt="" /> */}
-            <Certificate name={`${secondName} ${firstName}`} certificate={certificate} />
-            { !certificate && <div className={ClassNames(cls.disabled, {}, [])}></div> }
+            <Certificate name={`${secondName} ${firstName}`} disabled={!certificate} />
           </div>
         </div>
     </Main>

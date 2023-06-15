@@ -16,6 +16,7 @@
     background: transparent;
     font: var(--font-h3);
     color: #fff;
+    width: 100%;
 }
 
 .button {

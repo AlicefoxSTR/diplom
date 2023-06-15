@@ -10,7 +10,7 @@
     text-align: center;
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 950px) {
 
     .nav {
         flex-direction: column;
@@ -19,6 +19,15 @@
 
     .link:not(:last-child) {
         margin-bottom: 20px;
+    }
+
+}
+
+@media screen and (max-width: 580px) {
+
+    .nav {
+        flex-direction: column;
+        align-items: normal;
     }
 
 }

@@ -13,3 +13,11 @@
 .table {
     padding-left: 20px;
 }
+
+@media screen and (max-width: 950px) {
+
+    .filter {
+        width: 100%;
+    }
+    
+}
