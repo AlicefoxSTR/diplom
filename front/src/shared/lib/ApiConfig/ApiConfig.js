@@ -4,5 +4,5 @@
 
 
 //prod URL
-export const baseUrl = 'http://93.159.221.90/api'
+export const baseUrl = 'http://93.159.221.90'
 export const baseApiUrl = 'http://93.159.221.90/api'
