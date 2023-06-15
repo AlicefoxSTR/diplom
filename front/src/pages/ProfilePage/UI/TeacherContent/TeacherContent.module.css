@@ -20,14 +20,7 @@
     border-radius: 24px;
 }
 
-.button:hover > .icon {
-    fill: var(--secondary-color);
-}
 
-.icon {
-    fill: var(--main-color);
-    width: 50px;
-}
 
 .link {
     font: var(--font-h3);

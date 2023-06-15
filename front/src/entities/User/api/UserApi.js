@@ -49,7 +49,7 @@ export const userApi =  createApi({
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            })
+            }),
         }),
         saveUser: build.mutation({
             query: (data) => ({
@@ -58,6 +58,17 @@ export const userApi =  createApi({
                 body: JSON.stringify(data.formData),
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${data.token}`
+                }
+            })
+        }),
+        saveAvatar: build.mutation({
+            query: (data) => ({
+                url: 'v1/user/',
+                method: 'PATCH',
+                body: data.formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${data.token}`
                 }
             })

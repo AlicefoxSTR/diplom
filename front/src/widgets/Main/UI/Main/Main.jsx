@@ -37,6 +37,8 @@ export const Main = (props) => {
                 }
                 }
               })
+            }else if(res.data){
+              dispatch(UserSlice.actions.setUser(res.data))
             }
           }
         )

@@ -46,6 +46,7 @@ export const UserSlice = createSlice({
             state.role = action.payload.role
             state.email = action.payload.email
             state.certificate = action.payload.user?.certificate ?? false
+            state.avatar = action.payload.avatar
         },
         getAccessToken(state){
             return state.access_token

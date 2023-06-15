@@ -23,13 +23,10 @@ from .models import (
 )
 from .serializers import (
     UserSerializer,
-    StudentSerializer,
-    ClassSerializer,
     UserDetailSerializer,
     ClassCreateSerializer,
     TeacherClassesSerializer,
     TestsSerializer,
-    ClassDeleteSerializer,
     TaskSerializer, 
     StageSerializer,
     ClassesForAccessSerializer,
@@ -99,10 +96,15 @@ class UserView(APIView):
 
         try: 
             user = self.request.user
-            user.first_name = request.data['first_name']
-            user.last_name = request.data['last_name']
+            if 'first_name' in request.data:
+                user.first_name = request.data['first_name']
+            if 'last_name' in request.data:
+                user.last_name = request.data['last_name']
+            if 'avatar' in request.FILES:
+                user.avatar = request.FILES['avatar']
             user.save()
-            return Response({"message": "Данные успешно сохранены."}, status=status.HTTP_200_OK)
+            user_serializer = UserDetailSerializer(instance=user)
+            return Response({"message": "Данные успешно сохранены.", "data": user_serializer.data}, status=status.HTTP_200_OK)
 
         except:
             return Response({"message": "Ошибка сохранения данных пользователя."}, status=status.HTTP_400_BAD_REQUEST)
